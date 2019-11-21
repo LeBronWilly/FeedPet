@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>FeedPet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/tocas.css">
+    <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/animate.css">
+    <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/style.css">
+    <style type="text/css">
+        a.title-link:hover {
+            color: #34b2db !important;
+        }
+
+        a.title-link:active {
+            color: #2075c1 !important;
+        }
+
+        #menu-color-id {
+            background: #f7f7f7;
+        }
+
+        #menu-color-id a {
+            color: #5a5a5a;
+        }
+    </style>
+    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
+
+
+</head>
+
+<body>
+    <!-- navigation -->
+
+    <div class="ts fluid basic link big menu" id="menu-color-id">
+
+        <!-- ejs : align to post page or index page -->
+
+        <div class="ts narrow container" style=" padding-left: 25px; ">
+
+            <a class="item" href="">Home</a>
+            <a class="item" href="">My Pet</a>
+            <a class="item" href="">Feed</a>
+            <a class="item" href="">Hotel</a>
+
+        </div>
+    </div>
+    <!-- the end of navigation -->
+
+    <!-- big bang title -->
+    <div class="ts padded horizontally fitted fluid slate" style="background-color: #f7f7f7;">
+        <!-- ejs : align to post page or index page -->
+
+        <div class="ts narrow container relaxed stackable grid" id="big-bang-title" style=" padding-left: 35px; ">
+
+            <!-- Title -->
+            <h1 class="ts eleven wide column header be-center-h1">
+                <span style="color: #404040;" id="big-title">FeedPet</span>
+                <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: #404040;"></div>
+            </h1>
+            <!-- the end of title -->
+        </div>
+    </div>
+    <!-- the end of big bang title -->
+
+
+    <!-- content section -->
+    <div class="ts narrow container" style=" margin-bottom: 35px; ">
+        <div style=" padding-top: 35px; ">
+            <!-- 與上面容器隔出距離 -->
+
+            <!-- left section -->
+            <div class="column" style=" padding: 35px; ">
+              
+              {% block header %}{% endblock header %}
+              {% block content %}{% endblock content %}
+
+              <!-- / the end of articles -->
+            </div>
+            <!-- / left section -->
+
+        </div>
+    </div>
+    <!-- the end of content section -->
+
+    <!-- footer -->
+    <div class="ts attached secondary segment">
+        <div class="ts narrow container">
+            <br>
+            <div class="ts large center aligned header">
+
+                <div class="smaller sub header">
+
+                    Style-Framework <a href="https://tocas-ui.com">&nbsp;Tocas-UI</a> designs by <a
+                        href="https://github.com/YamiOdymel">&nbsp;@YamiOldmel</a>
+
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <!-- the end of footer -->
+    <script type="text/javascript">
+
+        const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
+    </script>
+    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
+</body>
+
+</html>
