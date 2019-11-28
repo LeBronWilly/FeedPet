@@ -40,19 +40,37 @@
 
         <!-- ejs : align to post page or index page -->
 
-        <div class="ts narrow container" style=" padding-left: 25px; ">
+        <div class="ts narrow container " style=" padding-left: 25px; ">
 
-            <a class="item" href="">Home</a>
+            <a class="item" href="{% url 'master:index' %}">Home</a>
             <a class="item" href="">My Pet</a>
             <a class="item" href="">Feed</a>
             <a class="item" href="">Hotel</a>
+            <div class="right menu">
+                {% if user.is_authenticated %}
+                <div class="ts item dropdown">
+                    <div class="text">
+                        Hi, {{ user.username }}.
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item">個人資料</a>
+                        <a class="item">我的寵物</a>
+                    </div>
+                </div>
 
+                <a class="item" href="{% url 'master:logout' %}">Log out</a>
+                {% else %}
+                <a class="item" href="{% url 'master:register' %}">Register</a>
+                <a class="item" href="{% url 'master:login' %}">Log in</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     <!-- the end of navigation -->
 
     <!-- big bang title -->
-    <div class="ts padded horizontally fitted fluid slate" style="background-color: #f7f7f7;">
+    <div class="ts padded horizontally fitted fluid slate" style="background-color: #CCFF33;">
         <!-- ejs : align to post page or index page -->
 
         <div class="ts narrow container relaxed stackable grid" id="big-bang-title" style=" padding-left: 35px; ">
@@ -75,11 +93,11 @@
 
             <!-- left section -->
             <div class="column" style=" padding: 35px; ">
-              
-              {% block header %}{% endblock header %}
-              {% block content %}{% endblock content %}
 
-              <!-- / the end of articles -->
+                {% block header %}{% endblock header %}
+                {% block content %}{% endblock content %}
+
+                <!-- / the end of articles -->
             </div>
             <!-- / left section -->
 
@@ -95,8 +113,10 @@
 
                 <div class="smaller sub header">
 
-                    Style-Framework <a href="https://tocas-ui.com">&nbsp;Tocas-UI</a> designs by <a
-                        href="https://github.com/YamiOdymel">&nbsp;@YamiOldmel</a>
+                    軟體工程期末報告<br>
+                    /admin<br>
+                    acount : zachary<br>
+                    password : 123
 
                 </div>
             </div>
@@ -105,7 +125,7 @@
     </div>
     <!-- the end of footer -->
     <script type="text/javascript">
-
+        ts('.ts.dropdown:not(.basic)').dropdown();
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
     </script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>

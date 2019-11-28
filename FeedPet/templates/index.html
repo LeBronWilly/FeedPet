@@ -1,12 +1,23 @@
 {% extends "base.html" %}
-{% load static %} 
+{% load staticfiles %}
 
 {% block header %}
-    
+
 {% endblock header %}
 
 {% block content %}
 
-    
+<div class="ts two cards">
+    <div class="ts borderless card">
+        <div class="image">
+            <img class="ts image" src="{% static 'images/dogandcat.png' %}">
+        </div>
+    </div>
+    <div class="ts borderless card">
+        <div class="image">
+            <img class="ts image" src="{% static 'images/feed.png' %}">
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

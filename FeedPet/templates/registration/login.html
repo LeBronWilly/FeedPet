@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h2>Log in</h2>
+{% endblock %}
+
+{% block content %}
+
+<form class="ts horizontal form" method="post" action="{% url 'master:login' %}">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="ts positive button" name="submit">log in</button>
+
+    <input type="hidden" name="next" value="{% url 'master:index' %}" />
+
+</form>
+
+{% endblock content %}
