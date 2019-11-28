@@ -17,4 +17,15 @@ urlpatterns = [
 
     # Registration page
     path('register/', views.register, name='register'),
+
+    # My Pet page
+    path('mypet/', views.mypet, name='mypet'),
+
+    # My Pet detail page
+    path('mypet/petdetail', views.petdetail, name='petdetail'),
+
+    # Add Pet page
+    path('mypet/addpet', views.addpet, name='addpet'),
+
+
 ]

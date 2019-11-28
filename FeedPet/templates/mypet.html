@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block header %}
+    
+{% endblock header %}
+
+
+{% block content %}
+
+
+<div class="ts grid">
+    <div class="four wide column">
+    {% comment %}要放上主人的大頭照  {% endcomment %}
+        <img class="ts small rounded image" src="{% static 'images/mastericon.png' %}">
+    </div>
+    {% comment %} 主人個人資料修改區 {% endcomment %}
+    <div class="twelve wide column">
+        
+        <form class="ts horizontal form">
+            <div class="field">
+                <label>姓名</label>
+                <input type="text" name="master_name">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="text" name="master_email">
+            </div>
+            <div class="field">
+             <button class="ts button">修改個人資料</button>
+             </div>
+           
+        </form>
+     </div>
+
+
+</div>
+
+
+
+
+{% comment %}  顯示寵物列表 {% endcomment %}
+
+<div class="ts horizontal divider">已登記寵物</div>
+
+<div class="ts card">
+    <div class="image">        <img src="{% static 'images/peticon.png' %}">    </div>
+    <div class="content">       
+         <div class="header">寵物名稱</div>
+        <div class="secondary extra content">品種</div>
+        <div class="secondary extra content">年齡</div>
+ 
+        <div class="ts fluid stackable buttons">
+            <button class="ts info button">修改寵物資料</button>
+            <button class="ts negative button">刪除寵物</button>
+            <button class="ts button"><a href="/mypet/petdetail">查看餵食紀錄</a></button>
+        </div>
+    </div>
+</div>
+
+
+<button class="ts button"><a href="/mypet/addpet">登記寵物</a></button>
+{% comment %} 跳轉到新增寵物的畫面 {% endcomment %}
+
+
+{% endblock content %}

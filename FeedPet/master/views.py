@@ -6,8 +6,11 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import MasterCreationForm
 
 # Create your views here.
+
+
 def index(request):
     return render(request, 'index.html', locals())
+
 
 def register(request):
     """Register a new user."""
@@ -25,11 +28,24 @@ def register(request):
                                              password=request.POST['password1'])
             login(request, authenticate_user)
             return HttpResponseRedirect(reverse('master:index'))
-    
+
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
 
 def logout_view(request):
     """Log the user out."""
     logout(request)
     return HttpResponseRedirect(reverse('master:index'))
+
+
+def mypet(request):
+    return render(request, 'mypet.html', locals())
+
+
+def petdetail(request):
+    return render(request, 'petdetail.html', locals())
+
+
+def addpet(request):
+    return render(request, 'addpet.html', locals())

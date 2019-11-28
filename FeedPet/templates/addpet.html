@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block header %}
+    
+{% endblock header %}
+
+
+{% block content %}
+
+<form class="ts form">
+    <div class="field">
+        <label>寵物名</label>
+        <input type="text" name="pet_name">
+    </div>
+
+    <div class="field">
+        <label>寵物品種</label>
+        <input type="text" name="pet_type">
+    </div>
+
+  <div class="field">
+        <label>寵物出生年月日</label>
+        <input type="date" name="pet_birthday">
+    </div>
+    <button class="ts button">新增</button>
+</form>
+
+{% endblock content %}

@@ -27,6 +27,10 @@
         #menu-color-id a {
             color: #5a5a5a;
         }
+
+        .card{
+            width:300px
+        }
     </style>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
 
@@ -43,7 +47,7 @@
         <div class="ts narrow container " style=" padding-left: 25px; ">
 
             <a class="item" href="{% url 'master:index' %}">Home</a>
-            <a class="item" href="">My Pet</a>
+            <a class="item" href="{% url 'master:mypet' %}">My Pet</a>
             <a class="item" href="">Feed</a>
             <a class="item" href="">Hotel</a>
             <div class="right menu">
