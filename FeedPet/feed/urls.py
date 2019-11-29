@@ -5,7 +5,7 @@ app_name = 'feed'
 
 urlpatterns = [
     # Feed page
-    path('feed/', views.feed, name='feed'),
+    path('', views.feed, name='feed'),
 
     # # Home page
     # path('', views.index, name='index'),

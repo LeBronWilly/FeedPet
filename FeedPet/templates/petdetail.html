@@ -8,5 +8,36 @@
 
 {% block content %}
 
+<form class="ts form">
+    <div class="field">
+        <label>寵物名</label>
+        <input type="text" name="pet_name">
+    </div>
+
+    <div class="field">
+            <label>寵物類型</label>
+            <div class="ts checkboxes">
+                <div class="ts radio checkbox">
+                    <input id="dog" type="radio" name="pettype">
+                    <label for="dog">狗</label>
+                </div>
+                <div class="ts radio checkbox">
+                    <input id="cat" type="radio" name="pettype">
+                    <label for="cat">貓</label>
+                </div>
+            </div>
+    </div>
+
+    <div class="field">
+        <label>寵物品種</label>
+        <input type="text" name="pet_type">
+    </div>
+
+  <div class="field">
+        <label>寵物出生年月日</label>
+        <input type="date" name="pet_birthday">
+    </div>
+    <button class="ts button">確認修改</button>
+</form>
 
 {% endblock content %}
