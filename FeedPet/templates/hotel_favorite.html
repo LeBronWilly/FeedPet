@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+
+
+
+<table class="ts table">
+    <thead>
+        <tr>
+            <th class="one wide">編號</th>
+            
+            <th>旅館名稱</th>
+            <th>旅館地址</th>
+            <th >旅館聯絡方式</th>
+        <th  class="three wide"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>1</td>
+            <td>旅館一號</td>
+            <td>大安區和平東路</td>
+        
+            <td>02-2223334</td>
+
+            <td> 
+              <button class="ts button">   <a href="{% url 'hotel:hotel_detail' %}">詳細資訊</a> </button>  
+            <button class="ts icon button"><i class="delete icon"></i>  </button>  </td>
+        </tr>
+ 
+
+
+
+    </tbody>
+
+</table>
+
+{% endblock content %}

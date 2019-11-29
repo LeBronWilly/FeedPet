@@ -7,9 +7,9 @@ def feed(request):
     return render(request, 'feed.html', locals())
 
 
-def feedrecommendation(request):
-    return render(request, 'feedrecommendation.html', locals())
+def feed_recommendation(request):
+    return render(request, 'feed_recommendation.html', locals())
 
 
-def feeddetail(request):
-    return render(request, 'feeddetail.html', locals())
+def feed_detail(request):
+    return render(request, 'feed_detail.html', locals())

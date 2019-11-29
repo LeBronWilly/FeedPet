@@ -6,6 +6,9 @@ app_name = 'hotel'
 urlpatterns = [
     # Hotel page
     path('', views.hotel, name='hotel'),
+
+    # Hotel detail page
+    path('hotel_detail/', views.hoteldetail, name='hotel_detail'),
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face

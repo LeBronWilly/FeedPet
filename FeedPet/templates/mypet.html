@@ -42,15 +42,17 @@
              </div>
            
         </form>
+        
+
      </div>
 
 
 </div>
 
-
-
-
-
+<div class="ts hidden divider">我是分隔線</div>
+<button class="ts button"><a href="{% url 'master:add_pet' %}">登記寵物</a></button>
+<button class="ts button"><a href="{% url 'master:feed_favorite' %}">查看我的最愛(飼料)</a></button>
+<button class="ts button"><a href="{% url 'master:hotel_favorite' %}">查看我的最愛(旅館)</a></button>
 
 <div class="ts horizontal divider">我的寵物清單</div>
 {% comment %}  顯示寵物列表 {% endcomment %}
@@ -66,47 +68,25 @@
              </div>
     
              <div class="ts fluid stackable buttons">
-                <button class="ts button"><a href="{% url 'master:petdetail' %}">修改</a></button>
-                
-
-                
+                <button class="ts button"><a href="{% url 'master:pet_detail' %}">修改</a></button>
+                               
             </div>
             <div class="ts fluid stackable buttons">
+                 <button class="ts button"><a href="">刪除</a></button>
                
-                <button class="ts button"><a href="">刪除</a></button>
+            </div>
+            <div class="ts fluid stackable buttons">
               
-
-                
+                <button class="ts button"><a href="{% url 'master:feeding_record' %}">查詢餵食紀錄</a></button>
+              
             </div>
-            <div class="ts fluid stackable buttons">
-               
-            
-                <button class="ts button"><a href="{% url 'master:feedingrecord' %}">查詢餵食紀錄</a></button>
-
-                
-            </div>
-
-
        
     </div>
-     <div class="ts card">
-        <div class="image">       
-         <img class="ts medium rounded image" src="{% static 'images/peticon.png' %}">   
-        </div>
-        <div class="content">       
-            <div class="header">寵物名字</div>
-            
-    
-            <div class="ts fluid stackable buttons">
-                <button class="ts button"><a href="{% url 'master:petdetail' %}">修改</a></button>
-                <button class="ts button"><a href="">刪除</a></button>
-                <button class="ts button"><a href="{% url 'master:feedingrecord' %}">查詢餵食紀錄</a></button>
-            </div>
-        </div>
+        
     </div>
 </div>
-<button class="ts button"><a href="{% url 'master:addpet' %}">登記寵物</a></button>
-{% comment %} 跳轉到新增寵物的畫面 {% endcomment %}
+
+
 
 
 {% endblock content %}

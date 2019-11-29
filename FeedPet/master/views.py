@@ -43,13 +43,21 @@ def mypet(request):
     return render(request, 'mypet.html', locals())
 
 
-def petdetail(request):
-    return render(request, 'petdetail.html', locals())
+def pet_detail(request):
+    return render(request, 'pet_detail.html', locals())
 
 
-def addpet(request):
-    return render(request, 'addpet.html', locals())
+def add_pet(request):
+    return render(request, 'add_pet.html', locals())
 
 
-def feedingrecord(request):
-    return render(request, 'feedingrecord.html', locals())
+def feeding_record(request):
+    return render(request, 'feeding_record.html', locals())
+
+
+def hotel_favorite(request):
+    return render(request, 'hotel_favorite.html', locals())
+
+
+def feed_favorite(request):
+    return render(request, 'feed_favorite.html', locals())
