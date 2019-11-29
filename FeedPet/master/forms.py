@@ -5,9 +5,9 @@ from .models import Master
 
 class MasterCreationForm(UserCreationForm):
 
-    class Meta(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
         model = Master
-        fields = ('username',)
+        fields = UserCreationForm.Meta.fields + ('name', 'email', 'gender')
 
 class MasterChangeForm(UserChangeForm):
 
