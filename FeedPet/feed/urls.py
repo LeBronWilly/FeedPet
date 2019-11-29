@@ -7,6 +7,13 @@ urlpatterns = [
     # Feed page
     path('', views.feed, name='feed'),
 
+    # Feed recommendation page
+    path('feedrecommendation/', views.feedrecommendation,
+         name='feedrecommendation'),
+
+    # Feed detail page
+    path('feeddetail/', views.feeddetail, name='feeddetail'),
+
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face

@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="field">
+            <div class="field required">
                 <label>選擇哪隻寵物</label>
                 <select>
                     <option>可爾必思</option>
@@ -38,11 +38,11 @@
                     <option>來福</option>
                 </select>
             </div>
-            <div class="field">
+            <div class="field required">
                 <label>重量</label>
                 <input type="text">
             </div>
-            <div class="field">
+            <div class="field required">
                 <label>活動類型</label>
                 <select>
                     <option>成犬室內中低活動</option>
@@ -52,7 +52,7 @@
                         <option>哺乳母犬</option>
                 </select>
             </div>
-            <div class="field">
+            <div class="field required">
                 <label>有無結紮</label>
                 <select>
                     <option>有</option>
@@ -60,12 +60,40 @@
 
                 </select>
             </div>
-            
+            <button class="ts button">計算餵食量</button>
+            <button class="ts button">
+            <a href="{% url 'feed:feedrecommendation' %}"> 推薦飼料</a>
+           </button>
 
         </form>
     </div>
     <div class="six wide column">
-    
+    <form class="ts form horizontal">  
+
+
+            <div class="field">
+                <label>罐頭</label>
+                <input type="text">
+            </div>
+             <div class="field">
+                <label>生食</label>
+                <input type="text">
+            </div>
+              <div class="field">
+                <label>凍乾</label>
+                <input type="text">
+            </div>
+               <div class="field">
+                <label>乾飼料</label>
+                <input type="text">
+            </div>
+               <div class="field">
+                <label>水</label>
+                <input type="text">
+            </div>
+        
+
+        </form>
 
 
 

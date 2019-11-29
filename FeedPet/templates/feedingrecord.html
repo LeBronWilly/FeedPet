@@ -7,36 +7,49 @@
 
 {% block content %}
 
-<table class="ts compact celled definition table">
+<table class="ts table">
     <thead>
         <tr>
-            <th></th>
+            <th class="one wide">編號</th>
+            
+            <th>飼料名</th>
             <th>餵食時間</th>
-            <th>餵食飼料名</th>
-            <th>餵食的分量(g)</th>
- 
+            <th >餵食的分量(g)</th>
+        <th  class="one wide"></th>
         </tr>
     </thead>
     <tbody>
         <tr>
         <td>1</td>
-            <td>2019-11-30</td>
             <td>飼料1</td>
+            <td>2019-11-30</td>
+        
             <td>100</td>
-   
+
+                <td>
+                   <button class="ts icon button">
+                <i class="delete icon"></i>  </button>
+                 </td>
         </tr>
-       
+{% comment %} 新增飼料的表單 {% endcomment %}
+        <form class="ts form">
+            <tr>
+            <td></td>
+            <td> <input type="text"></td>
+            <td><input type="date"></td>
+            <td><input type="text"></td>
+                   <td>
+                   <button class="ts icon button">
+                <i class="add icon"></i>  </button>
+                 </td>
+             </tr>
+        </form>
+ 
+
+
+
     </tbody>
-    <tfoot class="full-width">
-        <tr>
-            <th></th>
-            <th colspan="4">
-                <div class="ts right floated small primary labeled icon button">
-                    <i class="plus icon"></i> 新增餵食紀錄
-                </div>
-                           </th>
-        </tr>
-    </tfoot>
+
 </table>
 
 {% endblock content %}
