@@ -49,3 +49,7 @@ def petdetail(request):
 
 def addpet(request):
     return render(request, 'addpet.html', locals())
+
+
+def feedingrecord(request):
+    return render(request, 'feedingrecord.html', locals())

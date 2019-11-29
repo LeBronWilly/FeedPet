@@ -19,15 +19,15 @@
         
         <form class="ts horizontal form">
             <div class="field">
-                <label>姓名</label>
+                <label>master's name</label>
                 <input type="text" name="master_name">
             </div>
             <div class="field">
-                <label>Email</label>
+                <label>master's email</label>
                 <input type="text" name="master_email">
             </div>
             <div class="field">
-             <button class="ts button">修改個人資料</button>
+             <button class="ts button">revise</button>
              </div>
            
         </form>
@@ -41,19 +41,20 @@
 
 {% comment %}  顯示寵物列表 {% endcomment %}
 
-<div class="ts horizontal divider">已登記寵物</div>
+<div class="ts horizontal divider">my pet list</div>
 
 <div class="ts card">
     <div class="image">        <img src="{% static 'images/peticon.png' %}">    </div>
     <div class="content">       
-         <div class="header">寵物名稱</div>
-        <div class="secondary extra content">品種</div>
-        <div class="secondary extra content">年齡</div>
+         <div class="header">pet's name</div>
+          <div class="secondary extra content">pet's type: cat or dog</div>
+        <div class="secondary extra content">pet's variety</div>
+        <div class="secondary extra content">pet's age</div>
  
         <div class="ts fluid stackable buttons">
-            <button class="ts info button">修改寵物資料</button>
-            <button class="ts negative button">刪除寵物</button>
-            <button class="ts button"><a href="/mypet/petdetail">查看餵食紀錄</a></button>
+            <button class="ts info button"><a href="/mypet/petdetail">revise</a></button>
+            <button class="ts negative button">delete</button>
+            <button class="ts button"><a href="/mypet/feedingrecord">feeding record</a></button>
         </div>
     </div>
 </div>

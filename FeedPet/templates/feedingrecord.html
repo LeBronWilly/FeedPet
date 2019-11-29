@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+
+<table class="ts compact celled definition table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>餵食時間</th>
+            <th>餵食飼料名</th>
+            <th>餵食的分量(g)</th>
+ 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>1</td>
+            <td>2019-11-30</td>
+            <td>飼料1</td>
+            <td>100</td>
+   
+        </tr>
+       
+    </tbody>
+    <tfoot class="full-width">
+        <tr>
+            <th></th>
+            <th colspan="4">
+                <div class="ts right floated small primary labeled icon button">
+                    <i class="plus icon"></i> 新增餵食紀錄
+                </div>
+                           </th>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock content %}

@@ -27,5 +27,7 @@ urlpatterns = [
     # Add Pet page
     path('mypet/addpet', views.addpet, name='addpet'),
 
+    # Feeding record page
+    path('mypet/feedingrecord', views.feedingrecord, name='feedingrecord'),
 
 ]
