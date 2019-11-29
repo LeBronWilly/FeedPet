@@ -17,9 +17,9 @@ urlpatterns = [
     # Favorite feed page
     path('feed_favorite/', views.feed_favorite, name='feed_favorite'),
 
-
     # Feeding record page
     path('feeding_record/', views.feeding_record, name='feeding_record'),
+
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face
