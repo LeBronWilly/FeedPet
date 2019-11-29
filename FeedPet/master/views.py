@@ -31,13 +31,14 @@ def register(request):
                                              password=request.POST['password1'])
             login(request, authenticate_user)
             return HttpResponseRedirect(reverse('master:index'))
-    
+
     return render(request, 'registration/register.html', locals())
 
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('master:index'))
+
 
 @login_required
 def profile(request):
@@ -77,15 +78,3 @@ def pet_detail(request):
 
 def add_pet(request):
     return render(request, 'add_pet.html', locals())
-
-
-def feeding_record(request):
-    return render(request, 'feeding_record.html', locals())
-
-
-def hotel_favorite(request):
-    return render(request, 'hotel_favorite.html', locals())
-
-
-def feed_favorite(request):
-    return render(request, 'feed_favorite.html', locals())

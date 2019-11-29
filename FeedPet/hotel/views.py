@@ -9,3 +9,7 @@ def hotel(request):
 
 def hoteldetail(request):
     return render(request, 'hotel_detail.html', locals())
+
+
+def hotel_favorite(request):
+    return render(request, 'hotel_favorite.html', locals())

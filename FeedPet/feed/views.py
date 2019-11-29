@@ -13,3 +13,11 @@ def feed_recommendation(request):
 
 def feed_detail(request):
     return render(request, 'feed_detail.html', locals())
+
+
+def feed_favorite(request):
+    return render(request, 'feed_favorite.html', locals())
+
+
+def feeding_record(request):
+    return render(request, 'feeding_record.html', locals())

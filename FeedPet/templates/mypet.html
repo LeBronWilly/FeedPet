@@ -51,8 +51,8 @@
 
 <div class="ts hidden divider">我是分隔線</div>
 <button class="ts button"><a href="{% url 'master:add_pet' %}">登記寵物</a></button>
-<button class="ts button"><a href="{% url 'master:feed_favorite' %}">查看我的最愛(飼料)</a></button>
-<button class="ts button"><a href="{% url 'master:hotel_favorite' %}">查看我的最愛(旅館)</a></button>
+<button class="ts button"><a href="{% url 'feed:feed_favorite' %}">查看我的最愛(飼料)</a></button>
+<button class="ts button"><a href="{% url 'hotel:hotel_favorite' %}">查看我的最愛(旅館)</a></button>
 
 <div class="ts horizontal divider">我的寵物清單</div>
 {% comment %}  顯示寵物列表 {% endcomment %}
@@ -77,7 +77,7 @@
             </div>
             <div class="ts fluid stackable buttons">
               
-                <button class="ts button"><a href="{% url 'master:feeding_record' %}">查詢餵食紀錄</a></button>
+                <button class="ts button"><a href="{% url 'feed:feeding_record' %}">查詢餵食紀錄</a></button>
               
             </div>
        
