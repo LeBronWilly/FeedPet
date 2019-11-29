@@ -7,6 +7,72 @@
 
 {% block content %}
 
+<div class="ts relaxed grid">
+    <div class="ten wide column">
+        <form class="ts form horizontal">  
+
+
+             <div class="field">
+
+                <div class="ts horizontal checkboxes">
+                    <div class="ts radio checkbox">
+                        <input id="dog" type="radio" name="pettype">
+                        <label for="dog">
+                          <img class="ts small rounded image" src="{% static 'images/dogicon.png' %}">
+                        </label>
+                    </div>
+                    <div class="ts radio checkbox">
+                        <input id="cat" type="radio" name="pettype">
+                        <label for="cat">
+                         <img class="ts small rounded image" src="{% static 'images/caticon.png' %}">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>選擇哪隻寵物</label>
+                <select>
+                    <option>可爾必思</option>
+                    <option>肉鬆</option>
+                    <option>來福</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>重量</label>
+                <input type="text">
+            </div>
+            <div class="field">
+                <label>活動類型</label>
+                <select>
+                    <option>成犬室內中低活動</option>
+                    <option>成犬中高強度活動</option>
+                    <option>成長期幼犬</option>
+                    <option>懷孕母犬</option>
+                        <option>哺乳母犬</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>有無結紮</label>
+                <select>
+                    <option>有</option>
+                    <option>無</option>
+
+                </select>
+            </div>
+            
+
+        </form>
+    </div>
+    <div class="six wide column">
+    
+
+
+
+    </div>
+    
+</div>
+
 
 
 {% endblock content %}
