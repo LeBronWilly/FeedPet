@@ -4,6 +4,8 @@ from . import views
 app_name = 'hotel'
 
 urlpatterns = [
+    # Hotel page
+    path('', views.hotel, name='hotel'),
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face
