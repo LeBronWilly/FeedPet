@@ -27,6 +27,18 @@
         #menu-color-id a {
             color: #5a5a5a;
         }
+
+        .card{
+            width:32% !important;
+            margin:5px !important;
+        }
+
+        .cards{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
     </style>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
 
@@ -43,9 +55,9 @@
         <div class="ts narrow container " style=" padding-left: 25px; ">
 
             <a class="item" href="{% url 'master:index' %}">Home</a>
-            <a class="item" href="">My Pet</a>
-            <a class="item" href="">Feed</a>
-            <a class="item" href="">Hotel</a>
+            <a class="item" href="{% url 'master:mypet' %}">My Pet</a>
+            <a class="item" href="{% url 'feed:feed' %}">Feed</a>
+            <a class="item" href="{% url 'hotel:hotel' %}">Hotel</a>
             <div class="right menu">
                 {% if user.is_authenticated %}
                 <div class="ts item dropdown">
@@ -129,6 +141,7 @@
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
     </script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
+
 </body>
 
 </html>

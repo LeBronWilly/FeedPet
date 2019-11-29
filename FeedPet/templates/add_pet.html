@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block header %}
+    
+{% endblock header %}
+
+
+{% block content %}
+
+<form class="ts form">
+    <div class="field">
+        <label>寵物名</label>
+        <input type="text" name="pet_name">
+    </div>
+
+    <div class="field">
+            <label>寵物類型</label>
+            <div class="ts checkboxes">
+                <div class="ts radio checkbox">
+                    <input id="dog" type="radio" name="pettype">
+                    <label for="dog">狗</label>
+                </div>
+                <div class="ts radio checkbox">
+                    <input id="cat" type="radio" name="pettype">
+                    <label for="cat">貓</label>
+                </div>
+            </div>
+    </div>
+
+    <div class="field">
+        <label>寵物品種</label>
+        <input type="text" name="pet_type">
+    </div>
+
+  <div class="field">
+        <label>寵物出生年月日</label>
+        <input type="date" name="pet_birthday">
+    </div>
+
+   <div class="field">
+        <label>上傳照片</label>
+        <input type="file" name="uploadfile" style="overflow: hidden" />
+    </div>
+
+    <button class="ts button">
+   <a href="/mypet">新增</a> </button>
+    {% comment %} 新增完成後要跳轉到mypet {% endcomment %}
+   
+</form>
+
+{% endblock content %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block header %}
+    
+{% endblock header %}
+
+
+{% block content %}
+
+
+<div class="ts grid">
+    <div class="four wide column">
+    {% comment %}要放上主人的大頭照  {% endcomment %}
+        <img class="ts medium rounded image" src="{% static 'images/mastericon.png' %}">
+    </div>
+    {% comment %} 主人個人資料修改區 {% endcomment %}
+    <div class="twelve wide column">
+        
+        <form class="ts horizontal form">
+            <div class="field">
+                <label>主人名稱</label>
+                <input type="text" name="">
+            </div>
+            <div class="field">
+                <label>帳號</label>
+                <input type="text" name="">
+            </div>
+             <div class="field">
+                <label>密碼</label>
+                <input type="password" name="">
+            </div>
+
+            <div class="field">
+                <label>上傳照片</label>
+                <input type="file" name="uploadfile" style="overflow: hidden" />
+            </div>
+
+
+            <div class="field">
+             <button class="ts button">修改送出</button>
+             </div>
+           
+        </form>
+        
+
+     </div>
+
+
+</div>
+
+<div class="ts hidden divider">我是分隔線</div>
+<button class="ts button"><a href="{% url 'master:add_pet' %}">登記寵物</a></button>
+<button class="ts button"><a href="{% url 'master:feed_favorite' %}">查看我的最愛(飼料)</a></button>
+<button class="ts button"><a href="{% url 'master:hotel_favorite' %}">查看我的最愛(旅館)</a></button>
+
+<div class="ts horizontal divider">我的寵物清單</div>
+{% comment %}  顯示寵物列表 {% endcomment %}
+<div class="cards">
+
+{% comment %} 一個card裡面為一個寵物 {% endcomment %}
+    <div class="ts card">
+        <div class="image">       
+         <img class="ts medium rounded image" src="{% static 'images/peticon.png' %}">   
+        </div>
+        <div class="content">       
+            <div class="header">寵物名字</div>
+             </div>
+    
+             <div class="ts fluid stackable buttons">
+                <button class="ts button"><a href="{% url 'master:pet_detail' %}">修改</a></button>
+                               
+            </div>
+            <div class="ts fluid stackable buttons">
+                 <button class="ts button"><a href="">刪除</a></button>
+               
+            </div>
+            <div class="ts fluid stackable buttons">
+              
+                <button class="ts button"><a href="{% url 'master:feeding_record' %}">查詢餵食紀錄</a></button>
+              
+            </div>
+       
+    </div>
+        
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

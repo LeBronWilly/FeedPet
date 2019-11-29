@@ -10,8 +10,11 @@ from django.contrib.auth.decorators import login_required
 from .models import Master
 # from .forms import TopicForm, EntryForm
 # Create your views here.
+
+
 def index(request):
     return render(request, 'index.html', locals())
+
 
 def register(request):
     if request.method != 'POST':
@@ -31,6 +34,7 @@ def register(request):
     
     return render(request, 'registration/register.html', locals())
 
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('master:index'))
@@ -43,8 +47,6 @@ def profile(request):
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'profile.html', locals())
-    
-    
 
 
 # @login_required
@@ -64,3 +66,26 @@ def profile(request):
 
 #     context = {'entry': entry, 'topic': topic, 'form': form}
 #     return render(request, 'learning_logs/edit_entry.html', context)
+
+def mypet(request):
+    return render(request, 'mypet.html', locals())
+
+
+def pet_detail(request):
+    return render(request, 'pet_detail.html', locals())
+
+
+def add_pet(request):
+    return render(request, 'add_pet.html', locals())
+
+
+def feeding_record(request):
+    return render(request, 'feeding_record.html', locals())
+
+
+def hotel_favorite(request):
+    return render(request, 'hotel_favorite.html', locals())
+
+
+def feed_favorite(request):
+    return render(request, 'feed_favorite.html', locals())

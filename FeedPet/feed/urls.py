@@ -4,6 +4,16 @@ from . import views
 app_name = 'feed'
 
 urlpatterns = [
+    # Feed page
+    path('', views.feed, name='feed'),
+
+    # Feed recommendation page
+    path('feed_recommendation/', views.feed_recommendation,
+         name='feed_recommendation'),
+
+    # Feed detail page
+    path('feed_detail/', views.feed_detail, name='feed_detail'),
+
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face
