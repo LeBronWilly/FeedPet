@@ -9,6 +9,11 @@ urlpatterns = [
 
     # Hotel detail page
     path('hotel_detail/', views.hoteldetail, name='hotel_detail'),
+
+
+    # Favorite hotel page
+    path('hotel_favorite', views.hotel_favorite, name='hotel_favorite'),
+
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face

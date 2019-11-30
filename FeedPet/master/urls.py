@@ -32,12 +32,5 @@ urlpatterns = [
     # Add Pet page
     path('mypet/add_pet', views.add_pet, name='add_pet'),
 
-    # Feeding record page
-    path('mypet/feeding_record', views.feeding_record, name='feeding_record'),
 
-    # Favorite hotel page
-    path('mypet/hotel_favorite', views.hotel_favorite, name='hotel_favorite'),
-
-    # Favorite feed page
-    path('mypet/feed_favorite', views.feed_favorite, name='feed_favorite'),
 ]
