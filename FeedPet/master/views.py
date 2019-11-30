@@ -47,13 +47,13 @@ def register(request):
 # date：2019/11/30
 def login_view(request):
     if request.method == 'POST':
-        if request.user.is_authenticated: 
+        if request.user.is_authenticated:
             messages.add_message(request, messages.SUCCESS, '成功登入')
             return HttpResponseRedirect(reverse('master:index'))
 
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
+
         user = authenticate(username=username, password=password)
 
         if user is not None and user.is_active:
@@ -62,7 +62,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse('master:index'))
         else:
             messages.add_message(request, messages.ERROR, '未註冊或帳號密碼輸入錯誤')
-    
+
     return render(request, 'registration/login.html', locals())
 
 
@@ -118,12 +118,12 @@ def update_profile(request):
 
 
 def mypet(request):
-    return render(request, 'mypet.html', locals())
+    return render(request, 'master/mypet.html', locals())
 
 
 def pet_detail(request):
-    return render(request, 'pet_detail.html', locals())
+    return render(request, 'pet/pet_detail.html', locals())
 
 
 def add_pet(request):
-    return render(request, 'add_pet.html', locals())
+    return render(request, 'pet/add_pet.html', locals())
