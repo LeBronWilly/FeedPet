@@ -1,20 +1,58 @@
+<!-- registration/register.html -->
 {% extends "base.html" %}
 
 {% load static %}
 
 {% block header %}
-<h2>Register</h2>
+<h2>註冊</h2>
 {% endblock header %}
 
 {% block content %}
-<form class="ts horizontal form" method="post" action="{% url 'master:register' %}">
 
+<form class="ts form" method="post" action="{% url 'master:register' %}">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="seven wide field">
+        <label>帳號</label>
+        <input type="text" id="username" name="username">
+    </div>
 
-    <button class="ts positive button" name="submit">register</button>
+    <div class="field">
+        <label>密碼</label>
+        <div class="fields">
+            <div class="seven wide field">
+                <input type="password" id="password1" name="password1" placeholder="密碼">
+            </div>
+            <div class="seven wide field">
+                <input type="password" id="password2" name="password2" placeholder="密碼確認">
+            </div>
+        </div>
+    </div>
 
+    <div class="seven wide field">
+        <label>姓名</label>
+        <input type="text" id="name" name="name">
+    </div>
+
+    <div class="seven wide field">
+        <label>信箱</label>
+        <input type="text" id="email" name="email">
+    </div>
+
+    <div class="field">
+        <label>性別</label>
+        <div class="ts checkboxes">
+            <div class="ts radio checkbox">
+                <input id="firstMale" type="radio" name="gender" value="Male">
+                <label for="firstMale">男性</label>
+            </div>
+            <div class="ts radio checkbox">
+                <input id="firstFemale" type="radio" name="gender" value="Female">
+                <label for="firstFemale">女性</label>
+            </div>
+        </div>
+    </div>
+
+    <button class="ts positive button" name="submit">註冊</button>
     <input type="hidden" name="next" value="{% url 'master:index' %}" />
-
 </form>
 {% endblock content %}

@@ -1,3 +1,4 @@
+<!-- base -->
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -28,12 +29,12 @@
             color: #5a5a5a;
         }
 
-        .card{
-            width:32% !important;
-            margin:5px !important;
+        .card {
+            width: 32% !important;
+            margin: 5px !important;
         }
 
-        .cards{
+        .cards {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -67,14 +68,15 @@
                     <i class="dropdown icon"></i>
                     <div class="menu">
                         <a class="item" href="{% url 'master:profile' %}">個人資料</a>
-                        <a class="item">我的寵物</a>
+                        <a class="item">最愛飼料</a>
+                        <a class="item">最愛旅館</a>
                     </div>
                 </div>
 
-                <a class="item" href="{% url 'master:logout' %}">Log out</a>
+                <a class="item" href="{% url 'master:logout' %}">登出</a>
                 {% else %}
-                <a class="item" href="{% url 'master:register' %}">Register</a>
-                <a class="item" href="{% url 'master:login' %}">Log in</a>
+                <a class="item" href="{% url 'master:register' %}">註冊</a>
+                <a class="item" href="{% url 'master:login' %}">登入</a>
                 {% endif %}
             </div>
         </div>
@@ -106,6 +108,12 @@
             <!-- left section -->
             <div class="column" style=" padding: 35px; ">
 
+                {% for message in messages %}
+                <div class="ts {{message.tags}} message">
+                    <div class="header">{{ message }}</div>
+                </div>
+                {% endfor %}
+
                 {% block header %}{% endblock header %}
                 {% block content %}{% endblock content %}
 
@@ -125,7 +133,7 @@
 
                 <div class="smaller sub header">
 
-                    軟體工程期末報告<br>
+                    軟體工程期末專案<br>
                     /admin<br>
                     acount : zachary<br>
                     password : 123
@@ -138,6 +146,7 @@
     <!-- the end of footer -->
     <script type="text/javascript">
         ts('.ts.dropdown:not(.basic)').dropdown();
+        ts('.dismissable.message').message();
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
     </script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>

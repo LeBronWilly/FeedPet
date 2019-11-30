@@ -9,8 +9,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     # Login page
-    path('login/', LoginView.as_view(template_name='registration/login.html'),
-         name='login'),
+    path('login/', views.login_view, name='login'),
 
     # Logout page
     path('logout/', views.logout_view, name='logout'),
@@ -20,6 +19,10 @@ urlpatterns = [
 
     # Master profile page
     path('profile/', views.profile, name='profile'),
+
+    # Update master profile page
+    path('update_profile/', views.update_profile, name='update_profile'),
+
     # My Pet page
     path('mypet/', views.mypet, name='mypet'),
 

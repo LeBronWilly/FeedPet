@@ -1,8 +1,8 @@
+<!-- master/profile.html -->
 {% extends "base.html" %}
 
 {% block header %}
-<h2>Profile</h2>
-<button class="ts positive button">修改</button>
+<h2>個人資料</h2>
 {% endblock %}
 
 {% block content %}
@@ -10,22 +10,25 @@
 <table class="ts very basic table">
     <tbody>
         <tr>
-            <td>username</td>
+            <td>帳號</td>
             <td>{{ master.username }}</td>
         </tr>
         <tr>
-            <td>name</td>
+            <td>姓名</td>
             <td>{{ master.name }}</td>
         </tr>
         <tr>
-            <td>email</td>
+            <td>信箱</td>
             <td>{{ master.email }}</td>
         </tr>
         <tr>
-            <td>gender</td>
+            <td>性別</td>
             <td>{{ master.gender }}</td>
         </tr>
     </tbody>
 </table>
+<button class="ts positive button" onclick="location.href='/update_profile'">
+    修改
+</button>
 
 {% endblock content %}

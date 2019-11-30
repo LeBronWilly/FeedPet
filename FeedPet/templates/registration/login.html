@@ -1,20 +1,24 @@
+<!-- registration/login.html -->
 {% extends "base.html" %}
 
 {% block header %}
-<h2>Log in</h2>
+<h2>登入</h2>
 {% endblock %}
 
 {% block content %}
 
-<form class="ts horizontal form" method="post" action="{% url 'master:login' %}">
-
+<form class="ts form" method="post" action="{% url 'master:login' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-
-    <button class="ts positive button" name="submit">log in</button>
-
+    <div class="seven wide field">
+        <label>帳號</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="seven wide field">
+        <label>密碼</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <button class="ts positive button" name="submit">登入</button>
     <input type="hidden" name="next" value="{% url 'master:index' %}" />
-
 </form>
 
 {% endblock content %}

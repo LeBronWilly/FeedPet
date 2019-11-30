@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -131,3 +131,13 @@ STATICFILES_DIRS = (
     ("images", os.path.join(STATIC_ROOT,'images')),
 )
 AUTH_USER_MODEL = 'master.Master'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: '',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'positive',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'negative',
+}

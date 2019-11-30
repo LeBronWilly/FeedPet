@@ -8,7 +8,8 @@ class Master(AbstractUser):
 
     name = models.CharField(max_length=6)
     email = models.EmailField()
-    gender = models.CharField(max_length=6, choices=(('male', '男'), ('female', '女')))
+    GENDER = (('Male', '男'), ('Female', '女'))
+    gender = models.CharField(max_length=6, choices=GENDER, null=True)
 
     def __str__(self):
         return self.username
