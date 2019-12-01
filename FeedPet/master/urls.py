@@ -32,7 +32,7 @@ urlpatterns = [
     path('mypet/pet_detail/<int:pet_id>/', views.pet_detail, name='mypet/pet_detail'),
 
     # Add pet page
-    path('mypet/add_pet', views.add_pet, name='mypet/add_pet'),
+    path('mypet/add_pet/', views.add_pet, name='mypet/add_pet'),
 
     # Update pet detail page
     path('mypet/update_pet_detail/<int:pet_id>/', views.update_pet_detail, name='mypet/update_pet_detail'),

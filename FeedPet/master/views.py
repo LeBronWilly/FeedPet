@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Master, Pet
 
+import datetime
+import time
+
 
 # function：index
 # author：Zachary Zhuo
@@ -163,6 +166,7 @@ def add_pet(request):
 def pet_detail(request, pet_id):
     try:
         pet = Pet.objects.get(id=pet_id)
+        age_year, age_month = calculate_age(pet.birthday)
     except Exception as e:
         pet = None
         messages.add_message(request, messages.ERROR, e)
@@ -198,11 +202,10 @@ def update_pet_detail(request, pet_id):
         except Exception as e:
             print(e)
             messages.add_message(request, messages.ERROR, '請確認輸入內容')
+            return HttpResponseRedirect(reverse('master:mypet/update_pet_detail', args=[pet_id]))
 
         messages.add_message(request, messages.SUCCESS, '成功修改')
-
-        #     return HttpResponseRedirect(reverse('master:mypet/update_pet_detail/', args=[pet.id]))
-        # return HttpResponseRedirect(reverse('master:mypet/pet_detail/', args=[pet.id]))
+        return HttpResponseRedirect(reverse('master:mypet/pet_detail', args=[pet_id]))
 
     return render(request, 'pet/update_pet_detail.html', locals())
 
@@ -221,3 +224,26 @@ def del_pet(request, pet_id):
         messages.add_message(request, messages.ERROR, '已刪除' + pet.petName)
 
     return HttpResponseRedirect(reverse('master:mypet'))
+
+
+def calculate_age(born):
+    today = datetime.date.today()
+    birthday = born
+    age_year = 0
+    age_month = 0
+    if today.month > birthday.month:
+        age_year = today.year - birthday.year
+        age_month = today.month - birthday.month
+
+    if today.month < birthday.month:
+        age_year = (today.year - birthday.year) - 1
+        age_month = 12 - birthday.month + today.month
+
+    if today.month - birthday.month == 0:
+        if today.day - birthday.day < 0:
+            age_year = (today.year - birthday.year) - 1
+            age_month = 11
+    if today.year - birthday.year < 0:
+        age_year = 0
+        age_month = 0
+    return age_year, age_month
