@@ -1,0 +1,60 @@
+<!-- pet/mypet.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+
+<button class="ts positive button" onclick="location.href='/mypet/add_pet'">登記寵物</button>
+
+<div class="ts horizontal divider">我的寵物清單</div>
+
+<div class="cards">
+    {% for pet in pets %}
+    <div class="ts card">
+        <div class="image">
+            <img class="ts image" src="{{ pet.image.url }}">
+        </div>
+        <div class="content">
+            <div class="center aligned header">{{ pet.petName }}</div>
+        </div>
+        <div class="ts fluid stackable buttons">
+            <button class="ts button" onclick="location.href='/mypet/pet_detail/{{pet.id}}'">詳細資訊</button>
+        </div>
+        <div class="ts fluid stackable buttons">
+            <button class="ts button" onclick="location.href='/feed/feeding_record'">餵食紀錄</button>
+        </div>
+        <div class="ts fluid stackable buttons">
+            <button class="ts negative button" onclick="showDimmer()">刪除寵物</button>
+        </div>
+
+        <!-- 彈跳訊息 -->
+        <div class="ts modals dimmer">
+            <dialog id="closableModal" class="ts closable tiny modal">
+                <div class="content">
+                    <p>
+                        你確定要刪除『{{pet.petName}}』嗎？<br>
+                        刪了就沒了喔！確定喔？<br>
+                        再給你一次機會<br>
+                    </p>
+                </div>
+                <div class="actions">
+                    <button class="ts deny button">
+                        別
+                    </button>
+                    <button class="ts negative button" onclick="location.href='/mypet/del_pet/{{pet.id}}'">
+                        忍痛刪除
+                    </button>
+                </div>
+            </dialog>
+        </div>
+        <!-- 彈跳訊息 -->
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock content %}

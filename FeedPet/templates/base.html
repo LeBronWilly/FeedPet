@@ -47,9 +47,7 @@
 </head>
 
 <body>
-    <!-- navigation -->
-
-    <div class="ts fluid basic link big menu" id="menu-color-id">
+    <div class="ts top fixed fluid basic link big menu" id="menu-color-id">
 
         <!-- ejs : align to post page or index page -->
 
@@ -63,7 +61,7 @@
                 {% if user.is_authenticated %}
                 <div class="ts item dropdown">
                     <div class="text">
-                        Hi, {{ user.username }}.
+                        Hi, {{ user.name }}.
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -84,9 +82,7 @@
     <!-- the end of navigation -->
 
     <!-- big bang title -->
-    <div class="ts padded horizontally fitted fluid slate" style="background-color: #CCFF33;">
-        <!-- ejs : align to post page or index page -->
-
+    <header class="ts massive basic borderless extra vertically padded cover slate" style="background-color: #CCFF33;">
         <div class="ts narrow container relaxed stackable grid" id="big-bang-title" style=" padding-left: 35px; ">
 
             <!-- Title -->
@@ -96,9 +92,8 @@
             </h1>
             <!-- the end of title -->
         </div>
-    </div>
+    </header>
     <!-- the end of big bang title -->
-
 
     <!-- content section -->
     <div class="ts narrow container" style=" margin-bottom: 35px; ">
@@ -130,14 +125,11 @@
         <div class="ts narrow container">
             <br>
             <div class="ts large center aligned header">
-
                 <div class="smaller sub header">
-
                     軟體工程期末專案<br>
                     /admin<br>
                     acount : zachary<br>
                     password : 123
-
                 </div>
             </div>
             <br>
@@ -145,9 +137,12 @@
     </div>
     <!-- the end of footer -->
     <script type="text/javascript">
+        const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
         ts('.ts.dropdown:not(.basic)').dropdown();
         ts('.dismissable.message').message();
-        const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
+        var showDimmer = function () {
+            ts('#closableModal').modal("show")
+        }
     </script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
 

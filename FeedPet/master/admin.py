@@ -6,7 +6,7 @@ class MasterAdmin(admin.ModelAdmin):
     list_display = ('username', 'name', 'email', 'gender')
 
 class PetAdmin(admin.ModelAdmin):
-    list_display = ('master', 'petClass', 'petType', 'petName', 'birthday', 'weight', 'ligation', 'image')
+    list_display = ('master', 'petName', 'petClass', 'petType', 'petGender', 'birthday', 'weight', 'ligation', 'image')
     ordering = ('master',)
 
 admin.site.register(Master, MasterAdmin)

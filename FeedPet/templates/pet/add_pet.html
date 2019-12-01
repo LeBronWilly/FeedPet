@@ -1,52 +1,83 @@
+<!-- pet/add_pet.html -->
 {% extends "base.html" %}
-{% load static %} 
+{% load static %}
 
 {% block header %}
-    
-{% endblock header %}
 
+{% endblock header %}
 
 {% block content %}
 
-<form class="ts form">
+<form class="ts form" method="post" enctype='multipart/form-data' action="{% url 'master:mypet/add_pet' %}">
+    {% csrf_token %}
     <div class="field">
-        <label>寵物名</label>
-        <input type="text" name="pet_name">
+        <label for="petName">名字</label>
+        <input type="text" id="petName" name="petName">
     </div>
-
-    <div class="field">
-            <label>寵物類型</label>
+    <div class="fields">
+        <div class="three wide field">
+            <label>類別</label>
             <div class="ts checkboxes">
                 <div class="ts radio checkbox">
-                    <input id="dog" type="radio" name="pettype">
-                    <label for="dog">狗</label>
+                    <input id="dog" type="radio" name="petClass" value="Dog">
+                    <label for="dog">狗狗</label>
                 </div>
                 <div class="ts radio checkbox">
-                    <input id="cat" type="radio" name="pettype">
-                    <label for="cat">貓</label>
+                    <input id="cat" type="radio" name="petClass" value="Cat">
+                    <label for="cat">貓貓</label>
                 </div>
             </div>
-    </div>
+        </div>
 
+        <div class="three wide field">
+            <label>性別</label>
+            <div class="ts checkboxes">
+                <div class="ts radio checkbox">
+                    <input id="firstMale" type="radio" name="petGender" value="Male">
+                    <label for="firstMale">公的</label>
+                </div>
+                <div class="ts radio checkbox">
+                    <input id="firstFemale" type="radio" name="petGender" value="Female">
+                    <label for="firstFemale">母的</label>
+                </div>
+            </div>
+        </div>
+        <div class="ten wide field">
+            <label for="petType">品種</label>
+            <input type="text" id="petType" name="petType">
+        </div>
+    </div>
+    <div class="fields">
+        <div class="five wide field">
+            <label>是否結紮</label>
+            <div class="ts checkboxes">
+                <div class="ts radio checkbox">
+                    <input id="yes" type="radio" name="ligation" value="Yes">
+                    <label for="yes">有</label>
+                </div>
+                <div class="ts radio checkbox">
+                    <input id="no" type="radio" name="ligation" value="No">
+                    <label for="no">無</label>
+                </div>
+            </div>
+        </div>
+        <div class="eleven wide field">
+            <label for="weight">體重</label>
+            <input type="number" id="weight" name="weight">
+        </div>
+    </div>
     <div class="field">
-        <label>寵物品種</label>
-        <input type="text" name="pet_type">
+        <label for="birthday">生日</label>
+        <input type="date" id="birthday" name="birthday" />
+    </div>
+    <div class="field">
+        <label for="image">照片</label>
+        <input type="file" id="image" name="image">
     </div>
 
-  <div class="field">
-        <label>寵物出生年月日</label>
-        <input type="date" name="pet_birthday">
-    </div>
-
-   <div class="field">
-        <label>上傳照片</label>
-        <input type="file" name="uploadfile" style="overflow: hidden" />
-    </div>
-
-    <button class="ts button">
-   <a href="/mypet">新增</a> </button>
-    {% comment %} 新增完成後要跳轉到mypet {% endcomment %}
-   
+    <button class="ts positive button" type="submit">確認</button>
+    <input class="ts button" type="button" onclick="location.href='/mypet/'" value="取消">
+    <input type="hidden" name="next" value="{% url 'master:mypet' %}" />
 </form>
 
 {% endblock content %}

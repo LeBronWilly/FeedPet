@@ -1,0 +1,54 @@
+<!-- pet/update_pet_detail.html -->
+{% extends "base.html" %}
+
+{% block header %}
+<h2>修改寵物資料</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="ts relaxed grid">
+    <div class="seven wide column">
+        <img class="ts medium image" src="{{ pet.image.url }}"><br>
+        <div class="field">
+            <label for="image">照片</label>
+            <input type="file" id="image" name="image">
+        </div>
+    </div>
+
+    <div class="eight wide column">
+        <form class="ts form" method="post" enctype='multipart/form-data'
+            action="{% url 'master:mypet/update_pet_detail' pet.id %}">
+            {% csrf_token %}
+            <div class="field">
+                <label>名字</label>
+                <input type="text" id="petName" name="petName" value="{{ pet.petName }}">
+            </div>
+            <div class="field">
+                <label>體重</label>
+                <input type="number" id="weight" name="weight" value="{{ pet.weight }}">
+            </div>
+            <div class="field">
+                <label>是否結紮</label>
+                <div class="ts checkboxes">
+                    <div class="ts radio checkbox">
+                        <input id="yes" type="radio" name="ligation"
+                            {% if pet.ligation == "Yes" %}checked="checked" {% endif %} value="Yes">
+                        <label for="yes">有</label>
+                    </div>
+                    <div class="ts radio checkbox">
+                        <input id="no" type="radio" name="ligation"
+                            {% if pet.ligation == "No" %}checked="checked" {% endif %} value="No">
+                        <label for="no">無</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="ts positive button" type="submit">確認</button>
+            <input class="ts button" type="button" onclick="location.href='/mypet/pet_detail/{{pet.id}}'" value="取消">
+            <input type="hidden" name="next" value="{% url 'master:mypet/pet_detail' pet.id %}" />
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
