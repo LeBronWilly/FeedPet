@@ -169,6 +169,43 @@
         }
 
     </script>
+   
+    <script type="text/javascript">
+        const dogSubType = ["成犬","成犬2"];
+        const catSubType = ["成貓","成貓2"];
+        Array.prototype.forEach.call(document.forms.addpet.petClass, radio => {
+        radio.addEventListener('change', () => {
+           if (document.forms.addpet.petClass.value='Dog') {
+
+               for (i=0;i<dogSubType.length;i++){
+                const option= document.createElement('option');
+                option.innerHTML= dogSubType[i];
+                document.getElementById("petsubtype").appendChild(option);
+                } 
+                console.log(`${document.forms.addpet.petClass.value}`);
+            }
+            else if(document.forms.addpet.petClass.value='Cat'){
+                for (i=0;i<catSubType.length;i++){
+                const option= document.createElement('option');
+                option.innerHTML= catSubType[i];
+                document.getElementById("petsubtype").appendChild(option);
+                } 
+                console.log(`${document.forms.addpet.petClass.value}`);
+            }
+            else{
+            console.log("none");
+            } 
+                
+            
+            })
+        });
+
+    
+      
+      
+             
+    </script>
+
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
 
 </body>
