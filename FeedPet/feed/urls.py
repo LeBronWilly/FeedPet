@@ -20,6 +20,9 @@ urlpatterns = [
     # Feeding record page
     path('feeding_record/', views.feeding_record, name='feeding_record'),
 
+
+    # total Feed list page
+    path('feed_list/', views.feed_list, name='feed_list'),
     # # Home page
     # path('', views.index, name='index'),
     # # add a user's face

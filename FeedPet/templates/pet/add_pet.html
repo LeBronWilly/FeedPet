@@ -57,7 +57,27 @@
             </div>
         </div>
     </div>
-    <div class="fields">
+
+{% comment %} 增加活動類型的判斷js用迴圈增加option {% endcomment %}
+
+    <div class="field required">
+                <label>活動類型</label>
+                 <select>
+                    <option>成犬室內中低活動</option>
+                    <option>成犬中高強度活動</option>
+                    <option>成長期幼犬</option>
+                    <option>懷孕母犬</option>
+                    <option>哺乳母犬</option>
+                    <option>成貓室內中低活動</option>
+                    <option>成貓中高強度活動</option>
+                    <option>成長期幼犬</option>
+                    <option>懷孕母貓</option>
+                    <option>哺乳母貓</option>
+                </select>
+            </div>
+
+
+   <div class="fields">
         <div class="eight wide field">
             <label>品種</label>
             <input type="text" id="petType" name="petType">

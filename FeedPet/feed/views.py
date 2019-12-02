@@ -21,3 +21,6 @@ def feed_favorite(request):
 
 def feeding_record(request):
     return render(request, 'pet/pet_feeding_record.html', locals())
+
+def feed_list(request):
+    return render(request, 'feed/feed_list.html', locals())
