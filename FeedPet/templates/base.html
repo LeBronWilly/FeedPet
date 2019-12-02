@@ -169,20 +169,31 @@
         }
     </script>
    
+    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
     <script type="text/javascript">
-        const dogSubType = ["成犬","成犬2"];
-        const catSubType = ["成貓","成貓2"];
+        const dogSubType = ["成犬(室內/中低活動量)","成犬(中高度活動量)","需增重成犬(輸入目標體重)","需減肥成犬(輸入目標體重)","成長期幼犬(斷奶至4個月)","成長期幼犬(4個月至10個月)","懷孕母犬(前42天)","懷孕母犬(最後21天)","哺乳母犬"];
+        const catSubType = ["成貓(室內/低活動量)","成貓(中高活動量)","需增重成貓(輸入目標體重)","需減肥成貓(輸入目標體重)","成長期幼貓(10個月以內)","老貓(11歲以上)","懷孕母貓","哺乳母貓"];
         Array.prototype.forEach.call(document.forms.addpet.petClass, radio => {
         radio.addEventListener('change', () => {
+            
             //先將原先petsubtype下的元素清空
             var div = document.getElementById("petsubtype");
             while(div.hasChildNodes()) 
                  {
                  div.removeChild(div.firstChild);
                 }
-           
+
+            if  (document.getElementById("cat").checked){
+                for (j=0;j<catSubType.length;j++){
+                var option= document.createElement('option');
+                option.innerHTML= catSubType[j];
+                document.getElementById("petsubtype").appendChild(option);
+                } 
+                console.log(`${document.forms.addpet.petClass.value}`);
+            }
             //判斷選取到dog時候
-            if (document.forms.addpet.petClass.value='Dog') {
+            if (document.getElementById("dog").checked) {
+                
               
                for (i=0;i<dogSubType.length;i++){
                 var option= document.createElement('option');
@@ -192,24 +203,13 @@
                 console.log(`${document.forms.addpet.petClass.value}`);
                 
             }
-            else if (document.forms.addpet.petClass.value='Cat') {
-                for (j=0;j<catSubType.length;j++){
-                var option= document.createElement('option');
-                option.innerHTML= catSubType[j];
-                document.getElementById("petsubtype").appendChild(option);
-                } 
-                console.log(`${document.forms.addpet.petClass.value}`);
-            }
-            else{
-                console.log("none");
-            } 
+           
                            
             }) 
         });
             
     </script>
 
-    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
 
 </body>
 
