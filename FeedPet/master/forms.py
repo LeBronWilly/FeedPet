@@ -1,7 +1,7 @@
 # master/forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Master
+from .models import Master, Pet
 
 
 class MasterCreationForm(UserCreationForm):
@@ -13,23 +13,15 @@ class MasterCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Master
         fields = ('username', 'password1', 'password2', 'name', 'email', 'gender')
-        labels = {
-            'username': '帳號',
-            'Password': '密碼',
-            'Password2': '密碼確認',
-            'name': '姓名',
-            'email': '信箱',
-            'gender': '性別',
-        }
 
 
 class MasterChangeForm(UserChangeForm):
-
     class Meta:
         model = Master
         fields = ('name', 'email', 'gender')
-        labels = {
-            'name': '姓名',
-            'email': '信箱',
-            'gender': '性別',
-        }
+
+
+class PetForm(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = ('petName', 'petClass', 'petType', 'petGender', 'birthday', 'weight', 'ligation', 'image')

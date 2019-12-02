@@ -1,65 +1,56 @@
+<!-- pet/pet_detail.html -->
 {% extends "base.html" %}
-{% load static %} 
+{% load static %}
 
 {% block header %}
-    
-{% endblock header %}
 
+{% endblock header %}
 
 {% block content %}
 
-<form class="ts form">
-    <div class="field">
-        <label>寵物名</label>
-        <input type="text" name="pet_name">
+<div class="ts relaxed grid">
+    <div class="seven wide column">
+        <img class="ts medium image" src="{{ pet.image.url }}">
     </div>
 
-    <div class="field">
-            <label>寵物類型</label>
-            <div class="ts checkboxes">
-                <div class="ts radio checkbox">
-                    <input id="dog" type="radio" name="pettype">
-                    <label for="dog">狗</label>
-                </div>
-                <div class="ts radio checkbox">
-                    <input id="cat" type="radio" name="pettype">
-                    <label for="cat">貓</label>
-                </div>
-            </div>
+    <div class="seven wide column">
+        <table class="ts very basic table">
+            <tbody>
+                <tr>
+                    <td>名字</td>
+                    <td>{{ pet.petName }}</td>
+                </tr>
+                <tr>
+                    <td>類別</td>
+                    <td>{{ pet.petClass }}</td>
+                </tr>
+                <tr>
+                    <td>性別</td>
+                    <td>{{ pet.petGender }}</td>
+                </tr>
+                <tr>
+                    <td>品種</td>
+                    <td>{{ pet.petType }}</td>
+                </tr>
+                <tr>
+                    <td>是否結紮</td>
+                    <td>{{ pet.ligation }}</td>
+                </tr>
+                <tr>
+                    <td>體重</td>
+                    <td>{{ pet.weight }} KG</td>
+                </tr>
+                <tr>
+                    <td>年齡</td>
+                    <td>{{ age_year }}歲{{ age_month }}個月</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="ts positive button" onclick="location.href='/mypet/update_pet_detail/{{pet.id}}'">
+            修改
+        </button>
     </div>
-
-    <div class="field">
-        <label>寵物品種</label>
-        <input type="text" name="pet_type">
-    </div>
-
-    <div class="field">
-        <label>寵物出生年月日</label>
-        <input type="date" name="pet_birthday">
-    </div>
-
-    <div class="field">
-        <label>寵物體重</label>
- 
-       <input type="text" name="pet_weight">
-
-    </div>
-
-     <div class="field">
-        <label>有無結紮</label>
-        <select>
-            <option>有</option>
-            <option>無</option>
-
-        </select>
-    </div>
-
-    <div class="field">
-        <label>上傳照片</label>
-        <input type="file" name="uploadfile" style="overflow: hidden" />
-    </div>
-
-    <button class="ts button">確認修改</button>
-</form>
+</div>
 
 {% endblock content %}

@@ -32,7 +32,8 @@
             </div>
         </div>
     </div>
-    <button class="ts positive button" name="submit">確認</button>
+    <button class="ts positive button" type="submit">確認</button>
+    <input class="ts button" type="button" onclick="location.href='/profile'" value="取消">
     <input type="hidden" name="next" value="{% url 'master:profile' %}" />
 </form>
 

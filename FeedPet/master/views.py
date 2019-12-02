@@ -1,13 +1,16 @@
 # master/views.py
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from .forms import MasterCreationForm, MasterChangeForm
+from .forms import MasterCreationForm, MasterChangeForm, PetForm
 from django.contrib.auth.decorators import login_required
 
-from .models import Master
+from .models import Master, Pet
+
+import datetime
+import time
 
 
 # function：index
@@ -86,12 +89,13 @@ def profile(request):
     username = request.user.username
     try:
         master = Master.objects.get(username=username)
+        pets = Pet.objects.filter(master=master)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'master/profile.html', locals())
 
 
-# function：updateProfile
+# function：update_profile
 # author：Zachary Zhuo
 # date：2019/11/30
 @login_required
@@ -117,13 +121,133 @@ def update_profile(request):
     return render(request, 'master/update_profile.html', locals())
 
 
+# function：mypet
+# author：Zachary Zhuo
+# date：2019/11/30
+@login_required
 def mypet(request):
-    return render(request, 'master/mypet.html', locals())
+    username = request.user.username
+    try:
+        master = Master.objects.get(username=username)
+    except Exception as e:
+        master = None
+        messages.add_message(request, messages.ERROR, e)
+    if master:
+        pets = Pet.objects.filter(master=master)
+
+    return render(request, 'pet/mypet.html', locals())
 
 
-def pet_detail(request):
+# function：add_pet
+# author：Zachary Zhuo
+# date：2019/12/1
+def add_pet(request):
+    if request.method != 'POST':
+        form = PetForm()
+    else:
+        form = PetForm(data=request.POST, files=request.FILES)
+
+        if form.is_valid():
+            new_pet = form.save(commit=False)
+            new_pet.master = request.user
+            new_pet.save()
+
+            messages.add_message(request, messages.SUCCESS, '成功登記')
+            return HttpResponseRedirect(reverse('master:mypet'))
+        else:
+            messages.add_message(request, messages.ERROR, '請確認輸入內容')
+
+    return render(request, 'pet/add_pet.html', locals())
+
+
+# function：pet_detail
+# author：Zachary Zhuo
+# date：2019/11/30
+@login_required
+def pet_detail(request, pet_id):
+    try:
+        pet = Pet.objects.get(id=pet_id)
+        age_year, age_month = calculate_age(pet.birthday)
+    except Exception as e:
+        pet = None
+        messages.add_message(request, messages.ERROR, e)
+    if pet.master != request.user:
+        raise Http404
+
     return render(request, 'pet/pet_detail.html', locals())
 
 
-def add_pet(request):
-    return render(request, 'pet/add_pet.html', locals())
+# function：update_pet_detail
+# author：Zachary Zhuo
+# date：2019/12/1
+@login_required
+def update_pet_detail(request, pet_id):
+    try:
+        pet = Pet.objects.get(id=pet_id)
+    except Exception as e:
+        pet = None
+        messages.add_message(request, messages.ERROR, e)
+
+    if request.method == 'POST':
+        petName = request.POST.get('petName')
+        weight = request.POST.get('weight')
+        ligation = request.POST.get('ligation')
+        image = request.FILES.get('image')
+
+        try:
+            pet.petName = petName
+            pet.weight = weight
+            pet.ligation = ligation
+            pet.image = image
+            pet.save()
+        except Exception as e:
+            print(e)
+            messages.add_message(request, messages.ERROR, '請確認輸入內容')
+            return HttpResponseRedirect(reverse('master:mypet/update_pet_detail', args=[pet_id]))
+
+        messages.add_message(request, messages.SUCCESS, '成功修改')
+        return HttpResponseRedirect(reverse('master:mypet/pet_detail', args=[pet_id]))
+
+    return render(request, 'pet/update_pet_detail.html', locals())
+
+
+# function：del_pet
+# author：Zachary Zhuo
+# date：2019/12/1
+@login_required
+def del_pet(request, pet_id):
+    try:
+        pet = Pet.objects.get(id=pet_id)
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+    if pet:
+        pet.delete()
+        messages.add_message(request, messages.ERROR, '已刪除' + pet.petName)
+
+    return HttpResponseRedirect(reverse('master:mypet'))
+
+
+# function：calculate_age
+# author：Zachary Zhuo
+# date：2019/12/1
+def calculate_age(born):
+    today = datetime.date.today()
+    birthday = born
+    age_year = 0
+    age_month = 0
+    if today.month > birthday.month:
+        age_year = today.year - birthday.year
+        age_month = today.month - birthday.month
+
+    if today.month < birthday.month:
+        age_year = (today.year - birthday.year) - 1
+        age_month = 12 - birthday.month + today.month
+
+    if today.month - birthday.month == 0:
+        if today.day - birthday.day < 0:
+            age_year = (today.year - birthday.year) - 1
+            age_month = 11
+    if today.year - birthday.year < 0:
+        age_year = 0
+        age_month = 0
+    return age_year, age_month

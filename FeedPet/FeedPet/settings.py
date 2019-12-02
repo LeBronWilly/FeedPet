@@ -144,3 +144,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'negative',
 }
+
+LOGIN_URL = '/login/'

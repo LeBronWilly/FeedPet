@@ -25,6 +25,18 @@
             <td>性別</td>
             <td>{{ master.gender }}</td>
         </tr>
+        <tr>
+            <td>毛小孩</td>
+            <td>
+                {% for pet in pets %}
+                    {% if forloop.first %}
+                        {{ pet.petName }}
+                    {% else %}
+                        ,&nbsp;{{ pet.petName }}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
     </tbody>
 </table>
 <button class="ts positive button" onclick="location.href='/update_profile'">

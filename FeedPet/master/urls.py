@@ -4,6 +4,8 @@ from . import views
 
 app_name = 'master'
 
+# {% url '<url_name>' %} : 根據在 urls.py 中設定的「name」值，找到對應的 URL
+
 urlpatterns = [
     # Home page
     path('', views.index, name='index'),
@@ -23,14 +25,20 @@ urlpatterns = [
     # Update master profile page
     path('update_profile/', views.update_profile, name='update_profile'),
 
-    # My Pet page
+    # My pet page
     path('mypet/', views.mypet, name='mypet'),
 
-    # My Pet detail page
-    path('mypet/pet_detail', views.pet_detail, name='pet_detail'),
+    # My pet detail page
+    path('mypet/pet_detail/<int:pet_id>/', views.pet_detail, name='mypet/pet_detail'),
 
-    # Add Pet page
-    path('mypet/add_pet', views.add_pet, name='add_pet'),
+    # Add pet page
+    path('mypet/add_pet/', views.add_pet, name='mypet/add_pet'),
+
+    # Update pet detail page
+    path('mypet/update_pet_detail/<int:pet_id>/', views.update_pet_detail, name='mypet/update_pet_detail'),
+
+    # Delete pet
+    path('mypet/del_pet/<int:pet_id>/', views.del_pet, name='mypet/del_pet'),
 
 
 ]
