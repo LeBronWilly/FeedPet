@@ -167,7 +167,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
     </script>
    
     <script type="text/javascript">
@@ -175,35 +174,39 @@
         const catSubType = ["成貓","成貓2"];
         Array.prototype.forEach.call(document.forms.addpet.petClass, radio => {
         radio.addEventListener('change', () => {
-           if (document.forms.addpet.petClass.value='Dog') {
-
+            //先將原先petsubtype下的元素清空
+            var div = document.getElementById("petsubtype");
+            while(div.hasChildNodes()) 
+                 {
+                 div.removeChild(div.firstChild);
+                }
+           
+            //判斷選取到dog時候
+            if (document.forms.addpet.petClass.value='Dog') {
+              
                for (i=0;i<dogSubType.length;i++){
-                const option= document.createElement('option');
+                var option= document.createElement('option');
                 option.innerHTML= dogSubType[i];
                 document.getElementById("petsubtype").appendChild(option);
                 } 
                 console.log(`${document.forms.addpet.petClass.value}`);
+                
             }
-            else if(document.forms.addpet.petClass.value='Cat'){
-                for (i=0;i<catSubType.length;i++){
-                const option= document.createElement('option');
-                option.innerHTML= catSubType[i];
+            else if (document.forms.addpet.petClass.value='Cat') {
+                for (j=0;j<catSubType.length;j++){
+                var option= document.createElement('option');
+                option.innerHTML= catSubType[j];
                 document.getElementById("petsubtype").appendChild(option);
                 } 
                 console.log(`${document.forms.addpet.petClass.value}`);
             }
             else{
-            console.log("none");
+                console.log("none");
             } 
-                
-            
-            })
+                           
+            }) 
         });
-
-    
-      
-      
-             
+            
     </script>
 
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
