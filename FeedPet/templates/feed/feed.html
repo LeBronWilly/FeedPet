@@ -112,6 +112,7 @@
         <div class="ten wide column">
             <form class="ts form horizontal">
                 <mark>這裡是狗狗</mark>
+                {% if user.is_authenticated %}
                 <div class="field required">
                     <label>選擇哪隻寵物</label>
                     <select>
@@ -120,6 +121,7 @@
                         <option>來福</option>
                     </select>
                 </div>
+                {% endif %}
                 <div class="field required">
                     <label>重量</label>
                     <input type="text">
@@ -164,11 +166,7 @@
                     <label>凍乾</label>
                     <input type="text">
                 </div>
-                <div class="field">
-                    <label>乾飼料</label>
-                    <input type="text">
-                </div>
-                <div class="field">
+                     <div class="field">
                     <label>水</label>
                     <input type="text">
                 </div>
@@ -181,6 +179,7 @@
         <div class="ten wide column">
             <form class="ts form horizontal">
                 <mark>這裡是貓貓</mark>
+                 {% if user.is_authenticated %}
                 <div class="field required">
                     <label>選擇哪隻寵物</label>
                     <select>
@@ -189,6 +188,7 @@
                         <option>來福</option>
                     </select>
                 </div>
+                {% endif %}
                 <div class="field required">
                     <label>重量</label>
                     <input type="text">
@@ -233,10 +233,7 @@
                     <label>凍乾</label>
                     <input type="text">
                 </div>
-                <div class="field">
-                    <label>乾飼料</label>
-                    <input type="text">
-                </div>
+            
                 <div class="field">
                     <label>水</label>
                     <input type="text">
