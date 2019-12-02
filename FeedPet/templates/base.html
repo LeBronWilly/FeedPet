@@ -138,11 +138,36 @@
     <!-- the end of footer -->
     <script type="text/javascript">
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
+
         ts('.ts.dropdown:not(.basic)').dropdown();
+
         ts('.dismissable.message').message();
-        var showDimmer = function () {
+        function showDimmer() {
             ts('#closableModal').modal("show")
         }
+
+        ts('#first.tabbed.menu .item').tab({
+            onSwitch: (tabName, groupName) => {
+                // alert("你切換到了「" + tabName + "」分頁，而群組是「" + groupName + "」。");
+            }
+        });
+
+        $("#imgInp").change(function () {
+            //當檔案改變後，做一些事 
+            readURL(this);   // this代表<input id="imgInp">
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var imageTagID = input.getAttribute("targetID");
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.getElementById(imageTagID);
+                    img.setAttribute("src", e.target.result)
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
     </script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
 

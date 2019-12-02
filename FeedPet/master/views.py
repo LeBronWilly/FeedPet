@@ -89,6 +89,7 @@ def profile(request):
     username = request.user.username
     try:
         master = Master.objects.get(username=username)
+        pets = Pet.objects.filter(master=master)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'master/profile.html', locals())
@@ -191,13 +192,13 @@ def update_pet_detail(request, pet_id):
         petName = request.POST.get('petName')
         weight = request.POST.get('weight')
         ligation = request.POST.get('ligation')
-        # image = request.POST.FILES.get('image')
+        image = request.FILES.get('image')
 
         try:
             pet.petName = petName
             pet.weight = weight
             pet.ligation = ligation
-            # pet.image = image
+            pet.image = image
             pet.save()
         except Exception as e:
             print(e)
@@ -226,6 +227,9 @@ def del_pet(request, pet_id):
     return HttpResponseRedirect(reverse('master:mypet'))
 
 
+# function：calculate_age
+# author：Zachary Zhuo
+# date：2019/12/1
 def calculate_age(born):
     today = datetime.date.today()
     birthday = born
