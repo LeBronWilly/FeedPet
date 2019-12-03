@@ -13,7 +13,7 @@
     {% csrf_token %}
     <div class="field">
         <label>名字</label>
-        <input type="text" id="petName" name="petName">
+        <input type="text" id="petName" name="petName" required="required" pattern="\S{0,20}" placeholder="輸入小於20個字元">
     </div>
     <div class="fields">
         <div class="field">
@@ -70,21 +70,21 @@
     <div class="fields">
         <div class="field">
             <label>體重</label>
-            <input type="number" id="weight" name="weight">
+            <input type="number" id="weight" name="weight" required="required" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"> 
         </div>
         <div class="field">
             <label>生日</label>
-            <input type="date" id="birthday" name="birthday" />
+            <input type="date" id="birthday" name="birthday" required="required"/>
         </div>
     </div>
     <div class="fields">
         <div class="five wide field">
             <label>照片</label>
-            <img id="preview_progressbarTW_img" src="#" height="200" width="150" />
+            <img id="preview_progressbarTW_img" src="#" height="200" width="150" >
         </div>
         <div class="eleven wide field">
             <input type="file" id="imgInp" name="image" onchange="readURL(this)" targetID="preview_progressbarTW_img"
-                accept="image/gif, image/jpeg, image/png" />
+                accept="image/gif, image/jpeg, image/png" required="required"/>
         </div>
     </div>
 

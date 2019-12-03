@@ -105,7 +105,10 @@
 
                 {% for message in messages %}
                 <div class="ts {{message.tags}} message">
+                <button class="ts close button"></button>
                     <div class="header">{{ message }}</div>
+
+                  
                 </div>
                 {% endfor %}
 

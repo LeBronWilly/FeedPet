@@ -4,7 +4,8 @@
 *.pyc
 __pycache__/
 local_settings.py
-
+FeedPet/FeedPet/__pycache__/__init__.cpython-37.pyc
+FeedPet/FeedPet/__pycache__/settings.cpython-37.pyc
 
 .env
 db.sqlite3
@@ -118,3 +119,4 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
