@@ -40,7 +40,7 @@ def register(request):
             login(request, authenticate_user)
             return HttpResponseRedirect(reverse('master:index'))
         else:
-            messages.add_message(request, messages.ERROR, '請確認輸入內容')
+            messages.add_message(request, messages.ERROR, form.errors)
 
     return render(request, 'registration/register.html', locals())
 
@@ -155,7 +155,7 @@ def add_pet(request):
             messages.add_message(request, messages.SUCCESS, '成功登記')
             return HttpResponseRedirect(reverse('master:mypet'))
         else:
-            messages.add_message(request, messages.ERROR, '請確認輸入內容')
+            messages.add_message(request, messages.ERROR, form.errors)
 
     return render(request, 'pet/add_pet.html', locals())
 

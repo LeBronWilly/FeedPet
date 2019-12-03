@@ -1,4 +1,4 @@
-<!-- base -->
+<!-- base.html -->
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -9,9 +9,11 @@
     <title>FeedPet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/tocas.css">
     <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/animate.css">
     <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/style.css">
+    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
     <style type="text/css">
         a.title-link:hover {
             color: #34b2db !important;
@@ -41,8 +43,6 @@
             flex-wrap: wrap;
         }
     </style>
-    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
-
 
 </head>
 
@@ -137,21 +137,22 @@
     </div>
     <!-- the end of footer -->
     <script type="text/javascript">
+        // index subtitle
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
-
+        // index user tag
         ts('.ts.dropdown:not(.basic)').dropdown();
-
+        // mypet del button
         ts('.dismissable.message').message();
         function showDimmer() {
             ts('#closableModal').modal("show")
         }
-
+        // feed tab
         ts('#first.tabbed.menu .item').tab({
             onSwitch: (tabName, groupName) => {
                 // alert("你切換到了「" + tabName + "」分頁，而群組是「" + groupName + "」。");
             }
         });
-
+        // mypet preview image(add/update)
         $("#imgInp").change(function () {
             //當檔案改變後，做一些事 
             readURL(this);   // this代表<input id="imgInp">
@@ -168,62 +169,118 @@
             }
         }
     </script>
-   
+
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
     <script type="text/javascript">
-        const dogSubType = ["成犬(室內/中低活動量)","成犬(中高度活動量)","需增重成犬(輸入目標體重)","需減肥成犬(輸入目標體重)","成長期幼犬(斷奶至4個月)","成長期幼犬(4個月至10個月)","懷孕母犬(前42天)","懷孕母犬(最後21天)","哺乳母犬"];
-        const catSubType = ["成貓(室內/低活動量)","成貓(中高活動量)","需增重成貓(輸入目標體重)","需減肥成貓(輸入目標體重)","成長期幼貓(10個月以內)","老貓(11歲以上)","懷孕母貓","哺乳母貓"];
+        // mypet add pet chose petType
+        const dogSubType = ["成犬(室內/中低活動量)", "成犬(中高度活動量)", "需增重成犬(輸入目標體重)", "需減肥成犬(輸入目標體重)", "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"];
+        const catSubType = ["成貓(室內/低活動量)", "成貓(中高活動量)", "需增重成貓(輸入目標體重)", "需減肥成貓(輸入目標體重)", "成長期幼貓(10個月以內)", "老貓(11歲以上)", "懷孕母貓", "哺乳母貓"];
         Array.prototype.forEach.call(document.forms.addpet.petClass, radio => {
-        radio.addEventListener('change', () => {
-            
-            //先將原先petsubtype下的元素清空
-            var div = document.getElementById("petsubtype");
-            while(div.hasChildNodes()) 
-                 {
-                 div.removeChild(div.firstChild);
-                }
+            radio.addEventListener('change', () => {
 
-            if  (document.getElementById("cat").checked){
-                for (j=0;j<catSubType.length;j++){
-                var option= document.createElement('option');
-                option.innerHTML= catSubType[j];
-                document.getElementById("petsubtype").appendChild(option);
-                } 
-                //console.log(`${document.forms.addpet.petClass.value}`);
-            }
-            //判斷選取到dog時候
-            if (document.getElementById("dog").checked) {
-                
-              
-               for (i=0;i<dogSubType.length;i++){
-                var option= document.createElement('option');
-                option.innerHTML= dogSubType[i];
-                document.getElementById("petsubtype").appendChild(option);
-                } 
-                //console.log(`${document.forms.addpet.petClass.value}`);
+                //先將原先petType下的元素清空
+                var div = document.getElementById("petType");
+                while (div.hasChildNodes()) {
+                    div.removeChild(div.firstChild);
                 }
-                                    
-            }) 
+                if (document.getElementById("cat").checked) {
+                    for (j = 0; j < catSubType.length; j++) {
+                        var option = document.createElement('option');
+                        option.innerHTML = catSubType[j];
+                        document.getElementById("petType").appendChild(option);
+                    }
+                    //console.log(`${document.forms.addpet.petClass.value}`);
+                }
+                //判斷選取到dog時候
+                if (document.getElementById("dog").checked) {
+                    for (i = 0; i < dogSubType.length; i++) {
+                        var option = document.createElement('option');
+                        option.innerHTML = dogSubType[i];
+                        document.getElementById("petType").appendChild(option);
+                    }
+                    //console.log(`${document.forms.addpet.petClass.value}`);
+                }
+            })
         });
     </script>
 
     <script type="text/javascript">
-	window.onload=getTime();
-	//取得系统当前时间
-	function getTime(){
-        
-        console.log(tMonth)
-		var today = new Date();
-        var tYear=today.getFullYear();
-        var tMonth=today.getMonth()+1;
-        var tDate=today.getDate();
-	    document.getElementById("showDate").innerHTML=tYear+"-"+tMonth+"-"+tDate;
-    }
-		
+        window.onload = getTime();
+        //取得系统当前时间
+        function getTime() {
+            console.log(tMonth)
+            var today = new Date();
+            var tYear = today.getFullYear();
+            var tMonth = today.getMonth() + 1;
+            var tDate = today.getDate();
+            document.getElementById("showDate").innerHTML = tYear + "-" + tMonth + "-" + tDate;
+        }
     </script>
 
-
-
+    <script>
+        //feed下拉式選單 選取其中之一寵物
+        $("#choseDog").change(function () {
+            $("#choseDog option:selected").each(function () {
+                var value = $("#choseDog").val();
+                getDogInfo(value)
+            });
+        });
+        $("#choseCat").change(function () {
+            $("#choseCat option:selected").each(function () {
+                var value = $("#choseCat").val();
+                getCatInfo(value)
+            });
+        });
+        //透過api跟後端要被選取的寵物的資料 並套入現有的欄位中
+        function getDogInfo(dogId) {
+            $.ajax({
+                url: '/feed/getDog/' + dogId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $('#dog_weight').val(data.weight)
+                        $('#dog_type option').each(function (index, value ) {
+                            if ($(this).val() == data.petType) { // EDITED THIS LINE
+                                $(this).prop('selected', true)
+                            }
+                        });
+                        if (data.ligation == 'Yes') {
+                            $('#dog_yes').prop('checked', true)
+                        } else {
+                            $('#dog_no').prop('checked', true)
+                        }
+                    }
+                },
+                error: function (err) {
+                }
+            });
+        }
+        function getCatInfo(catId) {
+            $.ajax({
+                url: '/feed/getCat/' + catId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $('#cat_weight').val(data.weight)
+                        $('#cat_type option').each(function (index, value ) {
+                            if ($(this).val() == data.petType) { // EDITED THIS LINE
+                                $(this).prop('selected', true)
+                            }
+                        });
+                        if (data.ligation == 'Yes') {
+                            $('#cat_yes').prop('checked', true)
+                        } else {
+                            $('#cat_no').prop('checked', true)
+                        }
+                    }
+                },
+                error: function (err) {
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
