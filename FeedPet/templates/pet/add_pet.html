@@ -12,10 +12,10 @@
     {% csrf_token %}
     <div class="field">
         <label>名字</label>
-        <input type="text" id="petName" name="petName" required="required">
+        <input type="text" id="petName" name="petName" required="required" pattern="\S{0,20}" placeholder="輸入小於20個字元">
     </div>
     <div class="fields">
-        <div class="field">
+        <div class="field required">
             <label>類別</label>
             <div class="ts checkboxes">
                 <div class="ts radio checkbox">
@@ -29,7 +29,7 @@
             </div>
         </div>
     
-        <div class="field">
+        <div class="field required">
             <label>性別</label>
             <div class="ts checkboxes">
                 <div class="ts radio checkbox">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="field">
+        <div class="field required">
             <label>是否結紮</label>
             <div class="ts checkboxes">
                 <div class="ts radio checkbox">
@@ -58,25 +58,22 @@
         </div>
     </div>
 
-{% comment %} 增加活動類型的判斷js用迴圈增加option {% endcomment %}
-
     <div class="field" >
-                <label>活動類型</label>
-                 <select id="petsubtype">
+        <label>活動類型</label>
+             <select id="petsubtype">
                   
-                   
-                </select>
-            </div>
+        </select>
+    </div>
 
 
    <div class="fields">
         <div class="eight wide field">
             <label>品種</label>
-            <input type="text" id="petType" name="petType">
+            <input type="text" id="petType" name="petType" required="required">
         </div>
         <div class="eight wide field">
             <label>體重</label>
-            <input type="number" id="weight" name="weight">
+            <input type="text" id="weight" name="weight" required="required" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" > 
         </div>
     </div>
     <div class="field">
