@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<form class="ts form" method="post" enctype='multipart/form-data' action="{% url 'master:mypet/add_pet' %}">
+<form name="addpet" class="ts form" method="post" enctype='multipart/form-data' action="{% url 'master:mypet/add_pet' %}">
     {% csrf_token %}
     <div class="field">
         <label>名字</label>
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-
+    
         <div class="field">
             <label>性別</label>
             <div class="ts checkboxes">
@@ -57,7 +57,19 @@
             </div>
         </div>
     </div>
-    <div class="fields">
+
+{% comment %} 增加活動類型的判斷js用迴圈增加option {% endcomment %}
+
+    <div class="field required" >
+                <label>活動類型</label>
+                 <select id="petsubtype">
+                  
+                   
+                </select>
+            </div>
+
+
+   <div class="fields">
         <div class="eight wide field">
             <label>品種</label>
             <input type="text" id="petType" name="petType">
