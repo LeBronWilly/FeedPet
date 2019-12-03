@@ -189,7 +189,7 @@
                 option.innerHTML= catSubType[j];
                 document.getElementById("petsubtype").appendChild(option);
                 } 
-                console.log(`${document.forms.addpet.petClass.value}`);
+                //console.log(`${document.forms.addpet.petClass.value}`);
             }
             //判斷選取到dog時候
             if (document.getElementById("dog").checked) {
@@ -200,15 +200,28 @@
                 option.innerHTML= dogSubType[i];
                 document.getElementById("petsubtype").appendChild(option);
                 } 
-                console.log(`${document.forms.addpet.petClass.value}`);
-                
-            }
-           
-                           
+                //console.log(`${document.forms.addpet.petClass.value}`);
+                }
+                                    
             }) 
         });
-            
     </script>
+
+    <script type="text/javascript">
+	window.onload=getTime();
+	//取得系统当前时间
+	function getTime(){
+        
+        console.log(tMonth)
+		var today = new Date();
+        var tYear=today.getFullYear();
+        var tMonth=today.getMonth()+1;
+        var tDate=today.getDate();
+	    document.getElementById("showDate").innerHTML=tYear+"-"+tMonth+"-"+tDate;
+    }
+		
+    </script>
+
 
 
 </body>
