@@ -105,7 +105,10 @@
 
                 {% for message in messages %}
                 <div class="ts {{message.tags}} message">
+                
                     <div class="header">{{ message }}</div>
+
+                  
                 </div>
                 {% endfor %}
 
@@ -209,6 +212,7 @@
 
     <script type="text/javascript">
 	window.onload=getTime();
+    
 	//取得系统当前时间
 	function getTime(){
         
@@ -221,7 +225,7 @@
     }
 		
     </script>
-
+    
 
 
 </body>

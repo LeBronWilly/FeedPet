@@ -12,7 +12,7 @@
     {% csrf_token %}
     <div class="field">
         <label>名字</label>
-        <input type="text" id="petName" name="petName">
+        <input type="text" id="petName" name="petName" required="required">
     </div>
     <div class="fields">
         <div class="field">
@@ -60,7 +60,7 @@
 
 {% comment %} 增加活動類型的判斷js用迴圈增加option {% endcomment %}
 
-    <div class="field required" >
+    <div class="field" >
                 <label>活動類型</label>
                  <select id="petsubtype">
                   
@@ -81,7 +81,7 @@
     </div>
     <div class="field">
         <label>生日</label>
-        <input type="date" id="birthday" name="birthday" />
+        <input type="date" id="birthday" name="birthday" required="required">
     </div>
     <div class="fields">
         <div class="five wide field">
