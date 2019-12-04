@@ -16,8 +16,9 @@
     <div class="ts relaxed grid">
         <div class="ten wide column">
             <form class="ts form horizontal">
-                {{ pets.pet }}
-                <mark>這裡是狗狗</mark>
+                <div class="field">
+                    <mark>這裡是狗狗</mark>
+                </div>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻狗狗</label>
@@ -98,7 +99,9 @@
     <div class="ts relaxed grid">
         <div class="ten wide column">
             <form class="ts form horizontal">
-                <mark>這裡是貓貓</mark>
+                <div class="field">
+                    <mark>這裡是貓貓</mark>
+                </div>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻貓貓</label>

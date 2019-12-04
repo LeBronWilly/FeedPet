@@ -12,15 +12,21 @@
     {% csrf_token %}
     <div class="ts relaxed grid">
         <div class="seven wide column">
-            <div class="field">
+            <!-- <div class="field">
                 <label for="image">照片(原本)</label>
-                <img class="ts medium image" src="{{ pet.image.url }}">
+                <img class="ts medium image" src="{{ pet.image.url }}" name="pre_image">
+            </div> -->
+            <div class="field">
+                <label for="image">照片</label>
+                <img class="ts medium image" id="preview_progressbarTW_img_chg" src="{{ pet.image.url }}" />
             </div>
             <div class="field">
-                <label for="image">照片(更換)</label>
+                <button class="ts positive button" type="button" onclick="imgInp_chg.click()">
+                    更改照片
+                </button>
                 <input type="file" id="imgInp_chg" name="image" onchange="readURL(this)"
-                    targetID="preview_progressbarTW_img_chg" accept="image/gif, image/jpeg, image/png"/>
-                <img id="preview_progressbarTW_img_chg" src="#" height="200" width="150"/>
+                    targetID="preview_progressbarTW_img_chg" accept="image/gif, image/jpeg, image/png"
+                    style="visibility:hidden" />
             </div>
         </div>
 

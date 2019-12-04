@@ -8,11 +8,8 @@ urlpatterns = [
     # Feed page
     path('', views.feed, name='feed'),
 
-    # Get dog by id
-    path('getDog/<int:dogId>', views.getDog, name='getDog'),
-
-    # Get cat by id
-    path('getCat/<int:catId>', views.getCat, name='getCat'),
+    # Get pet by id
+    path('getPet/<int:petId>', views.getPet, name='getPet'),
 
     # Feed recommendation page
     path('feed_recommendation/', views.feed_recommendation,
