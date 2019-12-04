@@ -4,3 +4,7 @@ from django.contrib import admin
 from .models import Hotel
 
 admin.site.register(Hotel)
+
+from .models import Favor_hotel
+
+admin.site.register(Favor_hotel)

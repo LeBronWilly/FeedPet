@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Master(AbstractUser):
-    name = models.CharField(max_length=6)
+    name = models.CharField(max_length=20)
     email = models.EmailField()
     GENDER = (('Male', '男'), ('Female', '女'))
     gender = models.CharField(max_length=6, choices=GENDER, null=True)

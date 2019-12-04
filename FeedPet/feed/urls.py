@@ -1,3 +1,4 @@
+# feed/urls.py
 from django.urls import path
 from . import views
 
@@ -6,6 +7,12 @@ app_name = 'feed'
 urlpatterns = [
     # Feed page
     path('', views.feed, name='feed'),
+
+    # Get dog by id
+    path('getDog/<int:dogId>', views.getDog, name='getDog'),
+
+    # Get cat by id
+    path('getCat/<int:catId>', views.getCat, name='getCat'),
 
     # Feed recommendation page
     path('feed_recommendation/', views.feed_recommendation,

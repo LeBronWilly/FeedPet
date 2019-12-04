@@ -20,17 +20,17 @@
         <label>密碼</label>
         <div class="fields">
             <div class="seven wide field">
-                <input type="password" id="password1" name="password1" placeholder="密碼" pattern="[a-zA-Z0-9]{8,}"  required="required">
+                <input type="password" id="password1" name="password1" placeholder="至少八位英數" pattern="[a-zA-Z0-9]{8,}"  required="required">
             </div>
             <div class="seven wide field">
-                <input type="password" id="password2" name="password2" placeholder="密碼確認" pattern="[a-zA-Z0-9]{8,}"  required="required">
+                <input type="password" id="password2" name="password2" placeholder="密碼確認" pattern="[a-zA-Z0-9]{8,}" required="required">
             </div>
         </div>
     </div>
 
     <div class="seven wide field">
         <label>姓名</label>
-        <input type="text" id="name" name="name" required="required">
+        <input type="text" id="name" name="name" required="required" pattern="\S{0,6}" placeholder="輸入小於6個字元">
     </div>
 
     <div class="seven wide field">
