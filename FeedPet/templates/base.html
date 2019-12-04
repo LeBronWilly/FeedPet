@@ -1,5 +1,5 @@
 <!-- base.html -->
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 
@@ -9,11 +9,13 @@
     <title>FeedPet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/tocas.css">
     <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/animate.css">
     <link rel="stylesheet" href="https://hpcslag.github.io/hexo-theme-morgan/demo/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
+
     <style type="text/css">
         a.title-link:hover {
             color: #34b2db !important;
@@ -105,10 +107,8 @@
 
                 {% for message in messages %}
                 <div class="ts {{message.tags}} message">
-                <button class="ts close button"></button>
+                    <button class="ts close button"></button>
                     <div class="header">{{ message }}</div>
-
-                  
                 </div>
                 {% endfor %}
 
@@ -139,6 +139,7 @@
         </div>
     </div>
     <!-- the end of footer -->
+
     <script type="text/javascript">
         // index subtitle
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
@@ -174,6 +175,7 @@
     </script>
 
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
+
     <script type="text/javascript">
         // mypet add pet chose petType
         const dogSubType = ["成犬(室內/中低活動量)", "成犬(中高度活動量)", "需增重成犬(輸入目標體重)", "需減肥成犬(輸入目標體重)", "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"];
@@ -235,15 +237,15 @@
             });
         });
         //透過api跟後端要被選取的寵物的資料 並套入現有的欄位中
-        function getDogInfo(dogId) {
+        function getDogInfo(petId) {
             $.ajax({
-                url: '/feed/getDog/' + dogId,
+                url: '/feed/getPet/' + petId,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
                         $('#dog_weight').val(data.weight)
-                        $('#dog_type option').each(function (index, value ) {
+                        $('#dog_type option').each(function (index, value) {
                             if ($(this).val() == data.petType) { // EDITED THIS LINE
                                 $(this).prop('selected', true)
                             }
@@ -259,15 +261,15 @@
                 }
             });
         }
-        function getCatInfo(catId) {
+        function getCatInfo(petId) {
             $.ajax({
-                url: '/feed/getCat/' + catId,
+                url: '/feed/getPet/' + petId,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     if (data) {
                         $('#cat_weight').val(data.weight)
-                        $('#cat_type option').each(function (index, value ) {
+                        $('#cat_type option').each(function (index, value) {
                             if ($(this).val() == data.petType) { // EDITED THIS LINE
                                 $(this).prop('selected', true)
                             }

@@ -51,33 +51,19 @@ def feed(request):
     return render(request, 'feed/feed.html', locals())
 
 
-# function：getDog
+# function：getPet
 # author：Zachary Zhuo
 # date：2019/12/4
 # description：在後端建立ＡＰＩ，回傳JSON format的資料給前端
-def getDog(request, dogId):
-    dog = Pet.objects.get(id=dogId)
-    dog_json = {
-        'dogId': dogId,
-        'weight': dog.weight,
-        'petType': dog.petType,
-        'ligation': dog.ligation,
+def getPet(request, petId):
+    pet = Pet.objects.get(id=petId)
+    pet_json = {
+        'petId': petId,
+        'weight': pet.weight,
+        'petType': pet.petType,
+        'ligation': pet.ligation,
     }
-    return JsonResponse(dog_json)
-
-
-# function：getCat
-# author：Zachary Zhuo
-# date：2019/12/4
-def getCat(request, catId):
-    cat = Pet.objects.get(id=catId)
-    cat_json = {
-        'catId': catId,
-        'weight': cat.weight,
-        'petType': cat.petType,
-        'ligation': cat.ligation,
-    }
-    return JsonResponse(cat_json)
+    return JsonResponse(pet_json)
 
 
 def feed_recommendation(request):
