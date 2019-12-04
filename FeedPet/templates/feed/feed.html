@@ -9,8 +9,8 @@
 {% block content %}
 
 <div id="first" class="ts top attached tabbed menu">
-    <a class="active item" data-tab="狗狗">狗狗</a>
-    <a class="item" data-tab="貓貓">貓貓</a>
+    <a class="{{dogactive}} item" data-tab="狗狗">狗狗</a>
+    <a class="{{catactive}}item" data-tab="貓貓">貓貓</a>
 </div>
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
     <div class="ts relaxed grid">
@@ -30,6 +30,7 @@
                         {% endif %}
                         {% endfor %}
                     </select>
+
                 </div>
                 {% endif %}
                 <div class="field">
@@ -64,7 +65,8 @@
                         </div>
                     </div>
                 </div>
-                <button class="ts button">計算餵食量</button>
+                <button class="ts button" name="petclass" value="dog">計算餵食量</button>
+<!--                <input name="petclass" value="dog" type="submit">-->
                 <button class="ts button">
                     <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
                 </button>
@@ -77,19 +79,19 @@
             <form class="ts form horizontal">
                 <div class="field">
                     <label>罐頭</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.3}}">
                 </div>
                 <div class="field">
                     <label>生食</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.1}}">
                 </div>
                 <div class="field">
                     <label>凍乾</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.2}}">
                 </div>
                 <div class="field">
                     <label>水</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.0}}">
                 </div>
             </form>
         </div>
@@ -156,23 +158,23 @@
             </form>
         </div>
         <div class="six wide column">
-            <form class="ts form horizontal">
+           <form class="ts form horizontal">
                 <div class="field">
                     <label>罐頭</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.3}}">
                 </div>
                 <div class="field">
                     <label>生食</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.1}}">
                 </div>
                 <div class="field">
                     <label>凍乾</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.2}}">
                 </div>
 
                 <div class="field">
                     <label>水</label>
-                    <input type="text">
+                    <input type="text" value="{{ result.0}}">
                 </div>
             </form>
         </div>

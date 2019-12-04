@@ -26,6 +26,8 @@ urlpatterns = [
 
     # total Feed list page
     path('feed_list/', views.feed_list, name='feed_list'),
+
+    path('feed_calculation/',views.feed_calculation, name = 'feed_calcultion'),
     
     # # Home page
     # path('', views.index, name='index'),
