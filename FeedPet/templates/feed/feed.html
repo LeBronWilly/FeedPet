@@ -9,16 +9,8 @@
 {% block content %}
 
 <div id="first" class="ts top attached tabbed menu">
-{% if cal_petclass == 'dog' %}
     <a class="active item" data-tab="狗狗">狗狗</a>
     <a class="item" data-tab="貓貓">貓貓</a>
-{% elif cal_petclass == 'cat' %}
-    <a class="item" data-tab="狗狗">狗狗</a>
-    <a class="active item" data-tab="貓貓">貓貓</a>
-    {% else %}
-     <a class="active item" data-tab="狗狗">狗狗</a>
-    <a class="item" data-tab="貓貓">貓貓</a>
-    {% endif %}
 </div>
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
     <div class="ts relaxed grid">
@@ -29,39 +21,24 @@
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻狗狗</label>
-
-                    <select  id='choseDog' name="choseDog">
+                    <select id='choseDog' name="choseDog">
                         <option value="" disabled selected>選擇一個狗狗</option>
                         {% for pet in pets %}
                         {% if pet.petClass == 'Dog' %}
-                            {% if cal_petclass ==  'dog' %}
-                                {% if pet.id|stringformat:"i" == cal_dog_id %}
-                                    <option value="{{pet.id}}" selected = 'selected' >{{pet.petName}}</option>
-                                {% else %}
-                                    <option value="{{ pet.id }}">{{ pet.petName }}</option>
-                                {% endif %}
-                            {% else %}
-                                <option value="{{ pet.id }}">{{ pet.petName }}</option>
-                            {% endif %}
-
+                        <option value="{{ pet.id }}">{{ pet.petName }}</option>
                         {% endif %}
                         {% endfor %}
                     </select>
-
                 </div>
                 {% endif %}
 
                 <div class="field">
                     <label>體重</label>
-                    {% if cal_petclass ==  'dog' %}
-                    <input type="number" name="dog_weight" id="dog_weight" value="{{weight}}" required>
-                    {% else %}
-                    <input type="number" name="dog_weight" id="dog_weight" " required>
-                    {% endif %}
+                    <input type="number" name="dog_weight" id="dog_weight" required>
                 </div>
                 <div class="field">
                     <label>活動類型</label>
-                    <select id='dog_type' name="dog_type" required >
+                    <select id="dog_type" name="dog_type" required>
                         <option value="" disabled selected>選擇活動類型</option>
                         <option value="1.2">成犬(室內/中低活動量)</option>
                         <option value="1.6">成犬(中高度活動量)</option>
@@ -87,8 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="ts button" name="petclass" value="dog">計算餵食量</button>
-<!--                <input name="petclass" value="dog" type="submit">-->
+                <button class="ts button">計算餵食量</button>
                 <button class="ts button">
                     <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
                 </button>
@@ -101,19 +77,19 @@
             <form class="ts form horizontal">
                 <div class="field">
                     <label>罐頭</label>
-                    <input type="text" value="{{ result.3}}">
+                    <input type="text">
                 </div>
                 <div class="field">
                     <label>生食</label>
-                    <input type="text" value="{{ result.1}}">
+                    <input type="text">
                 </div>
                 <div class="field">
                     <label>凍乾</label>
-                    <input type="text" value="{{ result.2}}">
+                    <input type="text">
                 </div>
                 <div class="field">
                     <label>水</label>
-                    <input type="text" value="{{ result.0}}">
+                    <input type="text">
                 </div>
             </form>
         </div>
@@ -140,11 +116,11 @@
                 {% endif %}
                 <div class="field">
                     <label>體重</label>
-                    <input type="number" name="cat_weight" id="cat_weight">
+                    <input type="number" name="cat_weight" id="cat_weight" required>
                 </div>
                 <div class="field">
                     <label>活動類型</label>
-                    <select name = 'cat_type' id='cat_type'>
+                    <select name='cat_type' id='cat_type'>
                         <option value="" disabled selected>選擇活動類型</option>
                         <option value="1">成貓(室內/低活動量)</option>
                         <option value="1.3">成貓(中高活動量)</option>
@@ -170,7 +146,6 @@
                     </div>
                 </div>
                 <button class="ts button" name="petclass" value="cat">計算餵食量</button>
-                <!--                <input name="petclass" value="cat" type="submit">-->
 
                 <button class="ts button">
                     <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
@@ -181,23 +156,23 @@
             </form>
         </div>
         <div class="six wide column">
-           <form class="ts form horizontal">
+            <form class="ts form horizontal">
                 <div class="field">
                     <label>罐頭</label>
-                    <input type="text" value="{{ result.3}}">
+                    <input type="text">
                 </div>
                 <div class="field">
                     <label>生食</label>
-                    <input type="text" value="{{ result.1}}">
+                    <input type="text">
                 </div>
                 <div class="field">
                     <label>凍乾</label>
-                    <input type="text" value="{{ result.2}}">
+                    <input type="text">
                 </div>
 
                 <div class="field">
                     <label>水</label>
-                    <input type="text" value="{{ result.0}}">
+                    <input type="text">
                 </div>
             </form>
         </div>

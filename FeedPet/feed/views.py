@@ -7,11 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from master.models import Master, Pet
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
 import time
 import math
-
 
 
 # Create your views here.
@@ -27,26 +24,6 @@ def feed(request):
         pets = Pet.objects.filter(master=master)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
-
-    if request.POST:
-        cal_dog_id = request.POST['choseDog']
-
-        cal_petclass = request.POST['petclass']
-        if cal_petclass == 'dog':
-            weight = request.POST['dog_weight']
-            ligation = request.POST['dog_ligation']
-            type = request.POST['dog_type']
-
-        else: #cat
-            weight = request.POST['cat_weight']
-            ligation = request.POST['cat_ligation']
-            type = request.POST['cat_type']
-        pet_info = { 'type':type,  'weight':weight, 'ligation':ligation,  'petclass':cal_petclass}
-
-        result = feed_calculation(pet_info)
-
-    # print (type(pets[0].id))
-
 
     return render(request, 'feed/feed.html', locals())
 
@@ -85,25 +62,25 @@ def feeding_record(request):
 def feed_list(request):
     return render(request, 'feed/feed_list.html', locals())
 
+
 def feed_calculation(dict):
 
     # 貓狗代謝量 ＝ 70 x 體重的0.75次方 x 結紮係數 x 活動係數
     print(dict)
-    h = 70 * (math.pow(float(dict['weight']), 0.75)) * float(dict['ligation']) * float(dict['type'])
-
+    h = 70 * (math.pow(float(dict['weight']), 0.75)) * \
+        float(dict['ligation']) * float(dict['type'])
 
     if dict['petclass'] == 'dog':
         h_rawFood_rate = 84 / 64
         h_LyophilizerdRawFood_rate = 84 / 19
         h_cannedFood_rate = 84 / 62
 
-
         water = int(dict['weight']) * 60
         rawFood = h/h_rawFood_rate
         LyophilizerdRawFood = h/h_LyophilizerdRawFood_rate
         cannedFood = h/h_cannedFood_rate
 
-    else: #cat
+    else:  # cat
         h_rawFood_rate = 70 / 53
         h_LyophilizerdRawFood_rate = 84 / 15
         h_cannedFood_rate = 70 / 62
@@ -114,10 +91,3 @@ def feed_calculation(dict):
         cannedFood = h / h_cannedFood_rate
 
     return [round(water), round(rawFood), round(LyophilizerdRawFood), round(cannedFood)]
-
-
-
-
-
-
-
