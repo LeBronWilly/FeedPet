@@ -11,9 +11,6 @@ import time
 import math
 
 
-# Create your views here.
-
-
 # function：feed
 # author：Zachary Zhuo
 # date：2019/12/4
