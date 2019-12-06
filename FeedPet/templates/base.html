@@ -257,7 +257,7 @@
                     if (data) {
                         $('#dog_weight').val(data.weight)
                         $('#dog_type option').each(function (index, value) {
-                            if ($(this).text() == data.petType) { // EDITED THIS LINE
+                            if ($(this).val() == data.petType) { // EDITED THIS LINE
                                 $(this).prop('selected', true)
                             }
                         });
@@ -281,7 +281,7 @@
                     if (data) {
                         $('#cat_weight').val(data.weight)
                         $('#cat_type option').each(function (index, value) {
-                            if ($(this).text() == data.petType) { // EDITED THIS LINE
+                            if ($(this).val() == data.petType) { // EDITED THIS LINE
                                 $(this).prop('selected', true)
                             }
                         });
