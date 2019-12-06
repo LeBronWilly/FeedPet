@@ -1,5 +1,6 @@
 <!-- feed/feed.html -->
 {% extends "base.html" %}
+
 {% load staticfiles %}
 
 {% block header %}
@@ -78,16 +79,16 @@
                     <label>是否結紮</label>
                     <div class="ts checkboxes">
                         <div class="ts radio checkbox">
-                            <input id="dog_yes" type="radio" name="dog_ligation" value="0.888">
+                            <input id="dog_yes" type="radio" name="dog_ligation" value="0.888" class="dog_ligation">
                             <label for="dog_yes">有</label>
                         </div>
                         <div class="ts radio checkbox">
-                            <input id="dog_no" type="radio" name="dog_ligation" value="1">
+                            <input id="dog_no" type="radio" name="dog_ligation" value="1" class="dog_ligation">
                             <label for="dog_no">無</label>
                         </div>
                     </div>
                 </div>
-                <button class="ts button" name="petclass" value="dog">計算餵食量</button>
+                <button class="ts button" name="petclass" value="dog" id="dog_cal">計算餵食量</button>
 <!--                <input name="petclass" value="dog" type="submit">-->
                 <button class="ts button">
                     <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
