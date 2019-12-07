@@ -230,21 +230,68 @@
                 getDogInfo(value)
             });
         });
-        $("#choseDog").change(function () {
+        $("#choseCat").change(function () {
             $("#choseCat option:selected").each(function () {
                 var value = $("#choseCat").val();
                 getCatInfo(value)
             });
         });
 
+
+
         $("#dog_cal").click(function () {
             var weight = $("#dog_weight").val();
             var type = $("#dog_type").val();
             var ligation = $(".dog_ligation:checked").val();
-            var cal_dog_id = $("#choseDog").val();
             var cal_petclass = 'dog'
+            var petinfo = {'weight':weight,'type':type,'ligation':ligation,'cal_petclass':cal_petclass};
+            console.log(petinfo);
+            $.ajax({
+                url: '/feed/feed_calculation/' ,
+                type: 'GET',
+                data: petinfo,
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        console.log(data)
+                        $('#dogcannedFood').val(data.cannedFood)
+                        $('#dograwFood').val(data.cannedFood)
+                        $('#dogLyophilizerdRawFood').val(data.LyophilizerdRawFood)
+                        $('#dogwater').val(data.water)
+                    }
+                },
+                error: function (err) {
+                    console.log("nononon")
+                }
+            });
+        });
 
-            petCalculation(value)
+
+        $("#cat_cal").click(function () {
+            var weight = $("#cat_weight").val();
+            var type = $("#cat_type").val();
+            var ligation = $(".cat_ligation:checked").val();
+            var cal_petclass = 'dog'
+            var petinfo = {'weight':weight,'type':type,'ligation':ligation,'cal_petclass':cal_petclass};
+            console.log(petinfo);
+            $.ajax({
+                url: '/feed/feed_calculation/' ,
+                type: 'GET',
+                data: petinfo,
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        console.log(data)
+                        $('#catcannedFood').val(data.cannedFood)
+                        $('#catrawFood').val(data.cannedFood)
+                        $('#catLyophilizerdRawFood').val(data.LyophilizerdRawFood)
+                        $('#catwater').val(data.water)
+                    }
+                },
+                error: function (err) {
+                    console.log("nononon")
+                }
+            });
         });
 
         //透過api跟後端要被選取的寵物的資料 並套入現有的欄位中
@@ -297,30 +344,7 @@
             });
         }
 
-        function petCalculation(petId) {
-            $.ajax({
-                url: '/feed/' ,
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    if (data) {
-                        $('#dog_weight').val(data.weight)
-                        $('#dog_type option').each(function (index, value) {
-                            if ($(this).val() == data.petType) { // EDITED THIS LINE
-                                $(this).prop('selected', true)
-                            }
-                        });
-                        if (data.ligation == 'Yes') {
-                            $('#dog_yes').prop('checked', true)
-                        } else {
-                            $('#dog_no').prop('checked', true)
-                        }
-                    }
-                },
-                error: function (err) {
-                }
-            });
-        }
+
     </script>
 </body>
 
