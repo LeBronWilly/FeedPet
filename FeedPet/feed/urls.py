@@ -11,6 +11,9 @@ urlpatterns = [
     # [api] Get pet by id
     path('getPet/<int:petId>', views.getPet, name='getPet'),
 
+    # [api] Get feed calculation
+    path('feed_calculation/',views.feed_calculation, name = 'feed_calcultion'),
+
     # Import feed detail to DB
     path('import_feed/', views.import_feed, name='import_feed'),
 

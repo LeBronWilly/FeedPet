@@ -93,19 +93,19 @@ def import_feed(request):
     return HttpResponseRedirect(reverse('feed:feed_list'))
 
 
-def feed_calculation(dict):
-
+def feed_calculation(request):
     # 貓狗代謝量 ＝ 70 x 體重的0.75次方 x 結紮係數 x 活動係數
-    print(dict)
-    h = 70 * (math.pow(float(dict['weight']), 0.75)) * \
-        float(dict['ligation']) * float(dict['type'])
-
-    if dict['petclass'] == 'dog':
+    h = 70 * (math.pow(float(request.GET['weight']), 0.75)) * \
+        float(request.GET['ligation']) * float(request.GET['type'])
+    #
+    #
+    if request.GET['cal_petclass'] == 'dog':
         h_rawFood_rate = 84 / 64
         h_LyophilizerdRawFood_rate = 84 / 19
         h_cannedFood_rate = 84 / 62
-
-        water = int(dict['weight']) * 60
+    #
+    #
+        water = int(request.GET['weight']) * 60
         rawFood = h/h_rawFood_rate
         LyophilizerdRawFood = h/h_LyophilizerdRawFood_rate
         cannedFood = h/h_cannedFood_rate
@@ -115,12 +115,15 @@ def feed_calculation(dict):
         h_LyophilizerdRawFood_rate = 84 / 15
         h_cannedFood_rate = 70 / 62
 
-        water = int(dict['weight']) * 50
+        water = int(request.GET['weight']) * 50
         rawFood = h / h_rawFood_rate
         LyophilizerdRawFood = h / h_LyophilizerdRawFood_rate
         cannedFood = h / h_cannedFood_rate
-
-    return [round(water), round(rawFood), round(LyophilizerdRawFood), round(cannedFood)]
+    #
+    # return [round(water), round(rawFood), round(LyophilizerdRawFood), round(cannedFood)]
+    print({"water": round(water), 'rawFood': round(rawFood), 'LyophilizerdRawFood': round(
+        LyophilizerdRawFood), 'cannedFood': round(cannedFood)})
+    return JsonResponse({"water": round(water), 'rawFood': round(rawFood), 'LyophilizerdRawFood': round(LyophilizerdRawFood), 'cannedFood': round(cannedFood)})
 
 
 @login_required
@@ -147,10 +150,6 @@ def add_feed_favor(request, master_id, feed_id):
 
 def feed_recommendation(request):
     return render(request, 'feed/feed_recommendation.html', locals())
-
-
-def feed_favorite(request):
-    return render(request, 'feed/feed_favorite.html', locals())
 
 
 def feeding_record(request):
