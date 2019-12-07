@@ -156,6 +156,8 @@
                 // alert("你切換到了「" + tabName + "」分頁，而群組是「" + groupName + "」。");
             }
         });
+        // feed list table sort
+        ts('.ts.sortable.table').tablesort();
         // mypet preview image(add/update)
         $("#imgInp").change(function () {
             //當檔案改變後，做一些事 
@@ -299,7 +301,7 @@
 
         function petCalculation(petId) {
             $.ajax({
-                url: '/feed/' ,
+                url: '/feed/',
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
@@ -320,6 +322,43 @@
                 error: function (err) {
                 }
             });
+        }
+        // feed list 動態搜尋
+        function searchFeedTable() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("search_input");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("feed_table");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        // 增加feed favorite
+        function add_feed_favor(master_id, feed_id) {
+            $.ajax({
+                url: '/feed/add_feed_favor/' + master_id + '/' + feed_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                    }
+                },
+                error: function (err) {
+                }
+            });
+        }
+        // 刪除feed favorite
+        function del_feed_favor() {
+            
         }
     </script>
 </body>

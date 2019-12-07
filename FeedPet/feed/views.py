@@ -7,8 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from master.models import Master, Pet
+from .models import Feed, Favor_feed
+import datetime
 import time
 import math
+import requests
 
 
 # function：feed
@@ -19,6 +22,7 @@ def feed(request):
     try:
         master = Master.objects.get(username=username)
         pets = Pet.objects.filter(master=master)
+
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
 
@@ -30,34 +34,63 @@ def feed(request):
 # date：2019/12/4
 # description：在後端建立ＡＰＩ，回傳JSON format的資料給前端
 def getPet(request, petId):
-    pet = Pet.objects.get(id=petId)
-    pet_json = {
-        'petId': petId,
-        'weight': pet.weight,
-        'petType': pet.petType,
-        'ligation': pet.ligation,
-    }
+    if request.method == 'GET' and request.is_ajax():
+        try:
+            pet = Pet.objects.get(id=petId)
+        except Exception as e:
+            messages.add_message(request, messages.WARNING, e)
+        pet_json = {
+            'petId': petId,
+            'weight': pet.weight,
+            'petType': pet.petType,
+            'ligation': pet.ligation,
+        }
     return JsonResponse(pet_json)
 
 
-def feed_recommendation(request):
-    return render(request, 'feed/feed_recommendation.html', locals())
-
-
-def feed_detail(request):
-    return render(request, 'deed/feed_detail.html', locals())
-
-
-def feed_favorite(request):
-    return render(request, 'feed/feed_favorite.html', locals())
-
-
-def feeding_record(request):
-    return render(request, 'pet/pet_feeding_record.html', locals())
-
-
+# function：feed_list
+# author：Zachary Zhuo
+# date：2019/12/6
+# description：列出飼料open data以表格呈現簡單資訊
 def feed_list(request):
+    try:
+        feeds = Feed.objects.all()
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
     return render(request, 'feed/feed_list.html', locals())
+
+
+# function：feed_detail
+# author：Zachary Zhuo
+# date：2019/12/6
+# description：顯示feed list table所點擊的該feed詳細資訊
+def feed_detail(request, feed_id):
+    try:
+        feed = Feed.objects.get(id=feed_id)
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+
+    return render(request, 'feed/feed_detail.html', locals())
+
+
+# function：import_feed
+# author：Zachary Zhuo
+# date：2019/12/6
+# description：call api 將feed open data資料寫進資料庫
+def import_feed(request):
+    try:
+        feed_api = requests.get(
+            "http://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3")
+        feed_json = feed_api.json()
+        for feed_obj in feed_json:
+            feed = Feed.objects.create(fname=feed_obj["fname"], fitem=feed_obj["fitem"], fmat=feed_obj["fmat"], fnut=feed_obj["fnut"],
+                                       fusage1=feed_obj["fusage1"], fusage2=feed_obj["fusage2"], fusage3=feed_obj["fusage3"], flegalname=feed_obj["flegalname"])
+            feed.save()
+
+        messages.add_message(request, messages.SUCCESS, '成功更新')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, e)
+    return HttpResponseRedirect(reverse('feed:feed_list'))
 
 
 def feed_calculation(dict):
@@ -88,3 +121,37 @@ def feed_calculation(dict):
         cannedFood = h / h_cannedFood_rate
 
     return [round(water), round(rawFood), round(LyophilizerdRawFood), round(cannedFood)]
+
+
+@login_required
+def add_feed_favor(request, master_id, feed_id):
+    if request.method == 'GET' and request.is_ajax():
+        try:
+            master = Master.objects.get(id=master_id)
+            feed = Feed.objects.get(id=feed_id)
+            if master and feed is not None:
+                favor_feed = Favor_feed.objects.create(
+                    master=master, feed=feed, created_on=datetime.date.today())
+                favor_feed.save()
+                favor_feed_json = {
+                    'masterId': master_id,
+                    'feedId': feed_id,
+                }
+        except Exception as e:
+            messages.add_message(request, messages.WARNING, e)
+    else:
+        favor_feed_json = {}
+
+    return JsonResponse(favor_feed_json)
+
+
+def feed_recommendation(request):
+    return render(request, 'feed/feed_recommendation.html', locals())
+
+
+def feed_favorite(request):
+    return render(request, 'feed/feed_favorite.html', locals())
+
+
+def feeding_record(request):
+    return render(request, 'pet/pet_feeding_record.html', locals())
