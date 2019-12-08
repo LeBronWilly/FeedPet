@@ -127,7 +127,7 @@
                 
                 <!-- 提示訊息 -->
                 {% for message in messages %}
-                <div class="ts {{message.tags}} message">
+                <div class="ts {{message.tags}} dismissable message">
                     <button class="ts close button"></button>
                     <div class="header">{{ message }}</div>
                 </div>

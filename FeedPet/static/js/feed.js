@@ -96,6 +96,11 @@ $("#dog_cal").click(function () {
                 $('#dograwFood').val(data.rawFood)
                 $('#dogLyophilizerdRawFood').val(data.LyophilizerdRawFood)
                 $('#dogwater').val(data.water)
+
+                //點心條
+                ts('.snackbar').snackbar({
+                    content: '計算結果如右邊欄位'
+                });
             }
         },
         error: function (err) {
@@ -124,6 +129,11 @@ $("#cat_cal").click(function () {
                 $('#catrawFood').val(data.rawFood)
                 $('#catLyophilizerdRawFood').val(data.LyophilizerdRawFood)
                 $('#catwater').val(data.water)
+
+                //點心條
+                ts('.snackbar').snackbar({
+                    content: '計算結果如右邊欄位'
+                });
             }
         },
         error: function (err) {
@@ -160,6 +170,10 @@ function add_feed_favor(master_id, feed_id) {
         dataType: 'json',
         success: function (data) {
             if (data) {
+                //點心條
+                ts('.snackbar').snackbar({
+                    content: '成功加入我的最愛'
+                });
             }
         },
         error: function (err) {

@@ -15,7 +15,7 @@
 <table class="ts fixed single line sortable table" id="feed_table">
     <thead>
         <tr>
-            <!-- <th class="one wide">最愛</th> -->
+            <th class="one wide">最愛</th>
             <th class="six wide">名稱</th>
             <th class="two wide">項目</th>
             <!-- <th>成分</th>
@@ -29,15 +29,20 @@
     </thead>
     <tbody>
         {% for feed in feeds %}
+        <!-- {% for favor_feed in favor_feeds %} -->
         <tr>
-            <!-- <td>
-                <button class="ts circular icon secondary button" onclick="">
-                    <i class="empty heart icon"></i>
-                </button>
+            <td>
+                {% if favor_feed.feed == feed %}
                 <button class="ts circular icon secondary button" onclick="location.href='/feed/del_feed_favor'">
                     <i class="heart negative icon"></i>
                 </button>
-            </td> -->
+                {% else %}
+                <button class="ts circular icon secondary button"
+                    onclick="add_feed_favor('{{user.id}}', '{{feed.id}}')">
+                    <i class="empty heart icon"></i>
+                </button>
+                {% endif %}
+            </td>
             <td>{{ feed.fname }}</td>
             <td>{{ feed.fitem }}</td>
             <!-- <td>{{ feed.fmat }}</td>
@@ -49,7 +54,14 @@
             <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
         </tr>
         {% endfor %}
+        <!-- {% endfor %} -->
     </tbody>
 </table>
+
+<!-- 點心條 -->
+<div class="ts snackbar">
+    <div class="content"></div>
+</div>
+<!-- 點心條 -->
 
 {% endblock content %}

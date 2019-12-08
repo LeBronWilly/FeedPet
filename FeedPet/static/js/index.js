@@ -6,3 +6,6 @@ ts('.dismissable.message').message();
 function showDimmer_logout() {
     ts('#closableModal_logout').modal("show")
 }
+
+// close message
+ts('.dismissable.message').message()

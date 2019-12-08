@@ -53,7 +53,10 @@ def getPet(request, petId):
 # date：2019/12/6
 # description：列出飼料open data以表格呈現簡單資訊
 def feed_list(request):
+    username = request.user.username
     try:
+        master = Master.objects.get(username=username)
+        favor_feeds = Favor_feed.objects.filter(master=master)
         feeds = Feed.objects.all()
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
