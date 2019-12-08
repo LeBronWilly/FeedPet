@@ -12,11 +12,11 @@
 
 <div class="ts horizontal divider">我的寵物清單</div>
 
-<div class="cards">
+<div class="ts three cards">
     {% for pet in pets %}
     <div class="ts card">
-        <div class="image">
-            <img class="ts image" src="{{ pet.image.url }}">
+        <div class="image mypet_div">
+            <img class="ts image mypet_img" src="{{ pet.image.url }}">
         </div>
         <div class="content">
             <div class="center aligned header">{{ pet.petName }}</div>
