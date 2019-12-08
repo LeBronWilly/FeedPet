@@ -7,36 +7,49 @@
 
 {% block content %}
 
-
-
-
-<table class="ts table">
+<button class="ts button" onclick="location.href='/feed/import_feed'">匯入飼料</button>
+<div class="ts icon input">
+    <input type="text" id="search_input" onkeyup="searchFeedTable()" placeholder="搜尋...">
+    <i class="inverted circular search link icon"></i>
+</div>
+<table class="ts fixed single line sortable table" id="feed_table">
     <thead>
         <tr>
-            <th class="one wide">編號</th>
-            
-            <th>飼料品名</th>
-            <th>飼料類型</th>
-            <th >內容物</th>
-        <th  class="three wide"></th>
+            <!-- <th class="one wide">最愛</th> -->
+            <th class="six wide">名稱</th>
+            <th class="two wide">項目</th>
+            <!-- <th>成分</th>
+            <th>營養</th> -->
+            <th class="three wide">適用</th>
+            <!-- <th>使用</th>
+            <th>保存</th> -->
+            <th class="three wide">公司</th>
+            <th class="one wide"></th>
         </tr>
     </thead>
     <tbody>
+        {% for feed in feeds %}
         <tr>
-        <td>1</td>
-            <td>飼料一號</td>
-            <td>營養食品</td>
-        
-            <td>蔓越莓 紅麴</td>
-
-            
+            <!-- <td>
+                <button class="ts circular icon secondary button" onclick="">
+                    <i class="empty heart icon"></i>
+                </button>
+                <button class="ts circular icon secondary button" onclick="location.href='/feed/del_feed_favor'">
+                    <i class="heart negative icon"></i>
+                </button>
+            </td> -->
+            <td>{{ feed.fname }}</td>
+            <td>{{ feed.fitem }}</td>
+            <!-- <td>{{ feed.fmat }}</td>
+            <td>{{ feed.fnut }}</td> -->
+            <td>{{ feed.fusage1 }}</td>
+            <!-- <td>{{ feed.fusage2 }}</td>
+            <td>{{ feed.fusage3 }}</td> -->
+            <td>{{ feed.flegalname }}</td>
+            <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
         </tr>
- 
-
-
-
+        {% endfor %}
     </tbody>
-
 </table>
 
 {% endblock content %}

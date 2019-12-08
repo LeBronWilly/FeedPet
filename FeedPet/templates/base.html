@@ -81,10 +81,10 @@
                         <a class="item" href="{% url 'master:profile' %}">個人資料</a>
                         <a class="item">最愛飼料</a>
                         <a class="item">最愛旅館</a>
+                        <div class="section divider"></div>
+                        <a class="item" onclick="showDimmer_logout()">登出</a>
                     </div>
                 </div>
-
-                <a class="item" href="{% url 'master:logout' %}">登出</a>
                 {% else %}
                 <a class="item" href="{% url 'master:register' %}">註冊</a>
                 <a class="item" href="{% url 'master:login' %}">登入</a>
@@ -116,12 +116,34 @@
             <!-- left section -->
             <div class="column" style=" padding: 35px; ">
 
+                <!-- 彈跳訊息 -->
+                <div class="ts modals dimmer">
+                    <dialog id="closableModal_logout" class="ts closable tiny modal">
+                        <div class="content">
+                            <p>
+                                確定要登出嗎？
+                            </p>
+                        </div>
+                        <div class="actions">
+                            <button class="ts deny button">
+                                別
+                            </button>
+                            <button class="ts negative button" onclick="location.href='/logout'">
+                                對啦
+                            </button>
+                        </div>
+                    </dialog>
+                </div>
+                <!-- 彈跳訊息 -->
+                
+                <!-- 提示訊息 -->
                 {% for message in messages %}
                 <div class="ts {{message.tags}} message">
                     <button class="ts close button"></button>
                     <div class="header">{{ message }}</div>
                 </div>
                 {% endfor %}
+                <!-- 提示訊息 -->
 
                 {% block header %}{% endblock header %}
                 {% block content %}{% endblock content %}
@@ -154,149 +176,12 @@
     <script type="text/javascript">
         // index subtitle
         const slogans = ["安安你好！ 這裡是FeedPet", "這是一個寵物餵食紀錄與推薦網站", "趕快登入加入你的寵物吧", "快點喔！！！"];
-        // index user tag
-        ts('.ts.dropdown:not(.basic)').dropdown();
-        // mypet del button
-        ts('.dismissable.message').message();
-        function showDimmer() {
-            ts('#closableModal').modal("show")
-        }
-        // feed tab
-        ts('#first.tabbed.menu .item').tab({
-            onSwitch: (tabName, groupName) => {
-                // alert("你切換到了「" + tabName + "」分頁，而群組是「" + groupName + "」。");
-            }
-        });
-        // mypet preview image(add/update)
-        $("#imgInp").change(function () {
-            //當檔案改變後，做一些事 
-            readURL(this);   // this代表<input id="imgInp">
-        });
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var imageTagID = input.getAttribute("targetID");
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var img = document.getElementById(imageTagID);
-                    img.setAttribute("src", e.target.result)
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
     </script>
-
-    <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/script.js"></script>
-
-    <script type="text/javascript">
-        // mypet add pet chose petType
-        const dogSubType = ["成犬(室內/中低活動量)", "成犬(中高度活動量)", "需增重成犬(輸入目標體重)", "需減肥成犬(輸入目標體重)", "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"];
-        const catSubType = ["成貓(室內/低活動量)", "成貓(中高活動量)", "需增重成貓(輸入目標體重)", "需減肥成貓(輸入目標體重)", "成長期幼貓(10個月以內)", "老貓(11歲以上)", "懷孕母貓", "哺乳母貓"];
-        Array.prototype.forEach.call(document.forms.addpet.petClass, radio => {
-            radio.addEventListener('change', () => {
-
-                //先將原先petType下的元素清空
-                var div = document.getElementById("petType");
-                while (div.hasChildNodes()) {
-                    div.removeChild(div.firstChild);
-                }
-                if (document.getElementById("cat").checked) {
-                    for (j = 0; j < catSubType.length; j++) {
-                        var option = document.createElement('option');
-                        option.innerHTML = catSubType[j];
-                        document.getElementById("petType").appendChild(option);
-                    }
-                    //console.log(`${document.forms.addpet.petClass.value}`);
-                }
-                //判斷選取到dog時候
-                if (document.getElementById("dog").checked) {
-                    for (i = 0; i < dogSubType.length; i++) {
-                        var option = document.createElement('option');
-                        option.innerHTML = dogSubType[i];
-                        document.getElementById("petType").appendChild(option);
-                    }
-                    //console.log(`${document.forms.addpet.petClass.value}`);
-                }
-            })
-        });
-    </script>
-
-    <script type="text/javascript">
-        window.onload = getTime();
-        //取得系统当前时间
-        function getTime() {
-            console.log(tMonth)
-            var today = new Date();
-            var tYear = today.getFullYear();
-            var tMonth = today.getMonth() + 1;
-            var tDate = today.getDate();
-            document.getElementById("showDate").innerHTML = tYear + "-" + tMonth + "-" + tDate;
-        }
-    </script>
-
-    <script>
-        //feed下拉式選單 選取其中之一寵物
-        $("#choseDog").change(function () {
-            $("#choseDog option:selected").each(function () {
-                var value = $("#choseDog").val();
-                getDogInfo(value)
-            });
-        });
-        $("#choseCat").change(function () {
-            $("#choseCat option:selected").each(function () {
-                var value = $("#choseCat").val();
-                getCatInfo(value)
-            });
-        });
-        //透過api跟後端要被選取的寵物的資料 並套入現有的欄位中
-        function getDogInfo(petId) {
-            $.ajax({
-                url: '/feed/getPet/' + petId,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    if (data) {
-                        $('#dog_weight').val(data.weight)
-                        $('#dog_type option').each(function (index, value) {
-                            if ($(this).text() == data.petType) { // EDITED THIS LINE
-                                $(this).prop('selected', true)
-                            }
-                        });
-                        if (data.ligation == 'Yes') {
-                            $('#dog_yes').prop('checked', true)
-                        } else {
-                            $('#dog_no').prop('checked', true)
-                        }
-                    }
-                },
-                error: function (err) {
-                }
-            });
-        }
-        function getCatInfo(petId) {
-            $.ajax({
-                url: '/feed/getPet/' + petId,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    if (data) {
-                        $('#cat_weight').val(data.weight)
-                        $('#cat_type option').each(function (index, value) {
-                            if ($(this).text() == data.petType) { // EDITED THIS LINE
-                                $(this).prop('selected', true)
-                            }
-                        });
-                        if (data.ligation == 'Yes') {
-                            $('#cat_yes').prop('checked', true)
-                        } else {
-                            $('#cat_no').prop('checked', true)
-                        }
-                    }
-                },
-                error: function (err) {
-                }
-            });
-        }
-    </script>
+    <script src="{% static 'js/slogan.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/mypet.js' %}"></script>
+    <script src="{% static 'js/feed.js' %}"></script>
+    <script src="{% static 'js/hotel.js' %}"></script>
 </body>
 
 </html>

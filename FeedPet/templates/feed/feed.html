@@ -1,5 +1,6 @@
 <!-- feed/feed.html -->
 {% extends "base.html" %}
+
 {% load staticfiles %}
 
 {% block header %}
@@ -11,34 +12,42 @@
 <div id="first" class="ts top attached tabbed menu">
     <a class="active item" data-tab="狗狗">狗狗</a>
     <a class="item" data-tab="貓貓">貓貓</a>
+
 </div>
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
     <div class="ts relaxed grid">
         <div class="ten wide column">
-            <form class="ts form horizontal" action="/feed/" method="post">
+            <form class="ts form horizontal" >
                 {{ pets.pet }}
                 <mark>這裡是狗狗</mark>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻狗狗</label>
-                    <select id='choseDog' name="choseDog">
+
+                    <select  id='choseDog' name="choseDog">
                         <option value="" disabled selected>選擇一個狗狗</option>
                         {% for pet in pets %}
                         {% if pet.petClass == 'Dog' %}
-                        <option value="{{ pet.id }}">{{ pet.petName }}</option>
+
+                                <option value="{{ pet.id }}">{{ pet.petName }}</option>
+
+
                         {% endif %}
                         {% endfor %}
                     </select>
+
                 </div>
                 {% endif %}
 
                 <div class="field">
                     <label>體重</label>
-                    <input type="number" name="dog_weight" id="dog_weight" required>
+
+                    <input type="number" name="dog_weight" id="dog_weight"  required>
+
                 </div>
                 <div class="field">
                     <label>活動類型</label>
-                    <select id="dog_type" name="dog_type" required>
+                    <select id='dog_type' name="dog_type" required >
                         <option value="" disabled selected>選擇活動類型</option>
                         <option value="1.2">成犬(室內/中低活動量)</option>
                         <option value="1.6">成犬(中高度活動量)</option>
@@ -55,16 +64,16 @@
                     <label>是否結紮</label>
                     <div class="ts checkboxes">
                         <div class="ts radio checkbox">
-                            <input id="dog_yes" type="radio" name="dog_ligation" value="0.888">
+                            <input id="dog_yes" type="radio" name="dog_ligation" value="0.888" class="dog_ligation">
                             <label for="dog_yes">有</label>
                         </div>
                         <div class="ts radio checkbox">
-                            <input id="dog_no" type="radio" name="dog_ligation" value="1">
+                            <input id="dog_no" type="radio" name="dog_ligation" value="1" class="dog_ligation">
                             <label for="dog_no">無</label>
                         </div>
                     </div>
                 </div>
-                <button class="ts button">計算餵食量</button>
+                <button class="ts button" type="button" id="dog_cal">計算餵食量</button>
                 <button class="ts button">
                     <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
                 </button>
@@ -77,19 +86,19 @@
             <form class="ts form horizontal">
                 <div class="field">
                     <label>罐頭</label>
-                    <input type="text">
+                    <input id="dogcannedFood" type="text" >
                 </div>
                 <div class="field">
                     <label>生食</label>
-                    <input type="text">
+                    <input id="dograwFood" type="text" >
                 </div>
                 <div class="field">
                     <label>凍乾</label>
-                    <input type="text">
+                    <input id="dogLyophilizerdRawFood" type="text" >
                 </div>
                 <div class="field">
                     <label>水</label>
-                    <input type="text">
+                    <input id="dogwater" type="text" >
                 </div>
             </form>
         </div>
@@ -116,11 +125,11 @@
                 {% endif %}
                 <div class="field">
                     <label>體重</label>
-                    <input type="number" name="cat_weight" id="cat_weight" required>
+                    <input type="number"  id="cat_weight">
                 </div>
                 <div class="field">
                     <label>活動類型</label>
-                    <select name='cat_type' id='cat_type'>
+                    <select name = 'cat_type' id='cat_type'>
                         <option value="" disabled selected>選擇活動類型</option>
                         <option value="1">成貓(室內/低活動量)</option>
                         <option value="1.3">成貓(中高活動量)</option>
@@ -136,16 +145,16 @@
                     <label>是否結紮</label>
                     <div class="ts checkboxes">
                         <div class="ts radio checkbox">
-                            <input id="cat_yes" type="radio" name="cat_ligation" value="0.857">
+                            <input id="cat_yes" type="radio" name="cat_ligation" class="cat_ligation" value="0.857">
                             <label for="cat_yes">有</label>
                         </div>
                         <div class="ts radio checkbox">
-                            <input id="cat_no" type="radio" name="cat_ligation" value="1">
+                            <input id="cat_no" type="radio" name="cat_ligation" class="cat_ligation" value="1">
                             <label for="cat_no">無</label>
                         </div>
                     </div>
                 </div>
-                <button class="ts button" name="petclass" value="cat">計算餵食量</button>
+                <button class="ts button" id="cat_cal" type="button">計算餵食量</button>
 
                 <button class="ts button">
                     <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
@@ -156,23 +165,23 @@
             </form>
         </div>
         <div class="six wide column">
-            <form class="ts form horizontal">
+           <form class="ts form horizontal">
                 <div class="field">
                     <label>罐頭</label>
-                    <input type="text">
+                    <input id="catcannedFood" type="text" >
                 </div>
                 <div class="field">
                     <label>生食</label>
-                    <input type="text">
+                    <input id="catrawFood" type="text" >
                 </div>
                 <div class="field">
                     <label>凍乾</label>
-                    <input type="text">
+                    <input id="catLyophilizerdRawFood"  type="text" >
                 </div>
 
                 <div class="field">
                     <label>水</label>
-                    <input type="text">
+                    <input id="catwater" ype="text" >
                 </div>
             </form>
         </div>
