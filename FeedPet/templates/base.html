@@ -33,27 +33,32 @@
             color: #5a5a5a;
         }
 
-        .card {
-            width: 300px !important;
-            margin: 5px !important;
+        .topimg {
+            background-image: url("{% static 'images/slide/007.jpg' %}");
+            background-size: cover;
+            height: 500px;
+            display: flex;
+            padding-bottom: 20px;
+            padding-right: 30px;
+            justify-content: flex-end;
+            align-items: flex-end;
+            border-radius: 5px
         }
 
-        .cards {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            flex-wrap: wrap;
+        .topimg h2 {
+            color: #f7f7f7 !important;
+            text-shadow: 2px 2px #5a5a5a;
         }
+
 
         .mypet_img {
-            max-width: 296px;
-            max-height: 250px;
+            object-fit: cover;
+
         }
 
         .mypet_div {
-            width: 298px;
             height: 250px;
-            background-color: rgb(253, 253, 253);
+            background-color: rgb(250, 250, 250);
         }
     </style>
 

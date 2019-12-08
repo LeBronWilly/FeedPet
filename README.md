@@ -6,6 +6,7 @@ Django 2.2.7
 安裝
 ```Python
 pip install Pillow
+pip install requests
 ```
 
 執行
