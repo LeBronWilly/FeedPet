@@ -1,12 +1,15 @@
 // feed tab
 ts('#first.tabbed.menu .item').tab({
     onSwitch: (tabName, groupName) => {
-        // alert("你切換到了「" + tabName + "」分頁，而群組是「" + groupName + "」。");
+        //點心條
+        ts('.snackbar').snackbar({
+            content: '你切換到' + tabName + '的分頁了'
+        });
     }
 });
 
 // feed list table sort
-ts('.ts.sortable.table').tablesort();
+// ts('.ts.sortable.table').tablesort();
 
 //使用者透過下拉式選單選擇狗狗
 $("#choseDog").change(function () {
@@ -99,7 +102,7 @@ $("#dog_cal").click(function () {
 
                 //點心條
                 ts('.snackbar').snackbar({
-                    content: '計算結果如右邊欄位'
+                    content: '推薦餵食量如右邊欄位'
                 });
             }
         },
@@ -132,7 +135,7 @@ $("#cat_cal").click(function () {
 
                 //點心條
                 ts('.snackbar').snackbar({
-                    content: '計算結果如右邊欄位'
+                    content: '推薦餵食量如右邊欄位'
                 });
             }
         },
@@ -143,24 +146,26 @@ $("#cat_cal").click(function () {
 });
 
 // feed list 動態搜尋
-function searchFeedTable() {
-    var input, filter, table, tr, td, i;
-    input = document.getElementById("search_input");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("feed_table");
-    tr = table.getElementsByTagName("tr");
+// function searchFeedTable() {
+//     var input, filter, table, tr, td, i;
+//     input = document.getElementById("search_input");
+//     filter = input.value.toUpperCase();
+//     table = document.getElementById("feed_table");
+//     tr = table.getElementsByTagName("tr"); 
 
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
+//     for (i = 0; i < tr.length - 1; i++) {
+//         td = tr[i].getElementsByTagName("td")[0];
+//         if (td) {
+//             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+//                 tr[i].style.display = "";
+//             } else {
+//                 tr[i].style.display = "none";
+//             }
+//         }
+//     }
+// }
+
+$("#feed_table").DataTable();
 
 // 增加feed favorite
 function add_feed_favor(master_id, feed_id) {
@@ -170,10 +175,18 @@ function add_feed_favor(master_id, feed_id) {
         dataType: 'json',
         success: function (data) {
             if (data) {
-                //點心條
-                ts('.snackbar').snackbar({
-                    content: '成功加入我的最愛'
-                });
+                if (data.status == true) {
+                    //點心條
+                    ts('.snackbar').snackbar({
+                        content: '成功加入我的最愛'
+                    });
+                }
+                else {
+                    //點心條
+                    ts('.snackbar').snackbar({
+                        content: '已經加過了'
+                    });
+                }
             }
         },
         error: function (err) {

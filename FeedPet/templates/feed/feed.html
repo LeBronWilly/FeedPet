@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 {% block header %}
-
+<h2>餵食計算小工具</h2>
 {% endblock header %}
 
 {% block content %}
@@ -18,12 +18,12 @@
     <div class="ts relaxed grid">
         <div class="ten wide column">
             <form class="ts form horizontal">
-                {{ pets.pet }}
-                <mark>這裡是狗狗</mark>
+                <div class="field">
+                    <mark>這裡是狗狗</mark>
+                </div>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻狗狗</label>
-
                     <select id='choseDog' name="choseDog">
                         <option value="" disabled selected>選擇一個狗狗</option>
                         {% for pet in pets %}
@@ -32,15 +32,11 @@
                         {% endif %}
                         {% endfor %}
                     </select>
-
                 </div>
                 {% endif %}
-
                 <div class="field">
                     <label>體重</label>
-
                     <input type="number" name="dog_weight" id="dog_weight" required>
-
                 </div>
                 <div class="field">
                     <label>活動類型</label>
@@ -106,7 +102,9 @@
     <div class="ts relaxed grid">
         <div class="ten wide column">
             <form class="ts form horizontal" action="/feed/" method="post" name="petclass" value="cat">
-                <mark>這裡是貓貓</mark>
+                <div class="field">
+                    <mark>這裡是貓貓</mark>
+                </div>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻貓貓</label>
@@ -175,7 +173,6 @@
                     <label>凍乾</label>
                     <input id="catLyophilizerdRawFood" type="text">
                 </div>
-
                 <div class="field">
                     <label>水</label>
                     <input id="catwater" ype="text">
@@ -188,11 +185,5 @@
 <button class="ts button">
     <a href="{% url 'feed:feed_list' %}">查詢所有飼料 </a>
 </button>
-
-<!-- 點心條 -->
-<div class="ts snackbar">
-    <div class="content"></div>
-</div>
-<!-- 點心條 -->
 
 {% endblock content %}

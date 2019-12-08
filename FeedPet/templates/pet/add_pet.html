@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block header %}
-
+<h2>註冊寵物</h2>
 {% endblock header %}
 
 {% block content %}
@@ -79,10 +79,11 @@
     </div>
     <div class="fields">
         <div class="five wide field">
-            <label>照片</label>
+            <label>照片(預覽)</label>
             <img id="preview_progressbarTW_img" src="#" height="200" width="150" >
         </div>
         <div class="eleven wide field">
+            <label>上傳照片</label>
             <input type="file" id="imgInp" name="image" onchange="readURL(this)" targetID="preview_progressbarTW_img"
                 accept="image/gif, image/jpeg, image/png" required="required"/>
         </div>

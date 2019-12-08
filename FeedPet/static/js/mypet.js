@@ -4,6 +4,9 @@ function showDimmer_delpet() {
     ts('#closableModal_delpet').modal("show")
 }
 
+// mypet 彈跳提示訊息
+ts('[data-tooltip]').popup();
+
 // mypet add pet chose petType
 const dogSubType = ["成犬(室內/中低活動量)", "成犬(中高度活動量)", "需增重成犬(輸入目標體重)", "需減肥成犬(輸入目標體重)", "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"];
 const catSubType = ["成貓(室內/低活動量)", "成貓(中高活動量)", "需增重成貓(輸入目標體重)", "需減肥成貓(輸入目標體重)", "成長期幼貓(10個月以內)", "老貓(11歲以上)", "懷孕母貓", "哺乳母貓"];
