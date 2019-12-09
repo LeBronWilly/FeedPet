@@ -9,17 +9,40 @@
 
 {% block content %}
 
+<div class="ts fluid steps">
+    <div class="active step" id="setting">
+        <i class="add icon"></i>
+        <div class="content">
+            <div class="title">設定</div>
+            <div class="description">設定寵物資訊</div>
+        </div>
+    </div>
+    <div class="step" id="calculate">
+        <i class="bar graph icon"></i>
+        <div class="content">
+            <div class="title">計算</div>
+            <div class="description">計算推薦餵食量</div>
+        </div>
+    </div>
+    <div class="step" id="favorite">
+        <i class="like icon"></i>
+        <div class="content">
+            <div class="title">推薦</div>
+            <div class="description">推薦飼料</div>
+        </div>
+    </div>
+</div>
+
 <div id="first" class="ts top attached tabbed menu">
     <a class="active item" data-tab="狗狗">狗狗</a>
     <a class="item" data-tab="貓貓">貓貓</a>
-
 </div>
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
     <div class="ts relaxed grid">
-        <div class="ten wide column">
+        <div class="eight wide column">
             <form class="ts form horizontal">
                 <div class="field">
-                    <mark>這裡是狗狗</mark>
+                    <mark>設定狗狗資訊</mark>
                 </div>
                 {% if user.is_authenticated %}
                 <div class="field">
@@ -75,22 +98,25 @@
                 </button>
             </form>
         </div>
-        <div class="six wide column">
+        <div class="eight wide column">
             <form class="ts form horizontal">
                 <div class="field">
-                    <label>罐頭</label>
+                    <mark>推薦餵食量</mark>
+                </div>
+                <div class="field">
+                    <label>罐頭 (g)</label>
                     <input id="dogcannedFood" type="text">
                 </div>
                 <div class="field">
-                    <label>生食</label>
+                    <label>生食 (g)</label>
                     <input id="dograwFood" type="text">
                 </div>
                 <div class="field">
-                    <label>凍乾</label>
+                    <label>凍乾 (g)</label>
                     <input id="dogLyophilizerdRawFood" type="text">
                 </div>
                 <div class="field">
-                    <label>水</label>
+                    <label>水 (g)</label>
                     <input id="dogwater" type="text">
                 </div>
             </form>
@@ -100,10 +126,10 @@
 
 <div data-tab="貓貓" class="ts bottom attached tab segment">
     <div class="ts relaxed grid">
-        <div class="ten wide column">
+        <div class="eight wide column">
             <form class="ts form horizontal" action="/feed/" method="post" name="petclass" value="cat">
                 <div class="field">
-                    <mark>這裡是貓貓</mark>
+                    <mark>設定貓貓資訊</mark>
                 </div>
                 {% if user.is_authenticated %}
                 <div class="field">
@@ -159,22 +185,25 @@
                 </button>
             </form>
         </div>
-        <div class="six wide column">
+        <div class="eight wide column">
             <form class="ts form horizontal">
                 <div class="field">
-                    <label>罐頭</label>
+                    <mark>推薦餵食量</mark>
+                </div>
+                <div class="field">
+                    <label>罐頭 (g)</label>
                     <input id="catcannedFood" type="text">
                 </div>
                 <div class="field">
-                    <label>生食</label>
+                    <label>生食 (g)</label>
                     <input id="catrawFood" type="text">
                 </div>
                 <div class="field">
-                    <label>凍乾</label>
+                    <label>凍乾 (g)</label>
                     <input id="catLyophilizerdRawFood" type="text">
                 </div>
                 <div class="field">
-                    <label>水</label>
+                    <label>水 (g)</label>
                     <input id="catwater" ype="text">
                 </div>
             </form>

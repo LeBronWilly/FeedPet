@@ -16,6 +16,9 @@ $("#choseDog").change(function () {
     $("#choseDog option:selected").each(function () {
         var value = $("#choseDog").val();
         getDogInfo(value)
+        $("#setting").removeClass("active")
+        $("#calculate").addClass("active")
+        $("#favorite").removeClass("active")
     });
 });
 
@@ -24,6 +27,9 @@ $("#choseCat").change(function () {
     $("#choseCat option:selected").each(function () {
         var value = $("#choseCat").val();
         getCatInfo(value)
+        $("#setting").removeClass("active")
+        $("#calculate").addClass("active")
+        $("#favorite").removeClass("active")
     });
 });
 
@@ -86,30 +92,41 @@ $("#dog_cal").click(function () {
     var ligation = $(".dog_ligation:checked").val();
     var cal_petclass = 'dog'
     var petinfo = { 'weight': weight, 'type': type, 'ligation': ligation, 'cal_petclass': cal_petclass };
-    console.log(petinfo);
-    $.ajax({
-        url: '/feed/feed_calculation/',
-        type: 'GET',
-        data: petinfo,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                console.log(data)
-                $('#dogcannedFood').val(data.cannedFood)
-                $('#dograwFood').val(data.rawFood)
-                $('#dogLyophilizerdRawFood').val(data.LyophilizerdRawFood)
-                $('#dogwater').val(data.water)
+    if (weight == null || type == null || ligation == null) {
+        //點心條
+        ts('.snackbar').snackbar({
+            content: '左邊欄位都要填'
+        });
+    }
+    else {
+        $.ajax({
+            url: '/feed/feed_calculation/',
+            type: 'GET',
+            data: petinfo,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    console.log(data)
+                    $('#dogcannedFood').val(data.cannedFood)
+                    $('#dograwFood').val(data.rawFood)
+                    $('#dogLyophilizerdRawFood').val(data.LyophilizerdRawFood)
+                    $('#dogwater').val(data.water)
 
-                //點心條
-                ts('.snackbar').snackbar({
-                    content: '推薦餵食量如右邊欄位'
-                });
+                    $("#setting").removeClass("active")
+                    $("#calculate").removeClass("active")
+                    $("#favorite").addClass("active")
+
+                    //點心條
+                    ts('.snackbar').snackbar({
+                        content: '推薦餵食量如右邊欄位'
+                    });
+                }
+            },
+            error: function (err) {
+                console.log("nononon")
             }
-        },
-        error: function (err) {
-            console.log("nononon")
-        }
-    });
+        });
+    }
 });
 
 //將貓貓資訊透過ajax送到後端計算完再傳回來
@@ -119,30 +136,37 @@ $("#cat_cal").click(function () {
     var ligation = $(".cat_ligation:checked").val();
     var cal_petclass = 'dog'
     var petinfo = { 'weight': weight, 'type': type, 'ligation': ligation, 'cal_petclass': cal_petclass };
-    console.log(petinfo);
-    $.ajax({
-        url: '/feed/feed_calculation/',
-        type: 'GET',
-        data: petinfo,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                console.log(data)
-                $('#catcannedFood').val(data.cannedFood)
-                $('#catrawFood').val(data.rawFood)
-                $('#catLyophilizerdRawFood').val(data.LyophilizerdRawFood)
-                $('#catwater').val(data.water)
+    if (weight == null || type == null || ligation == null) {
+        //點心條
+        ts('.snackbar').snackbar({
+            content: '左邊欄位都要填'
+        });
+    }
+    else {
+        $.ajax({
+            url: '/feed/feed_calculation/',
+            type: 'GET',
+            data: petinfo,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    console.log(data)
+                    $('#catcannedFood').val(data.cannedFood)
+                    $('#catrawFood').val(data.rawFood)
+                    $('#catLyophilizerdRawFood').val(data.LyophilizerdRawFood)
+                    $('#catwater').val(data.water)
 
-                //點心條
-                ts('.snackbar').snackbar({
-                    content: '推薦餵食量如右邊欄位'
-                });
+                    //點心條
+                    ts('.snackbar').snackbar({
+                        content: '推薦餵食量如右邊欄位'
+                    });
+                }
+            },
+            error: function (err) {
+                console.log("nononon")
             }
-        },
-        error: function (err) {
-            console.log("nononon")
-        }
-    });
+        });
+    }
 });
 
 // feed list 動態搜尋
