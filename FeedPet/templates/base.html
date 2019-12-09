@@ -16,6 +16,9 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://hpcslag.github.io/hexo-theme-morgan/demo/js/tocas.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
     <style type="text/css">
         a.title-link:hover {
             color: #34b2db !important;
@@ -33,16 +36,28 @@
             color: #5a5a5a;
         }
 
-        .card {
-            width: 32% !important;
-            margin: 5px !important;
+        /* .topimg {
+            background-image: url("{% static 'images/slide/007.jpg' %}");
+            background-size: cover;
+            height: 500px;
+            display: flex;
+            padding-bottom: 20px;
+            padding-right: 30px;
+            justify-content: flex-end;
+            align-items: flex-end;
+            border-radius: 5px
         }
 
-        .cards {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            flex-wrap: wrap;
+        .topimg h2 {
+            color: #f7f7f7 !important;
+            text-shadow: 2px 2px #5a5a5a;
+        } */
+
+
+        #mypet_img {
+            object-fit: cover;
+            height: 250px;
+
         }
     </style>
 
@@ -85,8 +100,10 @@
 
     <!-- big bang title -->
     <header class="ts massive basic borderless extra vertically padded cover slate" style="background-color: #CCFF33;">
-        <div class="ts narrow container relaxed stackable grid" id="big-bang-title" style=" padding-left: 35px; ">
-
+        <div class="image">
+            <img src="{% static 'images/banner.png' %}">
+        </div>
+        <div class="ts narrow container relaxed stackable grid" id="big-bang-title" style="padding-left: 35px;">
             <!-- Title -->
             <h1 class="ts eleven wide column header be-center-h1">
                 <span style="color: #404040;" id="big-title">FeedPet</span>
@@ -124,15 +141,21 @@
                     </dialog>
                 </div>
                 <!-- 彈跳訊息 -->
-                
+
                 <!-- 提示訊息 -->
                 {% for message in messages %}
-                <div class="ts {{message.tags}} message">
+                <div class="ts {{message.tags}} dismissable message">
                     <button class="ts close button"></button>
                     <div class="header">{{ message }}</div>
                 </div>
                 {% endfor %}
                 <!-- 提示訊息 -->
+
+                <!-- 點心條 -->
+                <div class="ts snackbar">
+                    <div class="content"></div>
+                </div>
+                <!-- 點心條 -->
 
                 {% block header %}{% endblock header %}
                 {% block content %}{% endblock content %}

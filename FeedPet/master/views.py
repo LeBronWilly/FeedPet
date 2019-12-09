@@ -58,14 +58,12 @@ def login_view(request):
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
-
         if user is not None and user.is_active:
-            login(request, user)
-            messages.add_message(request, messages.SUCCESS, '成功登入')
-            return HttpResponseRedirect(reverse('master:index'))
+                login(request, user)
+                messages.add_message(request, messages.SUCCESS, '成功登入')
+                return HttpResponseRedirect(reverse('master:index'))
         else:
             messages.add_message(request, messages.ERROR, '未註冊或帳號密碼輸入錯誤')
-
     return render(request, 'registration/login.html', locals())
 
 
@@ -198,7 +196,8 @@ def update_pet_detail(request, pet_id):
             pet.petName = petName
             pet.weight = weight
             pet.ligation = ligation
-            pet.image = image
+            if image is not None:
+                pet.image = image
             pet.save()
         except Exception as e:
             print(e)

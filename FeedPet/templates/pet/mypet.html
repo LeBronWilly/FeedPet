@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block header %}
-
+<h2>我的寵物</h2>
 {% endblock header %}
 
 {% block content %}
@@ -12,46 +12,24 @@
 
 <div class="ts horizontal divider">我的寵物清單</div>
 
-<div class="cards">
+<div class="ts three cards">
     {% for pet in pets %}
-    <div class="ts card">
-        <div class="image">
-            <img class="ts image" src="{{ pet.image.url }}">
-        </div>
-        <div class="content">
-            <div class="center aligned header">{{ pet.petName }}</div>
-        </div>
-        <div class="ts fluid stackable buttons">
-            <button class="ts button" onclick="location.href='/mypet/pet_detail/{{pet.id}}'">詳細資訊</button>
-        </div>
+    <div class="ts raised positive card">
+        <a class="image" href="{% url 'master:mypet/pet_detail' pet.id %}" data-tooltip="點啊！看啥呢？"
+            data-tooltip-delay="disabled">
+            <img id="mypet_img" src="{{ pet.image.url }}">
+            <div class="center aligned header">
+                {{ pet.petName }}
+                {% if pet.petClass == 'Dog' %}
+                <div class="sub header">牠是隻狗狗</div>
+                {% else %}
+                <div class="sub header">牠是隻貓貓</div>
+                {% endif %}
+            </div>
+        </a>
         <div class="ts fluid stackable buttons">
             <button class="ts button" onclick="location.href='/feed/feeding_record'">餵食紀錄</button>
         </div>
-        <div class="ts fluid stackable buttons">
-            <button class="ts negative button" onclick="showDimmer_delpet()">刪除寵物</button>
-        </div>
-
-        <!-- 彈跳訊息 -->
-        <div class="ts modals dimmer">
-            <dialog id="closableModal_delpet" class="ts closable tiny modal">
-                <div class="content">
-                    <p>
-                        你確定要刪除『{{pet.petName}}』嗎？<br>
-                        刪了就沒了喔！確定喔？<br>
-                        再給你一次機會<br>
-                    </p>
-                </div>
-                <div class="actions">
-                    <button class="ts deny button">
-                        別
-                    </button>
-                    <button class="ts negative button" onclick="location.href='/mypet/del_pet/{{pet.id}}'">
-                        忍痛刪除
-                    </button>
-                </div>
-            </dialog>
-        </div>
-        <!-- 彈跳訊息 -->
     </div>
     {% endfor %}
 </div>

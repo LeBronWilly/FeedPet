@@ -2,42 +2,47 @@
 {% load staticfiles %}
 
 {% block header %}
-
+<h2>飼料列表</h2>
 {% endblock header %}
 
 {% block content %}
 
 <button class="ts button" onclick="location.href='/feed/import_feed'">匯入飼料</button>
-<div class="ts icon input">
+<!-- <div class="ts icon input">
     <input type="text" id="search_input" onkeyup="searchFeedTable()" placeholder="搜尋...">
     <i class="inverted circular search link icon"></i>
-</div>
+</div> -->
 <table class="ts fixed single line sortable table" id="feed_table">
     <thead>
         <tr>
-            <!-- <th class="one wide">最愛</th> -->
-            <th class="six wide">名稱</th>
+            <th class="one wide">最愛</th>
+            <th class="five wide">名稱</th>
             <th class="two wide">項目</th>
             <!-- <th>成分</th>
             <th>營養</th> -->
             <th class="three wide">適用</th>
             <!-- <th>使用</th>
             <th>保存</th> -->
-            <th class="three wide">公司</th>
+            <th class="four wide">公司</th>
             <th class="one wide"></th>
         </tr>
     </thead>
     <tbody>
         {% for feed in feeds %}
+        {% for favor_feed in favor_feeds %}
         <tr>
-            <!-- <td>
+            <td>
+                {% if favor_feed.feed == feed %}
                 <button class="ts circular icon secondary button" onclick="">
-                    <i class="empty heart icon"></i>
-                </button>
-                <button class="ts circular icon secondary button" onclick="location.href='/feed/del_feed_favor'">
                     <i class="heart negative icon"></i>
                 </button>
-            </td> -->
+                {% else %}
+                <button class="ts circular icon secondary button"
+                    onclick="add_feed_favor('{{user.id}}', '{{feed.id}}')">
+                    <i class="empty heart icon"></i>
+                </button>
+                {% endif %}
+            </td>
             <td>{{ feed.fname }}</td>
             <td>{{ feed.fitem }}</td>
             <!-- <td>{{ feed.fmat }}</td>
@@ -48,6 +53,7 @@
             <td>{{ feed.flegalname }}</td>
             <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
         </tr>
+        {% endfor %}
         {% endfor %}
     </tbody>
 </table>

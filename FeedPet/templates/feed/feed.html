@@ -4,50 +4,66 @@
 {% load staticfiles %}
 
 {% block header %}
-
+<h2>餵食計算小工具</h2>
 {% endblock header %}
 
 {% block content %}
 
+<div class="ts fluid steps">
+    <div class="active step" id="setting">
+        <i class="add icon"></i>
+        <div class="content">
+            <div class="title">設定</div>
+            <div class="description">設定寵物資訊</div>
+        </div>
+    </div>
+    <div class="step" id="calculate">
+        <i class="bar graph icon"></i>
+        <div class="content">
+            <div class="title">計算</div>
+            <div class="description">計算推薦餵食量</div>
+        </div>
+    </div>
+    <div class="step" id="favorite">
+        <i class="like icon"></i>
+        <div class="content">
+            <div class="title">推薦</div>
+            <div class="description">推薦飼料</div>
+        </div>
+    </div>
+</div>
+
 <div id="first" class="ts top attached tabbed menu">
     <a class="active item" data-tab="狗狗">狗狗</a>
     <a class="item" data-tab="貓貓">貓貓</a>
-
 </div>
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
     <div class="ts relaxed grid">
-        <div class="ten wide column">
-            <form class="ts form horizontal" >
-                {{ pets.pet }}
-                <mark>這裡是狗狗</mark>
+        <div class="eight wide column">
+            <form class="ts form horizontal">
+                <div class="field">
+                    <mark>設定狗狗資訊</mark>
+                </div>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻狗狗</label>
-
-                    <select  id='choseDog' name="choseDog">
+                    <select id='choseDog' name="choseDog">
                         <option value="" disabled selected>選擇一個狗狗</option>
                         {% for pet in pets %}
                         {% if pet.petClass == 'Dog' %}
-
-                                <option value="{{ pet.id }}">{{ pet.petName }}</option>
-
-
+                        <option value="{{ pet.id }}">{{ pet.petName }}</option>
                         {% endif %}
                         {% endfor %}
                     </select>
-
                 </div>
                 {% endif %}
-
                 <div class="field">
                     <label>體重</label>
-
-                    <input type="number" name="dog_weight" id="dog_weight"  required>
-
+                    <input type="number" name="dog_weight" id="dog_weight" required>
                 </div>
                 <div class="field">
                     <label>活動類型</label>
-                    <select id='dog_type' name="dog_type" required >
+                    <select id='dog_type' name="dog_type" required>
                         <option value="" disabled selected>選擇活動類型</option>
                         <option value="1.2">成犬(室內/中低活動量)</option>
                         <option value="1.6">成犬(中高度活動量)</option>
@@ -82,23 +98,26 @@
                 </button>
             </form>
         </div>
-        <div class="six wide column">
+        <div class="eight wide column">
             <form class="ts form horizontal">
                 <div class="field">
-                    <label>罐頭</label>
-                    <input id="dogcannedFood" type="text" >
+                    <mark>推薦餵食量</mark>
                 </div>
                 <div class="field">
-                    <label>生食</label>
-                    <input id="dograwFood" type="text" >
+                    <label>罐頭 (g)</label>
+                    <input id="dogcannedFood" type="text">
                 </div>
                 <div class="field">
-                    <label>凍乾</label>
-                    <input id="dogLyophilizerdRawFood" type="text" >
+                    <label>生食 (g)</label>
+                    <input id="dograwFood" type="text">
                 </div>
                 <div class="field">
-                    <label>水</label>
-                    <input id="dogwater" type="text" >
+                    <label>凍乾 (g)</label>
+                    <input id="dogLyophilizerdRawFood" type="text">
+                </div>
+                <div class="field">
+                    <label>水 (g)</label>
+                    <input id="dogwater" type="text">
                 </div>
             </form>
         </div>
@@ -107,9 +126,11 @@
 
 <div data-tab="貓貓" class="ts bottom attached tab segment">
     <div class="ts relaxed grid">
-        <div class="ten wide column">
+        <div class="eight wide column">
             <form class="ts form horizontal" action="/feed/" method="post" name="petclass" value="cat">
-                <mark>這裡是貓貓</mark>
+                <div class="field">
+                    <mark>設定貓貓資訊</mark>
+                </div>
                 {% if user.is_authenticated %}
                 <div class="field">
                     <label>選擇哪隻貓貓</label>
@@ -125,11 +146,11 @@
                 {% endif %}
                 <div class="field">
                     <label>體重</label>
-                    <input type="number"  id="cat_weight">
+                    <input type="number" id="cat_weight">
                 </div>
                 <div class="field">
                     <label>活動類型</label>
-                    <select name = 'cat_type' id='cat_type'>
+                    <select name='cat_type' id='cat_type'>
                         <option value="" disabled selected>選擇活動類型</option>
                         <option value="1">成貓(室內/低活動量)</option>
                         <option value="1.3">成貓(中高活動量)</option>
@@ -164,32 +185,34 @@
                 </button>
             </form>
         </div>
-        <div class="six wide column">
-           <form class="ts form horizontal">
+        <div class="eight wide column">
+            <form class="ts form horizontal">
                 <div class="field">
-                    <label>罐頭</label>
-                    <input id="catcannedFood" type="text" >
+                    <mark>推薦餵食量</mark>
                 </div>
                 <div class="field">
-                    <label>生食</label>
-                    <input id="catrawFood" type="text" >
+                    <label>罐頭 (g)</label>
+                    <input id="catcannedFood" type="text">
                 </div>
                 <div class="field">
-                    <label>凍乾</label>
-                    <input id="catLyophilizerdRawFood"  type="text" >
+                    <label>生食 (g)</label>
+                    <input id="catrawFood" type="text">
                 </div>
-
                 <div class="field">
-                    <label>水</label>
-                    <input id="catwater" ype="text" >
+                    <label>凍乾 (g)</label>
+                    <input id="catLyophilizerdRawFood" type="text">
+                </div>
+                <div class="field">
+                    <label>水 (g)</label>
+                    <input id="catwater" ype="text">
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
 <button class="ts button">
     <a href="{% url 'feed:feed_list' %}">查詢所有飼料 </a>
 </button>
+
 {% endblock content %}

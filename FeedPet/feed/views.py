@@ -53,7 +53,13 @@ def getPet(request, petId):
 # date：2019/12/6
 # description：列出飼料open data以表格呈現簡單資訊
 def feed_list(request):
+    username = request.user.username
     try:
+        master = Master.objects.get(username=username)
+        favor_feeds = Favor_feed.objects.filter(master=master)
+        for favor_feed in favor_feeds:
+            print(favor_feed.feed)
+            print(type(favor_feed.feed))
         feeds = Feed.objects.all()
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
@@ -133,17 +139,25 @@ def add_feed_favor(request, master_id, feed_id):
             master = Master.objects.get(id=master_id)
             feed = Feed.objects.get(id=feed_id)
             if master and feed is not None:
-                favor_feed = Favor_feed.objects.create(
-                    master=master, feed=feed, created_on=datetime.date.today())
-                favor_feed.save()
-                favor_feed_json = {
-                    'masterId': master_id,
-                    'feedId': feed_id,
-                }
+                if Favor_feed.objects.filter(master=master, feed=feed) is None:
+                    favor_feed = Favor_feed.objects.create(
+                        master=master, feed=feed, created_on=datetime.date.today())
+                    favor_feed.save()
+                    favor_feed_json = {
+                        'status': True,
+                        'masterId': master_id,
+                        'feedId': feed_id,
+                    }
+                else:
+                    favor_feed_json = {
+                        'status': False
+                    }
         except Exception as e:
-            messages.add_message(request, messages.WARNING, e)
+            pass
     else:
-        favor_feed_json = {}
+        favor_feed_json = {
+            'status': False
+        }
 
     return JsonResponse(favor_feed_json)
 
