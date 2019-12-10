@@ -15,32 +15,30 @@
             <th class="eight wide">飼料名稱</th>
             <th class="four wide">飼料類型</th>
             <th class="three wide"></th>
+            <th class="four wide"></th>
            
         </tr>
     </thead>
     <tbody>
         {% comment %} 每個飼料start {% endcomment %}
+        {% for feed in r_list %}
         <tr>
-            <td> 1</td>
-            <td>飼料一號</td>
-            <td>營養品</td>
+            <td> {{ forloop.counter }}</td>
+            <td>{{ feed.fname }}</td>
+            <td>{{ feed.fitem }}</td>
+            <!-- <td>{{ feed.fmat }}</td>
+            <td>{{ feed.fnut }}</td> -->
+{#            <td>{{ feed.fusage1 }}</td>#}
+{#            <td>{{ feed.fusage3 }}</td> #}
+            <td>{{ feed.flegalname }}</td>
             <td>
                 <button class="ts button">   <a href="/feed/feed_list/feed_detail">詳細資訊</a> </button>
                  <button class="ts icon button"> <i class="heart icon"></i> </button>
                  
            </td>
         </tr>
-        {% comment %} 每個飼料end {% endcomment %}
-        <tr>
-            <td> 2</td>
-            <td>飼料二號</td>
-            <td>乾飼料</td>
-            <td>
-                   <button class="ts button">   <a href="/feed/feed_list/feed_detail">詳細資訊</a> </button>
-                 <button class="ts icon button"> <i class="heart icon"></i> </button>
-                 
-           </td>
-        </tr>
+        {% endfor %}
+
 
     </tbody>
 </table>

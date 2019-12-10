@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from master.models import Master, Pet
 from .models import Feed, Favor_feed
 import datetime
-import time
+import random
 import math
 import requests
 
@@ -163,6 +163,13 @@ def add_feed_favor(request, master_id, feed_id):
 
 
 def feed_recommendation(request):
+    r_list=[]
+    feeds = Feed.objects.all()
+    r_ids = random.sample(range(len(feeds)), 10)
+    for i in r_ids:
+        r_list.append(feeds[i])
+    print(r_list)
+
     return render(request, 'feed/feed_recommendation.html', locals())
 
 
