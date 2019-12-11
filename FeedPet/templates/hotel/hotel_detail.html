@@ -8,36 +8,43 @@
 {% block content %}
 
 <table class="ts celled table">
+    
   <thead>
         <tr>
             <th colspan="3">
-                旅館名稱
+                hh
             </th>
         </tr>
     </thead>
     <tbody>
 
-        <tr>
+
+            <form action="/hoteldetail/" method="get">
+                <label for="rank">您的名字</label>
+            
+        <tr>  
             <td>編號</td>
-            <td>北市特寵燁字第0119號</td>
+            <!-- {% for Hotel in p %} -->
+            <td><a href='{%url "hotel-url" hotel.rank%}'>{{hotel.rank}}</td>
+            <!-- {% endfor %} -->
         </tr>
+        
         <tr>
-            <td>評鑑</td>
-            <td>特優 </td>
+            <td>評鑑：</td>
+            <td>d</td>
         </tr>
         <tr>
             <td>負責人</td>
-            <td>翁xx</td>
+            <td>d</td>
         </tr>
         <tr>
             <td>連絡電話</td>
-            <td>02-3922248</td>
+            <td>d</td>
         </tr>
          <tr>
             <td>地址</td>
-            <td>台北市大安區和平東路</td>
+            <td>d}</td>
         </tr>
-     
     </tbody>
   <tfoot>
         <tr>

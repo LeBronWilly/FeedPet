@@ -4,4 +4,4 @@ from .models import Hotel
 class HotelForm(forms.ModelForm):
     class Meta:
         model = Hotel
-        fields = ('sequence', 'year_eva', 'name', 'postalcode', 'area', 'address')
+        fields = ('hname','rank','full_name','incharge','phone','postalcode','district','address')

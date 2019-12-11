@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from hotel.views import hotel
 
 app_name = 'hotel'
 
