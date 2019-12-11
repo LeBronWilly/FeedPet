@@ -2,54 +2,50 @@
 {% load staticfiles %}
 
 {% block header %}
-
+<h2>飼料資訊</h2>
 {% endblock header %}
 
 {% block content %}
 
-
-<table class="ts celled table">
-  <thead>
-        <tr>
-            <th colspan="3">
-                飼料品名
-            </th>
-        </tr>
-    </thead>
+<table class="ts very basic table">
     <tbody>
-
         <tr>
-            <td>飼料類型</td>
-            <td>補助食品</td>
-        </tr>
-        <tr>
-            <td>內容物</td>
-            <td>蔓越莓 紅麴 </td>
+            <td class="three wide">名稱</td>
+            <td class="thirty wide">{{ feed.fname }}</td>
         </tr>
         <tr>
-            <td>適用對象</td>
-            <td>犬 貓</td>
+            <td>項目</td>
+            <td>{{ feed.fitem }}</td>
         </tr>
         <tr>
-            <td>使用方法</td>
-            <td>1~5kg一餐一匙</td>
-        </tr>
-         <tr>
-            <td>保存方式</td>
-            <td>密閉乾燥陰涼處存放</td>
+            <td>成份</td>
+            <td>{{ feed.fmat }}</td>
         </tr>
         <tr>
-            <td>製造公司</td>
-            <td>xxx生技公司</td>
+            <td>營養</td>
+            <td>{{ feed.fnut }}</td>
         </tr>
-       
+        <tr>
+            <td>適用</td>
+            <td>{{ feed.fusage1 }}</td>
+        </tr>
+        <tr>
+            <td>使用</td>
+            <td>{{ feed.fusage2 }}</td>
+        </tr>
+        <tr>
+            <td>保存</td>
+            <td>{{ feed.fusage3 }}</td>
+        </tr>
+        <tr>
+            <td>公司</td>
+            <td>{{ feed.flegalname }}</td>
+        </tr>
     </tbody>
-
     <tfoot>
         <tr>
             <th colspan="2">
-            
-             <div class="ts right floated small primary labeled icon button">
+                <div class="ts right floated small primary labeled icon button">
                     <i class="heart icon"></i> 加到我的最愛
                 </div>
             </th>
