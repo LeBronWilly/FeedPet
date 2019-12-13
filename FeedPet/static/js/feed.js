@@ -3,7 +3,7 @@ ts('#first.tabbed.menu .item').tab({
     onSwitch: (tabName, groupName) => {
         //點心條
         ts('.snackbar').snackbar({
-            content: '你切換到' + tabName + '的分頁了'
+            content: '你切換到 [ ' + tabName + ' ] 的分頁了'
         });
     }
 });
@@ -16,9 +16,15 @@ $("#choseDog").change(function () {
     $("#choseDog option:selected").each(function () {
         var value = $("#choseDog").val();
         getDogInfo(value)
+
         $("#setting").removeClass("active")
         $("#calculate").addClass("active")
         $("#favorite").removeClass("active")
+
+        //點心條
+        ts('.snackbar').snackbar({
+            content: "以填入 [ " + $("#choseDog option:selected").text() + " ] 的資料"
+        });
     });
 });
 
@@ -27,9 +33,15 @@ $("#choseCat").change(function () {
     $("#choseCat option:selected").each(function () {
         var value = $("#choseCat").val();
         getCatInfo(value)
+
         $("#setting").removeClass("active")
         $("#calculate").addClass("active")
         $("#favorite").removeClass("active")
+
+        //點心條
+        ts('.snackbar').snackbar({
+            content: "以填入 [ " + $("#choseCat option:selected").text() + " ] 的資料"
+        });
     });
 });
 
@@ -95,7 +107,7 @@ $("#dog_cal").click(function () {
     if (weight == null || type == null || ligation == null) {
         //點心條
         ts('.snackbar').snackbar({
-            content: '左邊欄位都要填'
+            content: '請輸狗狗物資訊'
         });
     }
     else {
@@ -139,7 +151,7 @@ $("#cat_cal").click(function () {
     if (weight == null || type == null || ligation == null) {
         //點心條
         ts('.snackbar').snackbar({
-            content: '左邊欄位都要填'
+            content: '請輸入貓貓資訊'
         });
     }
     else {
@@ -189,7 +201,7 @@ $("#cat_cal").click(function () {
 //     }
 // }
 
-$("#feed_table").DataTable();
+// $("#feed_table").DataTable();
 
 // 增加feed favorite
 function add_feed_favor(master_id, feed_id) {
@@ -221,4 +233,30 @@ function add_feed_favor(master_id, feed_id) {
 // 刪除feed favorite
 function del_feed_favor() {
 
+}
+
+//推薦狗狗飼料（假假）檢查欄位是否有空
+function reco_dog_feed() {
+    var weight = $("#dog_weight").val();
+    var type = $("#dog_type").val();
+    var ligation = $(".dog_ligation:checked").val();
+    var dogcannedFood = $("#dogcannedFood").val();
+    var dograwFood = $("#dograwFood").val();
+    var dogLyophilizerdRawFood = $("#dogLyophilizerdRawFood").val();
+    var dogwater = $("#dogwater").val();
+    if (weight == null || type == null || ligation == null) {
+        //點心條
+        ts('.snackbar').snackbar({
+            content: '請先輸入狗狗資訊'
+        });
+    }
+    else if (dogcannedFood == null || dograwFood == null || dogLyophilizerdRawFood == null || dogwater == null) {
+        //點心條
+        ts('.snackbar').snackbar({
+            content: '請先計算狗狗餵食量'
+        });
+    }
+    else {
+        location.href='/feed/feed_recommendation'
+    }
 }

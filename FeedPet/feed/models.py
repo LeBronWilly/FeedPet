@@ -13,6 +13,8 @@ class Feed(models.Model):
     fusage2 = models.CharField(max_length=50)
     fusage3 = models.CharField(max_length=50)
     flegalname = models.CharField(max_length=20)
+    master_feed = models.ManyToManyField(Master, through='Favor_feed', related_name='master_feed')
+    pet_feed = models.ManyToManyField(Pet, through='Record', related_name='pet_feed')
 
     def __str__(self):
         return self.fname

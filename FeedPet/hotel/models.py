@@ -2,28 +2,17 @@ from django.db import models
 from master.models import Master
 # from django.contrib.gis.db import models as geomodels
 
-# Create your models here.
 class Hotel(models.Model):
 
     hname = models.CharField(max_length=20)
-    
     rank = models.CharField(max_length=20)
-    
     full_name = models.CharField(max_length=30)
-  
     incharge = models.CharField(max_length=30)
-
     phone = models.CharField(max_length=30)
-    
     postalcode = models.CharField(max_length=30)
-    
     district = models.CharField(max_length=30)
-    
     address = models.CharField(max_length=40)
-    
-    # name = models.CharField(max_length=100, blank=False)
-
-    # geometry = geomodels.PointField()
+    master_hotel = models.ManyToManyField(Master, through='Favor_hotel', related_name='master_hotel')
 
     def __str__(self):
      

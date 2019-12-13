@@ -39,180 +39,180 @@
 </div>
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
     <div class="ts relaxed grid">
-        <div class="eight wide column">
-            <form class="ts form horizontal">
-                <div class="field">
-                    <mark>設定狗狗資訊</mark>
-                </div>
-                {% if user.is_authenticated %}
-                <div class="field">
-                    <label>選擇哪隻狗狗</label>
-                    <select id='choseDog' name="choseDog">
-                        <option value="" disabled selected>選擇一個狗狗</option>
-                        {% for pet in pets %}
-                        {% if pet.petClass == 'Dog' %}
-                        <option value="{{ pet.id }}">{{ pet.petName }}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                {% endif %}
-                <div class="field">
-                    <label>體重</label>
-                    <input type="number" name="dog_weight" id="dog_weight" required>
-                </div>
-                <div class="field">
-                    <label>活動類型</label>
-                    <select id='dog_type' name="dog_type" required>
-                        <option value="" disabled selected>選擇活動類型</option>
-                        <option value="1.2">成犬(室內/中低活動量)</option>
-                        <option value="1.6">成犬(中高度活動量)</option>
-                        <option value="1.4">需增重成犬(輸入目標體重)</option>
-                        <option value="1">需減肥成犬(輸入目標體重)</option>
-                        <option value="2.9">成長期幼犬(斷奶至4個月)</option>
-                        <option value="1.9">成長期幼犬(4個月至10個月)</option>
-                        <option value="1.8">懷孕母犬(前42天)</option>
-                        <option value="2.9">懷孕母犬(最後21天)</option>
-                        <option value="4">哺乳母犬</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label>是否結紮</label>
-                    <div class="ts checkboxes">
-                        <div class="ts radio checkbox">
-                            <input id="dog_yes" type="radio" name="dog_ligation" value="0.888" class="dog_ligation">
-                            <label for="dog_yes">有</label>
-                        </div>
-                        <div class="ts radio checkbox">
-                            <input id="dog_no" type="radio" name="dog_ligation" value="1" class="dog_ligation">
-                            <label for="dog_no">無</label>
+        <div class="row">
+            <div class="eight wide column">
+                <form class="ts form horizontal">
+                    <div class="field">
+                        <mark>設定狗狗資訊</mark>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="field">
+                        <label>選擇哪隻狗狗</label>
+                        <select id='choseDog' name="choseDog">
+                            <option value="" disabled selected>選擇一個狗狗</option>
+                            {% for pet in pets %}
+                            {% if pet.petClass == 'Dog' %}
+                            <option value="{{ pet.id }}">{{ pet.petName }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endif %}
+                    <div class="field">
+                        <label>活動類型</label>
+                        <select id='dog_type' name="dog_type" required>
+                            <option value="" disabled selected>選擇活動類型</option>
+                            <option value="1.2">成犬(室內/中低活動量)</option>
+                            <option value="1.6">成犬(中高度活動量)</option>
+                            <option value="1.4">需增重成犬(輸入目標體重)</option>
+                            <option value="1">需減肥成犬(輸入目標體重)</option>
+                            <option value="2.9">成長期幼犬(斷奶至4個月)</option>
+                            <option value="1.9">成長期幼犬(4個月至10個月)</option>
+                            <option value="1.8">懷孕母犬(前42天)</option>
+                            <option value="2.9">懷孕母犬(最後21天)</option>
+                            <option value="4">哺乳母犬</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>體重</label>
+                        <input type="number" name="dog_weight" id="dog_weight" required>
+                    </div>
+                    <div class="field">
+                        <label>是否結紮</label>
+                        <div class="ts checkboxes">
+                            <div class="ts radio checkbox">
+                                <input id="dog_yes" type="radio" name="dog_ligation" value="0.888" class="dog_ligation">
+                                <label for="dog_yes">有</label>
+                            </div>
+                            <div class="ts radio checkbox">
+                                <input id="dog_no" type="radio" name="dog_ligation" value="1" class="dog_ligation">
+                                <label for="dog_no">無</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button class="ts button" type="button" id="dog_cal">計算餵食量</button>
-                <button class="ts button">
-                    <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
-                </button>
-                <button class="ts button">
-                    <a href="{% url 'feed:feeding_record' %}"> 查詢餵食紀錄</a>
-                </button>
-            </form>
+                </form>
+            </div>
+            <div class="eight wide column">
+                <form class="ts form horizontal">
+                    <div class="field">
+                        <mark>推薦餵食量</mark>
+                    </div>
+                    <div class="field">
+                        <label>罐頭 (g)</label>
+                        <input id="dogcannedFood" type="text">
+                    </div>
+                    <div class="field">
+                        <label>生食 (g)</label>
+                        <input id="dograwFood" type="text">
+                    </div>
+                    <div class="field">
+                        <label>凍乾 (g)</label>
+                        <input id="dogLyophilizerdRawFood" type="text">
+                    </div>
+                    <div class="field">
+                        <label>水 (g)</label>
+                        <input id="dogwater" type="text">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="eight wide column">
-            <form class="ts form horizontal">
-                <div class="field">
-                    <mark>推薦餵食量</mark>
-                </div>
-                <div class="field">
-                    <label>罐頭 (g)</label>
-                    <input id="dogcannedFood" type="text">
-                </div>
-                <div class="field">
-                    <label>生食 (g)</label>
-                    <input id="dograwFood" type="text">
-                </div>
-                <div class="field">
-                    <label>凍乾 (g)</label>
-                    <input id="dogLyophilizerdRawFood" type="text">
-                </div>
-                <div class="field">
-                    <label>水 (g)</label>
-                    <input id="dogwater" type="text">
-                </div>
-            </form>
+        <div class="row">
+            <div class="ts very narrow container">
+                <button class="ts positive button" type="button" id="dog_cal">計算餵食量</button>
+                <button class="ts info button" onclick="reco_dog_feed()">推薦飼料</button>
+            </div>
         </div>
     </div>
 </div>
 
 <div data-tab="貓貓" class="ts bottom attached tab segment">
     <div class="ts relaxed grid">
-        <div class="eight wide column">
-            <form class="ts form horizontal" action="/feed/" method="post" name="petclass" value="cat">
-                <div class="field">
-                    <mark>設定貓貓資訊</mark>
-                </div>
-                {% if user.is_authenticated %}
-                <div class="field">
-                    <label>選擇哪隻貓貓</label>
-                    <select id='choseCat'>
-                        <option value="" disabled selected>選擇一個貓貓</option>
-                        {% for pet in pets %}
-                        {% if pet.petClass == 'Cat' %}
-                        <option value="{{ pet.id }}">{{ pet.petName }}</option>
-                        {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                {% endif %}
-                <div class="field">
-                    <label>體重</label>
-                    <input type="number" id="cat_weight">
-                </div>
-                <div class="field">
-                    <label>活動類型</label>
-                    <select name='cat_type' id='cat_type'>
-                        <option value="" disabled selected>選擇活動類型</option>
-                        <option value="1">成貓(室內/低活動量)</option>
-                        <option value="1.3">成貓(中高活動量)</option>
-                        <option value="1.5">需增重成貓(輸入目標體重)</option>
-                        <option value="0.8">需減肥成貓(輸入目標體重)</option>
-                        <option value="2.5">成長期幼貓(10個月以內)</option>
-                        <option value="0.9">老貓(11歲以上)</option>
-                        <option value="1.8">懷孕母貓</option>
-                        <option value="3">哺乳母貓</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label>是否結紮</label>
-                    <div class="ts checkboxes">
-                        <div class="ts radio checkbox">
-                            <input id="cat_yes" type="radio" name="cat_ligation" class="cat_ligation" value="0.857">
-                            <label for="cat_yes">有</label>
-                        </div>
-                        <div class="ts radio checkbox">
-                            <input id="cat_no" type="radio" name="cat_ligation" class="cat_ligation" value="1">
-                            <label for="cat_no">無</label>
+        <div class="row">
+            <div class="eight wide column">
+                <form class="ts form horizontal" action="/feed/" method="post" name="petclass" value="cat">
+                    <div class="field">
+                        <mark>設定貓貓資訊</mark>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="field">
+                        <label>選擇哪隻貓貓</label>
+                        <select id='choseCat'>
+                            <option value="" disabled selected>選擇一個貓貓</option>
+                            {% for pet in pets %}
+                            {% if pet.petClass == 'Cat' %}
+                            <option value="{{ pet.id }}">{{ pet.petName }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endif %}
+                    <div class="field">
+                        <label>活動類型</label>
+                        <select name='cat_type' id='cat_type'>
+                            <option value="" disabled selected>選擇活動類型</option>
+                            <option value="1">成貓(室內/低活動量)</option>
+                            <option value="1.3">成貓(中高活動量)</option>
+                            <option value="1.5">需增重成貓(輸入目標體重)</option>
+                            <option value="0.8">需減肥成貓(輸入目標體重)</option>
+                            <option value="2.5">成長期幼貓(10個月以內)</option>
+                            <option value="0.9">老貓(11歲以上)</option>
+                            <option value="1.8">懷孕母貓</option>
+                            <option value="3">哺乳母貓</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>體重</label>
+                        <input type="number" id="cat_weight">
+                    </div>
+                    <div class="field">
+                        <label>是否結紮</label>
+                        <div class="ts checkboxes">
+                            <div class="ts radio checkbox">
+                                <input id="cat_yes" type="radio" name="cat_ligation" class="cat_ligation" value="0.857">
+                                <label for="cat_yes">有</label>
+                            </div>
+                            <div class="ts radio checkbox">
+                                <input id="cat_no" type="radio" name="cat_ligation" class="cat_ligation" value="1">
+                                <label for="cat_no">無</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button class="ts button" id="cat_cal" type="button">計算餵食量</button>
-
-                <button class="ts button">
-                    <a href="{% url 'feed:feed_recommendation' %}"> 推薦飼料</a>
-                </button>
-                <button class="ts button">
-                    <a href="{% url 'feed:feeding_record' %}"> 查詢餵食紀錄</a>
-                </button>
-            </form>
+                </form>
+            </div>
+            <div class="eight wide column">
+                <form class="ts form horizontal">
+                    <div class="field">
+                        <mark>推薦餵食量</mark>
+                    </div>
+                    <div class="field">
+                        <label>罐頭 (g)</label>
+                        <input id="catcannedFood" type="text">
+                    </div>
+                    <div class="field">
+                        <label>生食 (g)</label>
+                        <input id="catrawFood" type="text">
+                    </div>
+                    <div class="field">
+                        <label>凍乾 (g)</label>
+                        <input id="catLyophilizerdRawFood" type="text">
+                    </div>
+                    <div class="field">
+                        <label>水 (g)</label>
+                        <input id="catwater" ype="text">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="eight wide column">
-            <form class="ts form horizontal">
-                <div class="field">
-                    <mark>推薦餵食量</mark>
-                </div>
-                <div class="field">
-                    <label>罐頭 (g)</label>
-                    <input id="catcannedFood" type="text">
-                </div>
-                <div class="field">
-                    <label>生食 (g)</label>
-                    <input id="catrawFood" type="text">
-                </div>
-                <div class="field">
-                    <label>凍乾 (g)</label>
-                    <input id="catLyophilizerdRawFood" type="text">
-                </div>
-                <div class="field">
-                    <label>水 (g)</label>
-                    <input id="catwater" ype="text">
-                </div>
-            </form>
+        <div class="row">
+            <div class="ts very narrow container">
+                <button class="ts positive button" id="cat_cal" type="button">計算餵食量</button>
+                <button class="ts info button" onclick="location.href='/feed/feed_recommendation'">推薦飼料</button>
+            </div>
         </div>
     </div>
 </div>
 
-<button class="ts button">
-    <a href="{% url 'feed:feed_list' %}">查詢所有飼料 </a>
-</button>
+<button class="ts button" onclick="location.href='/feed/feed_list'">查詢所有飼料</button>
+<button class="ts button" onclick="location.href='/feed/feeding_record'">查詢餵食紀錄</button>
 
 {% endblock content %}

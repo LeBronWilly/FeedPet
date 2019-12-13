@@ -12,7 +12,8 @@
     <input type="text" id="search_input" onkeyup="searchFeedTable()" placeholder="搜尋...">
     <i class="inverted circular search link icon"></i>
 </div> -->
-<table class="ts fixed single line sortable table" id="feed_table">
+{{ feeds }}
+<table class="ts very basic table" id="feed_table">
     <thead>
         <tr>
             <th class="one wide">最愛</th>
@@ -24,7 +25,7 @@
             <!-- <th>使用</th>
             <th>保存</th> -->
             <th class="four wide">公司</th>
-            <th class="one wide"></th>
+            <th class="one wide">詳細</th>
         </tr>
     </thead>
     <tbody>

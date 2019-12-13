@@ -12,30 +12,35 @@
     <thead>
         <tr>
             <th class="one wide">編號</th>
-            <th class="eight wide">飼料名稱</th>
-            <th class="four wide">飼料類型</th>
-            <th class="three wide"></th>
-            <th class="four wide"></th>
-           
+            <th class="one wide">最愛</th>
+            <th class="four wide">名稱</th>
+            <th class="two wide">項目</th>
+            <!-- <th>成分</th>
+            <th>營養</th> -->
+            <th class="three wide">適用</th>
+            <!-- <th>使用</th>
+            <th>保存</th> -->
+            <th class="four wide">公司</th>
+            <th class="one wide">詳細</th>
+
         </tr>
     </thead>
     <tbody>
-        {% comment %} 每個飼料start {% endcomment %}
         {% for feed in r_list %}
         <tr>
-            <td> {{ forloop.counter }}</td>
+            <td> {{ feed.id }}</td>
+            <td>
+                <button class="ts circular icon secondary button" onclick="">
+                    <i class="heart negative icon"></i>
+                </button>
+            </td>
             <td>{{ feed.fname }}</td>
             <td>{{ feed.fitem }}</td>
             <!-- <td>{{ feed.fmat }}</td>
             <td>{{ feed.fnut }}</td> -->
-{#            <td>{{ feed.fusage1 }}</td>#}
-{#            <td>{{ feed.fusage3 }}</td> #}
+            <td>{{ feed.fusage1 }}</td>
             <td>{{ feed.flegalname }}</td>
-            <td>
-                <button class="ts button">   <a href="/feed/feed_list/feed_detail">詳細資訊</a> </button>
-                 <button class="ts icon button"> <i class="heart icon"></i> </button>
-                 
-           </td>
+            <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
         </tr>
         {% endfor %}
 
