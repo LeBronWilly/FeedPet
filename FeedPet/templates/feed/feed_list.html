@@ -12,11 +12,10 @@
     <input type="text" id="search_input" onkeyup="searchFeedTable()" placeholder="搜尋...">
     <i class="inverted circular search link icon"></i>
 </div> -->
-{{ feeds }}
 <table class="ts very basic table" id="feed_table">
     <thead>
         <tr>
-            <th class="one wide">最愛</th>
+            <!-- <th class="one wide">最愛</th> -->
             <th class="five wide">名稱</th>
             <th class="two wide">項目</th>
             <!-- <th>成分</th>
@@ -30,9 +29,8 @@
     </thead>
     <tbody>
         {% for feed in feeds %}
-        {% for favor_feed in favor_feeds %}
         <tr>
-            <td>
+            <!-- <td>
                 {% if favor_feed.feed == feed %}
                 <button class="ts circular icon secondary button" onclick="">
                     <i class="heart negative icon"></i>
@@ -43,7 +41,7 @@
                     <i class="empty heart icon"></i>
                 </button>
                 {% endif %}
-            </td>
+            </td> -->
             <td>{{ feed.fname }}</td>
             <td>{{ feed.fitem }}</td>
             <!-- <td>{{ feed.fmat }}</td>
@@ -54,7 +52,6 @@
             <td>{{ feed.flegalname }}</td>
             <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
         </tr>
-        {% endfor %}
         {% endfor %}
     </tbody>
 </table>

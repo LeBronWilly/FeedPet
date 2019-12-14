@@ -201,7 +201,7 @@ $("#cat_cal").click(function () {
 //     }
 // }
 
-// $("#feed_table").DataTable();
+$("#feed_table").DataTable();
 
 // 增加feed favorite
 function add_feed_favor(master_id, feed_id) {
@@ -244,19 +244,23 @@ function reco_dog_feed() {
     var dograwFood = $("#dograwFood").val();
     var dogLyophilizerdRawFood = $("#dogLyophilizerdRawFood").val();
     var dogwater = $("#dogwater").val();
+
     if (weight == null || type == null || ligation == null) {
         //點心條
         ts('.snackbar').snackbar({
             content: '請先輸入狗狗資訊'
         });
     }
-    else if (dogcannedFood == null || dograwFood == null || dogLyophilizerdRawFood == null || dogwater == null) {
+    else if (dogcannedFood == null || dogcannedFood == "" ||
+        dograwFood == null || dograwFood == "" ||
+        dogLyophilizerdRawFood == null || dogLyophilizerdRawFood == "" ||
+        dogwater == null || dogwater == "") {
         //點心條
         ts('.snackbar').snackbar({
             content: '請先計算狗狗餵食量'
         });
     }
     else {
-        location.href='/feed/feed_recommendation'
+        location.href = '/feed/feed_recommendation'
     }
 }

@@ -7,50 +7,73 @@
 
 {% block content %}
 
-<table class="ts very basic table">
-    <tbody>
-        <tr>
-            <td class="three wide">名稱</td>
-            <td class="thirty wide">{{ feed.fname }}</td>
-        </tr>
-        <tr>
-            <td>項目</td>
-            <td>{{ feed.fitem }}</td>
-        </tr>
-        <tr>
-            <td>成份</td>
-            <td>{{ feed.fmat }}</td>
-        </tr>
-        <tr>
-            <td>營養</td>
-            <td>{{ feed.fnut }}</td>
-        </tr>
-        <tr>
-            <td>適用</td>
-            <td>{{ feed.fusage1 }}</td>
-        </tr>
-        <tr>
-            <td>使用</td>
-            <td>{{ feed.fusage2 }}</td>
-        </tr>
-        <tr>
-            <td>保存</td>
-            <td>{{ feed.fusage3 }}</td>
-        </tr>
-        <tr>
-            <td>公司</td>
-            <td>{{ feed.flegalname }}</td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <th colspan="2">
-                <div class="ts right floated small primary labeled icon button">
-                    <i class="heart icon"></i> 加到我的最愛
-                </div>
-            </th>
-        </tr>
-    </tfoot>
-</table>
+<div class="ts relaxed grid">
+    <div class="six wide column">
+        {% if feed.fitem == '罐頭' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/罐頭.jpg' %}">
+        {% elif feed.fitem == '潔牙骨' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/潔牙骨.jpg' %}">
+        {% elif feed.fitem == '輔助食品' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/輔助食品.jpg' %}">
+        {% elif feed.fitem == '零食' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/零食.jpg' %}">
+        {% elif feed.fitem == '乾飼糧' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/乾飼糧.jpg' %}">
+        {% elif feed.fitem == '生鮮、冷凍' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/生鮮、冷凍.jpg' %}">
+        {% elif feed.fitem == '半溼性飼糧' %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/半溼性飼糧.jpg' %}">
+        {% else %}
+        <img class="ts medium bordered rounded image" src="{% static 'images/feed/其他.jpg' %}">
+        {% endif %}
+    </div>
+    <div class="ten wide column">
+        <table class="ts very basic table">
+            <tbody>
+                <tr>
+                    <td class="three wide">名稱</td>
+                    <td class="thirty wide">{{ feed.fname }}</td>
+                </tr>
+                <tr>
+                    <td>項目</td>
+                    <td>{{ feed.fitem }}</td>
+                </tr>
+                <tr>
+                    <td>成份</td>
+                    <td>{{ feed.fmat }}</td>
+                </tr>
+                <tr>
+                    <td>營養</td>
+                    <td>{{ feed.fnut }}</td>
+                </tr>
+                <tr>
+                    <td>適用</td>
+                    <td>{{ feed.fusage1 }}</td>
+                </tr>
+                <tr>
+                    <td>使用</td>
+                    <td>{{ feed.fusage2 }}</td>
+                </tr>
+                <tr>
+                    <td>保存</td>
+                    <td>{{ feed.fusage3 }}</td>
+                </tr>
+                <tr>
+                    <td>公司</td>
+                    <td>{{ feed.flegalname }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">
+                        <div class="ts right floated small primary labeled icon button">
+                            <i class="heart icon"></i> 加到我的最愛
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 
 {% endblock content %}
