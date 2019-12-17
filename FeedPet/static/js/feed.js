@@ -1,3 +1,5 @@
+// js/feed.js
+
 // feed tab
 ts('#first.tabbed.menu .item').tab({
     onSwitch: (tabName, groupName) => {

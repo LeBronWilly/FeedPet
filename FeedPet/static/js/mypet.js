@@ -1,3 +1,5 @@
+// js/mypet.js
+
 // mypet del button
 ts('.dismissable.message').message();
 function showDimmer_delpet() {
