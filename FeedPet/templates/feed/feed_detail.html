@@ -28,7 +28,7 @@
         {% endif %}
     </div>
     <div class="ten wide column">
-        <table class="ts very basic table">
+        <table class="ts very basic table" id="feed_detail">
             <tbody>
                 <tr>
                     <td class="three wide">名稱</td>
@@ -66,9 +66,17 @@
             <tfoot>
                 <tr>
                     <th colspan="2">
-                        <div class="ts right floated small primary labeled icon button">
-                            <i class="heart icon"></i> 加到我的最愛
-                        </div>
+                        {% if not favor_feed %}
+                        <button class="ts right floated positive labeled icon button" id="detail_fav_btn_{{feed.id}}" onclick="add_feed_favor_detail('{{user.id}}', '{{feed.id}}')">
+                            加入最愛
+                            <i class="heart icon"></i>
+                        </button>
+                        {% else %}
+                        <button class="ts right floated negative labeled icon button" id="detail_fav_btn_{{feed.id}}" onclick="del_feed_favor_detail('{{user.id}}', '{{feed.id}}')">
+                            移除最愛
+                            <i class="heart icon"></i>
+                        </button>
+                        {% endif %}
                     </th>
                 </tr>
             </tfoot>

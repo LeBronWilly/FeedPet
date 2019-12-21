@@ -89,7 +89,7 @@
                 </div>
                 <div class="field">
                     <label>生日</label>
-                    <input type="date" id="birthday" name="birthday" required="required" value="{{ pet.birthday }}" />
+                    <input type="date" id="birthday" name="birthday" required="required" value="{{ pet.birthday|date:'Y-m-d' }}" />
                 </div>
             </div>
 

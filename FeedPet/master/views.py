@@ -177,7 +177,7 @@ def pet_detail(request, pet_id):
 
 # function：update_pet_detail
 # author：Zachary Zhuo
-# date：2019/12/1
+# date：2019/12/17
 @login_required
 def update_pet_detail(request, pet_id):
     try:

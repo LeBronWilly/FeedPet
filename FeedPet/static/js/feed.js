@@ -183,60 +183,6 @@ $("#cat_cal").click(function () {
     }
 });
 
-// feed list 動態搜尋
-// function searchFeedTable() {
-//     var input, filter, table, tr, td, i;
-//     input = document.getElementById("search_input");
-//     filter = input.value.toUpperCase();
-//     table = document.getElementById("feed_table");
-//     tr = table.getElementsByTagName("tr"); 
-
-//     for (i = 0; i < tr.length - 1; i++) {
-//         td = tr[i].getElementsByTagName("td")[0];
-//         if (td) {
-//             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-//                 tr[i].style.display = "";
-//             } else {
-//                 tr[i].style.display = "none";
-//             }
-//         }
-//     }
-// }
-
-$("#feed_table").DataTable();
-
-// 增加feed favorite
-function add_feed_favor(master_id, feed_id) {
-    $.ajax({
-        url: '/feed/add_feed_favor/' + master_id + '/' + feed_id,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                if (data.status == true) {
-                    //點心條
-                    ts('.snackbar').snackbar({
-                        content: '成功加入我的最愛'
-                    });
-                }
-                else {
-                    //點心條
-                    ts('.snackbar').snackbar({
-                        content: '已經加過了'
-                    });
-                }
-            }
-        },
-        error: function (err) {
-        }
-    });
-}
-
-// 刪除feed favorite
-function del_feed_favor() {
-
-}
-
 //推薦狗狗飼料（假假）檢查欄位是否有空
 function reco_dog_feed() {
     var weight = $("#dog_weight").val();
@@ -264,5 +210,181 @@ function reco_dog_feed() {
     }
     else {
         location.href = '/feed/feed_recommendation'
+    }
+}
+
+// data table server side
+$("#feed_table").DataTable({
+    "lengthMenu": [10, 25, 50, 75, 100],
+    "processing": true,
+    "serverSide": true,
+    "oLanguage": {
+        "sProcessing": "處理中...",
+        "sLengthMenu": "顯示 _MENU_ 筆記錄",
+        "sZeroRecords": "無符合資料",
+        "sInfo": "目前資料：_START_ - _END_ 總筆數：_TOTAL_",
+        "sInfoEmpty": "無任何資料", "sInfoFiltered": "(過濾總筆數 _MAX_)",
+        "sInfoPostFix": "",
+        "sSearch": "搜尋",
+        "sEmptyTable": "表格空空",
+        "sLoadingRecords": "載入中...",
+        "sUrl": "",
+        "oPaginate": {
+            "sFirst": "首頁",
+            "sPrevious": "上一頁",
+            "sNext": "下一頁",
+            "sLast": "最後一頁"
+        },
+    },
+    "ajax": {
+        "url": "/api/feedList/",
+        "type": "GET"
+    },
+    "columns": [
+        {
+            "data": null,
+            "render": function (data, type, row, meta) {
+                if (data["master_feed"] == 1) {
+                    return '<button class="ts circular icon secondary button" id="list_fav_btn_' + data['id'] + '" onclick="del_feed_favor_list(' + user + ', ' + data['id'] + ')"><i class="negative heart icon" id="list_fav_i_' + data['id'] + '"></i></button>'
+                }
+                else {
+                    return '<button class="ts circular icon secondary button" id="list_fav_btn_' + data['id'] + '" onclick="add_feed_favor_list(' + user + ', ' + data['id'] + ')"><i class="empty heart icon" id="list_fav_i_' + data['id'] + '"></i></button>'
+                }
+            }
+        },
+        { "data": "id" },
+        { "data": "fname" },
+        { "data": "fitem" },
+        { "data": "fusage1" },
+        { "data": "flegalname" },
+        {
+            "data": null,
+            "render": function (data, type, row, meta) {
+                return '<a href="/feed/feed_list/feed_detail/' + data['id'] + '">more</a>'
+            }
+        },
+    ]
+})
+
+$('div.dataTables_length select').removeClass().addClass("ts basic dropdown");
+$('#feed_table_filter').addClass("ts input");
+
+// 增加feed favorite
+function add_feed_favor(master_id, feed_id) {
+    var result
+    $.ajax({
+        url: '/feed/add_feed_favor/' + master_id + '/' + feed_id,
+        type: 'GET',
+        dataType: 'json',
+        async: false, //啟用同步請求
+        success: function (data) {
+            result = data
+        },
+        error: function (err) {
+        }
+    });
+    return result
+}
+
+// 刪除feed favorite
+function del_feed_favor(master_id, feed_id) {
+    var result
+    $.ajax({
+        url: '/feed/del_feed_favor/' + master_id + '/' + feed_id,
+        type: 'GET',
+        dataType: 'json',
+        async: false, //啟用同步請求
+        success: function (data) {
+            result = data
+        },
+        error: function (err) {
+        }
+    });
+    return result
+}
+
+// [feed_list]增加feed favorite
+function add_feed_favor_list(master_id, feed_id) {
+    var result = add_feed_favor(master_id, feed_id)
+    if (result) {
+        if (result.status == true) {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '成功加入我的最愛'
+            });
+            $('#list_fav_i_' + feed_id).removeClass("empty").addClass("negative")
+            $('#list_fav_btn_' + feed_id).attr("onclick", "del_feed_favor_list(" + master_id + ", " + feed_id + ")")
+        }
+        else {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '已經加過了'
+            });
+        }
+    }
+}
+
+// [feed_list]刪除feed favorite
+function del_feed_favor_list(master_id, feed_id) {
+    var result = del_feed_favor(master_id, feed_id)
+    if (result) {
+        if (result.status == true) {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '成功移除我的最愛'
+            });
+            $('#list_fav_i_' + feed_id).removeClass("negative").addClass("empty")
+            $('#list_fav_btn_' + feed_id).attr("onclick", "add_feed_favor_list(" + master_id + ", " + feed_id + ")")
+        }
+        else {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '無法移除'
+            });
+        }
+    }
+}
+
+// [feed_detail]增加feed favorite
+function add_feed_favor_detail(master_id, feed_id) {
+    var result = add_feed_favor(master_id, feed_id)
+    if (result) {
+        if (result.status == true) {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '成功加入我的最愛'
+            });
+            $('#detail_fav_btn_' + feed_id).removeClass("positive").addClass("negative")
+            $('#detail_fav_btn_' + feed_id).html('<i class="heart icon"></i>移除最愛')
+            $('#detail_fav_btn_' + feed_id).attr("onclick", "del_feed_favor_detail(" + master_id + ", " + feed_id + ")")
+        }
+        else {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '已經加過了'
+            });
+        }
+    }
+}
+
+// [feed_detail]刪除feed favorite
+function del_feed_favor_detail(master_id, feed_id) {
+    var result = del_feed_favor(master_id, feed_id)
+    if (result) {
+        if (result.status == true) {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '成功移除我的最愛'
+            });
+            $('#detail_fav_btn_' + feed_id).removeClass("negative").addClass("positive")
+            $('#detail_fav_btn_' + feed_id).html('<i class="heart icon"></i>加入最愛')
+            $('#detail_fav_btn_' + feed_id).attr("onclick", "add_feed_favor_detail(" + master_id + ", " + feed_id + ")")
+        }
+        else {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '無法移除'
+            });
+        }
     }
 }
