@@ -27,10 +27,8 @@ def feed(request):
     try:
         master = Master.objects.get(username=username)
         pets = Pet.objects.filter(master=master)
-
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
-
     return render(request, 'feed/feed.html', locals())
 
 
@@ -61,7 +59,7 @@ def feed_list(request):
     username = request.user.username
     try:
         master = Master.objects.get(username=username)
-        favor_feeds = Favor_feed.objects.filter(master=master)
+        # favor_feeds = Favor_feed.objects.filter(master=master)
         # print(favor_feeds.feed)
         # feeds = Feed.objects.all()
     except Exception as e:
@@ -87,7 +85,6 @@ class FeedViewSet(viewsets.ModelViewSet):
             result['recordsTotal'] = feed['total']
             result['recordsFiltered'] = feed['count']
             return Response(result, status=status.HTTP_200_OK, template_name=None, content_type=None)
-
         except Exception as e:
             return Response(e, status=status.HTTP_404_NOT_FOUND, template_name=None, content_type=None)
 
@@ -101,12 +98,9 @@ def feed_detail(request, feed_id):
     try:
         master = Master.objects.get(username=username)
         feed = Feed.objects.get(id=feed_id)
-        print(feed)
         favor_feed = Favor_feed.objects.filter(master=master, feed=feed)
-        print(favor_feed)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
-
     return render(request, 'feed/feed_detail.html', locals())
 
 
@@ -126,7 +120,6 @@ def import_feed(request):
                 feed = Feed.objects.create(fname=feed_obj["fname"], fitem=feed_obj["fitem"], fmat=feed_obj["fmat"], fnut=feed_obj["fnut"],
                                            fusage1=feed_obj["fusage1"], fusage2=feed_obj["fusage2"], fusage3=feed_obj["fusage3"], flegalname=feed_obj["flegalname"])
                 feed.save()
-
         messages.add_message(request, messages.SUCCESS, '成功更新')
     except Exception as e:
         messages.add_message(request, messages.ERROR, e)
@@ -196,8 +189,6 @@ def add_feed_favor(request, master_id, feed_id):
     favor_feed_json = {
         'status': False
     }
-    print(favor_feed_json)
-
     return JsonResponse(favor_feed_json)
 
 
@@ -226,8 +217,6 @@ def del_feed_favor(request, master_id, feed_id):
     favor_feed_json = {
         'status': False
     }
-    print(favor_feed_json)
-
     return JsonResponse(favor_feed_json)
 
 
@@ -236,19 +225,24 @@ def del_feed_favor(request, master_id, feed_id):
 # date：
 # description：隨便推薦十個飼料
 def feed_recommendation(request):
-    r_list = []
+    feed_list = []
     feeds = Feed.objects.all()
-    r_ids = random.sample(range(len(feeds)), 10)
-    for i in r_ids:
-        r_list.append(feeds[i])
-    print(r_list)
-
+    feeds_count = Feed.objects.count() - 1
+    rendom_i = random.sample(range(0, feeds_count), 10)
+    for i in rendom_i:
+        feed_list.append(feeds[i])
     return render(request, 'feed/feed_recommendation.html', locals())
 
 
-# function：feeding_record
-# author：
-# date：
-# description：
-def feeding_record(request):
-    return render(request, 'pet/pet_feeding_record.html', locals())
+# function：my_favor_feed
+# author：Zachary Zhuo
+# date：2019/12/22
+# description：列出我的最愛飼料
+def my_favor_feed(request):
+    username = request.user.username
+    try:
+        master = Master.objects.get(username=username)
+        favor_feeds = Favor_feed.objects.filter(master=master)
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+    return render(request, 'feed/my_favor_feed.html', locals())

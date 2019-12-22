@@ -32,5 +32,6 @@ urlpatterns = [
     # recommend some random feeds
     path('feed_recommendation/', views.feed_recommendation,name='feed_recommendation'),
 
-    path('feeding_record/', views.feeding_record, name='feeding_record'),
+    # my favorite feeds
+    path('my_favor_feed/', views.my_favor_feed,name='my_favor_feed'),
 ]
