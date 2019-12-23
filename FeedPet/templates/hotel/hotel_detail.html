@@ -25,25 +25,25 @@
         <tr>  
             <td>編號</td>
             <!-- {% for Hotel in p %} -->
-            <td><a href='{%url "hotel-url" hotel.rank%}'>{{hotel.rank}}</td>
+            <td><a href='{%url "hotel-url" hotel.rank%}'>{{hotel.hname}}</td>
             <!-- {% endfor %} -->
         </tr>
         
         <tr>
             <td>評鑑：</td>
-            <td>d</td>
+            <td>{{hotel.rank}}</td>
         </tr>
         <tr>
             <td>負責人</td>
-            <td>d</td>
+            <td>{{hotel.incharge}}</td>
         </tr>
         <tr>
             <td>連絡電話</td>
-            <td>d</td>
+            <td>{{hotel.phone}}</td>
         </tr>
          <tr>
             <td>地址</td>
-            <td>d}</td>
+            <td>{{hotel.address}}</td>
         </tr>
     </tbody>
   <tfoot>
@@ -51,11 +51,17 @@
             <th colspan="2">
             
              <div class="ts right floated small primary labeled icon button">
-                    <i class="heart icon"></i> 加到我的最愛
+                    <i class="heart icon"></i> 
+                    <a href="{% url 'hotel:hotel_favorite'  %}">加到我的最愛</a>
+                    
                 </div>
             </th>
         </tr>
     </tfoot>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
 
 </table>
 
