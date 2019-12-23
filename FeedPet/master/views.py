@@ -274,6 +274,36 @@ def feeding_record(request):
         master = Master.objects.get(username=username)
         pets = Pet.objects.filter(master=master)
         feeds = Feed.objects.all()
+        today = datetime.date.today()
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
+
+    if request.method == 'POST':
+        feed_id = request.POST.get('feed_id')
+        feed_time = request.POST.get('feed_time')
+        feed_amount = request.POST.get('feed_amount')
+        feed_water = request.POST.get('feed_water')
+
+        print(feed_id)
+        print(feed_time)
+        print(feed_amount)
+        print(feed_water)
+
+        # try:
+        #     pet.petName = petName
+        #     pet.weight = weight
+        #     pet.ligation = ligation
+        #     pet.petGender = petGender
+        #     pet.birthday = birthday
+        #     pet.petType = petType
+        #     if image is not None:
+        #         pet.image = image
+        #     pet.save()
+        # except Exception as e:
+        #     print(e)
+        #     messages.add_message(request, messages.ERROR, '請確認輸入內容')
+        #     return HttpResponseRedirect(reverse('master:mypet/update_pet_detail', args=[pet_id]))
+
+        # messages.add_message(request, messages.SUCCESS, '成功修改')
+        # return HttpResponseRedirect(reverse('master:mypet/pet_detail', args=[pet_id]))
     return render(request, 'pet/feeding_record.html', locals())
