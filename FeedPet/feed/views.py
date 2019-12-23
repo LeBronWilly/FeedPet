@@ -117,9 +117,11 @@ def import_feed(request):
             if feed_obj["fname"] == "" or feed_obj["fitem"] == "" or feed_obj["fmat"] == "" or feed_obj["fnut"] == "" or feed_obj["fusage1"] == "" or feed_obj["fusage2"] == "" or feed_obj["fusage3"] == "" or feed_obj["flegalname"] == "":
                 pass
             else:
-                feed = Feed.objects.create(fname=feed_obj["fname"], fitem=feed_obj["fitem"], fmat=feed_obj["fmat"], fnut=feed_obj["fnut"],
-                                           fusage1=feed_obj["fusage1"], fusage2=feed_obj["fusage2"], fusage3=feed_obj["fusage3"], flegalname=feed_obj["flegalname"])
-                feed.save()
+                is_feed = Feed.objects.filter(fname=feed_obj["fname"])
+                if not is_feed:
+                    feed = Feed.objects.create(fname=feed_obj["fname"], fitem=feed_obj["fitem"], fmat=feed_obj["fmat"], fnut=feed_obj["fnut"],
+                                            fusage1=feed_obj["fusage1"], fusage2=feed_obj["fusage2"], fusage3=feed_obj["fusage3"], flegalname=feed_obj["flegalname"])
+                    feed.save()
         messages.add_message(request, messages.SUCCESS, '成功更新')
     except Exception as e:
         messages.add_message(request, messages.ERROR, e)

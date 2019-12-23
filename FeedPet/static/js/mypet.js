@@ -67,3 +67,7 @@ function getTime() {
     var tDate = today.getDate();
     document.getElementById("showDate").innerHTML = tYear + "-" + tMonth + "-" + tDate;
 }
+
+$(document).ready(function () {
+    $(".chosen-select").chosen({ no_results_text: "沒有這個飼料喔！" })
+});

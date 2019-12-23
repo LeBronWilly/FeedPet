@@ -8,6 +8,7 @@ from .forms import MasterCreationForm, MasterChangeForm, PetForm
 from django.contrib.auth.decorators import login_required
 
 from .models import Master, Pet
+from feed.models import Feed
 
 import datetime
 import time
@@ -261,3 +262,18 @@ def calculate_age(born):
         age_year = 0
         age_month = 0
     return age_year, age_month
+
+
+# function：feeding_record
+# author：Zachary Zhuo
+# date：2019/12/
+# description：
+def feeding_record(request):
+    username = request.user.username
+    try:
+        master = Master.objects.get(username=username)
+        pets = Pet.objects.filter(master=master)
+        feeds = Feed.objects.all()
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+    return render(request, 'pet/feeding_record.html', locals())
