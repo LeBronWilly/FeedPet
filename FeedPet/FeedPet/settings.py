@@ -118,10 +118,84 @@ USE_L10N = True
 
 USE_TZ = True
 
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+#         },
+#         'simple': {
+#             'format': '%(levelname)s %(message)s'
+#         },
+#     },
+#     # 'filters': {
+#     #     'special': {
+#     #         '()': 'project.logging.SpecialFilter',
+#     #         'foo': 'bar',
+#     #     },
+#     #     'require_debug_true': {
+#     #         '()': 'django.utils.log.RequireDebugTrue',
+#     #     },
+#     # },
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             # 'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'verbose'
+#         },
+#         # 'file': {
+#         #     'level': 'DEBUG',
+#         #     'class': 'logging.FileHandler',
+#         #     'filename': 'mylog_test.log',
+#         #     'formatter': 'verbose'
+#         # },
+
+#         # 'mail_admins': {
+#         #     'level': 'ERROR',
+#         #     'class': 'django.utils.log.AdminEmailHandler',
+#         #     'filters': ['special']
+#         # }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],  # console or file
+#             'propagate': True,
+#             'level': 'DEBUG',
+#         },
+#         'django.request': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#             'propagate': False,
+#         },
+#         # For performance reasons, SQL logging is only enabled when settings.DEBUG is set to True
+#         # ref. https://docs.djangoproject.com/en/1.11/topics/logging/#django-db-backends
+#         'django.db.backends': {
+#             'handlers': ['console'],
+#             'propagate': False,
+#             'level': 'DEBUG',
+#         },
+#         # 'api.views': {
+#         #     'handlers': ['console'],
+#         #     'propagate': False,
+#         #     'level': 'DEBUG',
+#         # },
+#         # 'background_task': {
+#         #     'handlers': ['console'],
+#         #     'level': 'DEBUG',
+#         #     'propagate': True,
+#         # }
+#         # 'myproject.custom': {
+#         #     'handlers': ['console', 'mail_admins'],
+#         #     'level': 'INFO',
+#         #     'filters': ['special']
+#         # }
+#     }
+# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -146,4 +220,3 @@ MESSAGE_TAGS = {
 }
 
 LOGIN_URL = '/login/'
-

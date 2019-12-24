@@ -7,17 +7,13 @@
 
 {% block content %}
 
-<button class="ts button" onclick="location.href='/feed/import_feed'">匯入飼料</button>
-<!-- <div class="ts icon input">
-    <input type="text" id="search_input" onkeyup="searchFeedTable()" placeholder="搜尋...">
-    <i class="inverted circular search link icon"></i>
-</div> -->
-{{ feeds }}
-<table class="ts very basic table" id="feed_table">
+<!-- <button class="ts button" onclick="location.href='/feed/import_feed'">匯入飼料</button> -->
+<table class="ts table" id="feed_table">
     <thead>
         <tr>
-            <th class="one wide">最愛</th>
-            <th class="five wide">名稱</th>
+            <th class="one wide center aligned">最愛</th>
+            <th class="one wide">編號</th>
+            <th class="four wide">名稱</th>
             <th class="two wide">項目</th>
             <!-- <th>成分</th>
             <th>營養</th> -->
@@ -29,33 +25,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for feed in feeds %}
-        {% for favor_feed in favor_feeds %}
-        <tr>
-            <td>
-                {% if favor_feed.feed == feed %}
-                <button class="ts circular icon secondary button" onclick="">
-                    <i class="heart negative icon"></i>
-                </button>
-                {% else %}
-                <button class="ts circular icon secondary button"
-                    onclick="add_feed_favor('{{user.id}}', '{{feed.id}}')">
-                    <i class="empty heart icon"></i>
-                </button>
-                {% endif %}
-            </td>
-            <td>{{ feed.fname }}</td>
-            <td>{{ feed.fitem }}</td>
-            <!-- <td>{{ feed.fmat }}</td>
-            <td>{{ feed.fnut }}</td> -->
-            <td>{{ feed.fusage1 }}</td>
-            <!-- <td>{{ feed.fusage2 }}</td>
-            <td>{{ feed.fusage3 }}</td> -->
-            <td>{{ feed.flegalname }}</td>
-            <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
-        </tr>
-        {% endfor %}
-        {% endfor %}
+
     </tbody>
 </table>
 

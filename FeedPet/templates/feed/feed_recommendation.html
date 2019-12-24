@@ -8,43 +8,41 @@
 
 {% block content %}
 
-<table class="ts very basic table">
+<table class="ts table">
     <thead>
         <tr>
+            <th class="one wide center aligned">最愛</th>
             <th class="one wide">編號</th>
-            <th class="one wide">最愛</th>
             <th class="four wide">名稱</th>
             <th class="two wide">項目</th>
-            <!-- <th>成分</th>
-            <th>營養</th> -->
             <th class="three wide">適用</th>
-            <!-- <th>使用</th>
-            <th>保存</th> -->
             <th class="four wide">公司</th>
             <th class="one wide">詳細</th>
 
         </tr>
     </thead>
     <tbody>
-        {% for feed in r_list %}
+        {% for feed in feed_list %}
         <tr>
-            <td> {{ feed.id }}</td>
             <td>
-                <button class="ts circular icon secondary button" onclick="">
-                    <i class="heart negative icon"></i>
+                {% if feed.master_feed.all %}
+                <button class="ts circular icon secondary button" id="reco_fav_btn_{{feed.id}}" onclick="del_feed_favor_reco('{{user.id}}', '{{feed.id}}')">
+                    <i class="negative heart icon" id="reco_fav_i_{{feed.id}}" ></i>
                 </button>
+                {% else %}
+                <button class="ts circular icon secondary button" id="reco_fav_btn_{{feed.id}}" onclick="add_feed_favor_reco('{{user.id}}', '{{feed.id}}')">
+                    <i class="empty heart icon" id="reco_fav_i_{{feed.id}}" ></i>
+                </button>
+                {% endif %}
             </td>
+            <td> {{ feed.id }}</td>
             <td>{{ feed.fname }}</td>
             <td>{{ feed.fitem }}</td>
-            <!-- <td>{{ feed.fmat }}</td>
-            <td>{{ feed.fnut }}</td> -->
             <td>{{ feed.fusage1 }}</td>
             <td>{{ feed.flegalname }}</td>
             <td><a href="{% url 'feed:feed_list/feed_detail' feed.id %}">more</a></td>
         </tr>
         {% endfor %}
-
-
     </tbody>
 </table>
 

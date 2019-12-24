@@ -8,6 +8,7 @@ from .forms import MasterCreationForm, MasterChangeForm, PetForm
 from django.contrib.auth.decorators import login_required
 
 from .models import Master, Pet
+from feed.models import Feed
 
 import datetime
 import time
@@ -59,9 +60,9 @@ def login_view(request):
 
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
-                login(request, user)
-                messages.add_message(request, messages.SUCCESS, '成功登入')
-                return HttpResponseRedirect(reverse('master:index'))
+            login(request, user)
+            messages.add_message(request, messages.SUCCESS, '成功登入')
+            return HttpResponseRedirect(reverse('master:index'))
         else:
             messages.add_message(request, messages.ERROR, '未註冊或帳號密碼輸入錯誤')
     return render(request, 'registration/login.html', locals())
@@ -177,11 +178,16 @@ def pet_detail(request, pet_id):
 
 # function：update_pet_detail
 # author：Zachary Zhuo
-# date：2019/12/1
+# date：2019/12/17
 @login_required
 def update_pet_detail(request, pet_id):
     try:
         pet = Pet.objects.get(id=pet_id)
+        dogTypes = ["成犬(室內/中低活動量)", "成犬(中高度活動量)", "需增重成犬(輸入目標體重)", "需減肥成犬(輸入目標體重)",
+                      "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"]
+        catTypes = ["成貓(室內/低活動量)", "成貓(中高活動量)", "需增重成貓(輸入目標體重)",
+                      "需減肥成貓(輸入目標體重)", "成長期幼貓(10個月以內)", "老貓(11歲以上)", "懷孕母貓", "哺乳母貓"]
+
     except Exception as e:
         pet = None
         messages.add_message(request, messages.ERROR, e)
@@ -191,11 +197,17 @@ def update_pet_detail(request, pet_id):
         weight = request.POST.get('weight')
         ligation = request.POST.get('ligation')
         image = request.FILES.get('image')
+        petGender = request.POST.get('petGender')
+        birthday = request.POST.get('birthday')
+        petType = request.POST.get('type')
 
         try:
             pet.petName = petName
             pet.weight = weight
             pet.ligation = ligation
+            pet.petGender = petGender
+            pet.birthday = birthday
+            pet.petType = petType
             if image is not None:
                 pet.image = image
             pet.save()
@@ -250,3 +262,48 @@ def calculate_age(born):
         age_year = 0
         age_month = 0
     return age_year, age_month
+
+
+# function：feeding_record
+# author：Zachary Zhuo
+# date：2019/12/
+# description：
+def feeding_record(request):
+    username = request.user.username
+    try:
+        master = Master.objects.get(username=username)
+        pets = Pet.objects.filter(master=master)
+        feeds = Feed.objects.all()
+        today = datetime.date.today()
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+
+    if request.method == 'POST':
+        feed_id = request.POST.get('feed_id')
+        feed_time = request.POST.get('feed_time')
+        feed_amount = request.POST.get('feed_amount')
+        feed_water = request.POST.get('feed_water')
+
+        print(feed_id)
+        print(feed_time)
+        print(feed_amount)
+        print(feed_water)
+
+        # try:
+        #     pet.petName = petName
+        #     pet.weight = weight
+        #     pet.ligation = ligation
+        #     pet.petGender = petGender
+        #     pet.birthday = birthday
+        #     pet.petType = petType
+        #     if image is not None:
+        #         pet.image = image
+        #     pet.save()
+        # except Exception as e:
+        #     print(e)
+        #     messages.add_message(request, messages.ERROR, '請確認輸入內容')
+        #     return HttpResponseRedirect(reverse('master:mypet/update_pet_detail', args=[pet_id]))
+
+        # messages.add_message(request, messages.SUCCESS, '成功修改')
+        # return HttpResponseRedirect(reverse('master:mypet/pet_detail', args=[pet_id]))
+    return render(request, 'pet/feeding_record.html', locals())

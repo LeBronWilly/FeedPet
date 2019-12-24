@@ -7,63 +7,64 @@
 
 {% block content %}
 <div class="ts grid">
-    {% comment %} 旅館篩選條件 start {% endcomment %}
-   
+  
     <div class="three wide column">
         <form class="ts form" method="post" action="/hotel/">
-             <div class="field">
-                   
+            <div class="field">
+
                 <label>選擇地區</label>
                 <select name="region">
-                    {% for Hotel in unit %}   
+                    {% for Hotel in unit %}
                     <option>{{Hotel.district}}</option>
                     {% endfor %}
                 </select>
-                
+
             </div>
 
             <div class="field">
                 <label>選擇旅館評鑑</label>
                 <select name="star">
-                        {% for Hotel in unit1 %}   
-                        <option>{{Hotel.rank}}</option>
-                        {% endfor %}
+                    {% for Hotel in unit1 %}
+                    <option>{{Hotel.rank}}</option>
+                    {% endfor %}
                 </select>
             </div>
+
+            <div class="field">
+                <label>選擇旅館</label>
+                <select name="address">
+                    {% for Hotel in unit2 %}
+                    <option>{{Hotel.address}}</option>
+                    {% endfor %}
+                </select>
+            </div> 
+
             <button class="ts button">送出</button>
 
         </form>
     </div>
-    {% comment %} 旅館篩選條件 end {% endcomment %}
-   
-    {% comment %} 串接地圖api start {% endcomment %}
-    <!-- <div class="thirteen wide column">
-        {% comment %} 預計地圖放置位置之後可以把background-color的設定刪掉 {% endcomment %}
-        <div class="ts embed" style="width:100%;height:400px;"></div>
-        
-              
-        <button class="ts info labeled" data-tooltip-position="bottom center"
-            data-tooltip="顯示該旅館資訊 旅館名稱 旅館地址 旅館聯絡方式">          
-         <a href="{% url 'hotel:hotel_detail' 1 %}">某個旅館</a> 
-        </button>
-    </div> -->
-    <div class="thirteen wide column " id="map"></div>
-    <script type="text/javascript">
 
+    <div class="thirteen wide column" id="map">
+        <!-- <div class="ts embed" style="width:100%;height:100%;"></div> -->
+        <iframe width='500' height='500' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'
+            src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{hotel.region}}&z=16&output=embed&t='></iframe>
+    </div>
+    <button class="ts info labeled" data-tooltip-position="bottom center" data-tooltip="顯示該旅館資訊 旅館名稱 旅館地址 旅館聯絡方式">
+        <a href="{% url 'hotel:hotel_detail' 1 %}">某個旅館</a>
+    </button>
+</div>
+
+<!-- <script type="text/javascript">
     var map;
     function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 25.04, lng: 121.512},
-        zoom: 18
-      });
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 25.04, lng: 121.512 },
+            zoom: 18
+        });
     }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx7qnrkFTjPP4nwQFqjP6BW4RbWYMXGik&callback=initMap">
+    </script> -->
 
-    </script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx7qnrkFTjPP4nwQFqjP6BW4RbWYMXGik&callback=initMap">
-    </script>
-    {% comment %} 串接地圖api end {% endcomment %} 
-          
-</div>
-  
 {% endblock content %}

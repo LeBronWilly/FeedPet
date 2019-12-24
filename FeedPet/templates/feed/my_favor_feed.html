@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+<h2>最愛飼料</h2>
+{% endblock header %}
+
+{% block content %}
+
+<table class="ts very basic sortable table" id="my_fav_feed_table">
+    <thead>
+        <tr>
+            <th class="one wide">刪除</th>
+            <th class="one wide">編號</th>
+            <th class="four wide">名稱</th>
+            <th class="two wide">項目</th>
+            <th class="three wide">適用</th>
+            <th class="four wide">公司</th>
+            <th class="one wide">詳細</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for favor_feed in favor_feeds %}
+        <tr>
+            <td>
+                <button class="ts circular icon secondary button" id="my_fav_btn_{{feed.id}}" onclick="del_my_favor('{{user.id}}', '{{favor_feed.feed.id}}')">
+                    <i class="delete icon"></i>
+                </button>
+            </td>
+            <td> {{ favor_feed.feed.id }}</td>
+            <td>{{ favor_feed.feed.fname }}</td>
+            <td>{{ favor_feed.feed.fitem }}</td>
+            <td>{{ favor_feed.feed.fusage1 }}</td>
+            <td>{{ favor_feed.feed.flegalname }}</td>
+            <td><a href="{% url 'feed:feed_list/feed_detail' favor_feed.feed.id %}">more</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

@@ -7,6 +7,8 @@ Django 2.2.7
 ```Python
 pip install Pillow
 pip install requests
+pip install django-model-utils
+pip install djangorestframework
 ```
 
 執行
@@ -27,3 +29,6 @@ python manage.py migrate
 python manage.py makemigrations [appname]
 python manage.py migrate [appname]
 ```
+
+匯入飼料open data
+http://localhost:8000/feed/import_feed

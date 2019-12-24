@@ -18,7 +18,7 @@
             </div> -->
             <div class="field">
                 <label for="image">照片</label>
-                <img class="ts medium image" id="preview_progressbarTW_img_chg" src="{{ pet.image.url }}"/>
+                <img class="ts medium image" id="preview_progressbarTW_img_chg" src="{{ pet.image.url }}" />
             </div>
             <div class="field">
                 <button class="ts positive button" type="button" onclick="imgInp_chg.click()">
@@ -26,32 +26,70 @@
                 </button>
                 <input type="file" id="imgInp_chg" name="image" onchange="readURL(this)"
                     targetID="preview_progressbarTW_img_chg" accept="image/gif, image/jpeg, image/png"
-                    style="visibility:hidden"/>
+                    style="visibility:hidden" />
             </div>
         </div>
 
         <div class="eight wide column">
             <div class="field">
                 <label>名字</label>
-                <input type="text" id="petName" name="petName" value="{{ pet.petName }}">
+                <input type="text" id="petName" name="petName" required="required" value="{{ pet.petName }}">
+            </div>
+            <div class="fields">
+                <div class="field">
+                    <label>性別</label>
+                    <div class="ts checkboxes">
+                        <div class="ts radio checkbox">
+                            <input id="firstMale" type="radio" name="petGender"
+                                {% if pet.petGender == "Male" %}checked="checked" {% endif %} value="Male">
+                            <label for="firstMale">公的</label>
+                        </div>
+                        <div class="ts radio checkbox">
+                            <input id="firstFemale" type="radio" name="petGender"
+                                {% if pet.petGender == "Female" %}checked="checked" {% endif %} value="Female">
+                            <label for="firstFemale">母的</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field" id="ligation">
+                    <label>結紮</label>
+                    <div class="ts checkboxes">
+                        <div class="ts radio checkbox">
+                            <input id="yes" type="radio" name="ligation" {% if pet.ligation == "Yes" %}checked="checked"
+                                {% endif %} value="Yes">
+                            <label for="yes">有</label>
+                        </div>
+                        <div class="ts radio checkbox">
+                            <input id="no" type="radio" name="ligation" {% if pet.ligation == "No" %}checked="checked"
+                                {% endif %} value="No">
+                            <label for="no">無</label>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="field">
-                <label>體重</label>
-                <input type="number" id="weight" name="weight" value="{{ pet.weight }}">
+                <label>活動類型</label>
+                <select name="type" required>
+                    <option disabled selected>選擇活動類型</option>
+                    {% if pet.petClass == 'Dog' %}
+                    {% for dogType in dogTypes %}
+                    <option value="{{ dogType }}" {% if dogType == pet.petType %}selected="selected"{% endif %}>{{ dogType }}</option>
+                    {% endfor %}
+                    {% else %}
+                    {% for catType in catTypes %}
+                    <option value="{{ catType }}" {% if catType == pet.petType %}selected="selected"{% endif %}>{{ catType }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
             </div>
-            <div class="field" id="ligation">
-                <label>是否結紮</label>
-                <div class="ts checkboxes">
-                    <div class="ts radio checkbox">
-                        <input id="yes" type="radio" name="ligation" {% if pet.ligation == "Yes" %}checked="checked"
-                            {% endif %} value="Yes">
-                        <label for="yes">有</label>
-                    </div>
-                    <div class="ts radio checkbox">
-                        <input id="no" type="radio" name="ligation" {% if pet.ligation == "No" %}checked="checked"
-                            {% endif %} value="No">
-                        <label for="no">無</label>
-                    </div>
+            <div class="fields">
+                <div class="field">
+                    <label>體重</label>
+                    <input type="number" id="weight" name="weight" required="required" value="{{ pet.weight }}">
+                </div>
+                <div class="field">
+                    <label>生日</label>
+                    <input type="date" id="birthday" name="birthday" required="required" value="{{ pet.birthday|date:'Y-m-d' }}" />
                 </div>
             </div>
 

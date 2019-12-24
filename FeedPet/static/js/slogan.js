@@ -1,3 +1,5 @@
+// js/slogan.js
+
 let sloganBar = document.getElementById("slogan-bar");
 let slogan_position = 0;
 if(slogans.length > 1){

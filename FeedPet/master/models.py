@@ -16,7 +16,7 @@ class Master(AbstractUser):
 
 class Pet(models.Model):
     master = models.ForeignKey(Master, on_delete=models.CASCADE)
-    petName = models.CharField(max_length=20)
+    petName = models.CharField(max_length=20, unique=True)
     PETCLASS = (('Dog', '狗'), ('Cat', '貓'))
     petClass = models.CharField(max_length=3, choices=PETCLASS, null=True)
     petType = models.CharField(max_length=20)

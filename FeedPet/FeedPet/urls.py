@@ -15,14 +15,23 @@ Including another URLconf
 """
 # FeedPet/urls.py
 from django.contrib import admin
-from django.urls import path
-from django.urls import include  # 要導入這個include
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework.routers import DefaultRouter
+from feed.views import FeedViewSet
+
+router = DefaultRouter()
+router.register(r'feedList', FeedViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('master.urls')),
     path('feed/', include('feed.urls')),
     path('hotel/', include('hotel.urls')),
+
+    # for rest_framework
+    path('api/', include(router.urls)),
+    # for rest_framework auth
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

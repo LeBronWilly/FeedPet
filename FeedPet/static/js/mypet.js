@@ -1,3 +1,5 @@
+// js/mypet.js
+
 // mypet del button
 ts('.dismissable.message').message();
 function showDimmer_delpet() {
@@ -55,13 +57,18 @@ function readURL(input) {
     }
 }
 
-window.onload = getTime();
-//取得系统当前时间
-function getTime() {
-    console.log(tMonth)
-    var today = new Date();
-    var tYear = today.getFullYear();
-    var tMonth = today.getMonth() + 1;
-    var tDate = today.getDate();
-    document.getElementById("showDate").innerHTML = tYear + "-" + tMonth + "-" + tDate;
-}
+// 下拉式選單搜尋bootstrap-select
+$(document).ready(function () {
+    $(".selectpicker").selectpicker();
+});
+
+// $('.selectpicker').on('click', function () {
+//     var val = $('.selectpicker').val();
+//     console.log(val)
+// });
+
+$(".selectpicker").on('changed.bs.select', function (e) {
+    var selected = $('#".selectpicker" option:selected');
+    console.log(selected)
+    // write value to some field, etc
+});
