@@ -8,7 +8,33 @@
 {% endblock header %}
 
 {% block content %}
+<div class="ts two cards">
+    <a class="ts positive raised card" href="/feed/feed_list">
+        <div class="content">
+            <div class="header">查詢所有飼料</div>
+            <div class="description">
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="symbol">
+            <i class="list ui icon"></i>
+        </div>
+    </a>
 
+    <a class="ts info raised card" href="/mypet/feeding_record">
+        <div class="content">
+            <div class="header">查詢餵食紀錄</div>
+            <div class="description">
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="symbol">
+            <i class="edit icon"></i>
+        </div>
+    </a>
+</div>
 <div class="ts fluid steps">
     <div class="active step" id="setting">
         <i class="add icon"></i>
@@ -37,10 +63,11 @@
     <a class="active item" data-tab="狗狗">狗狗</a>
     <a class="item" data-tab="貓貓">貓貓</a>
 </div>
+
 <div data-tab="狗狗" class="ts active bottom attached tab segment">
-    <div class="ts relaxed grid">
-        <div class="row">
-            <div class="eight wide column">
+    <div class="ts form">
+        <div class="fields">
+            <div class="field">
                 <form class="ts form horizontal">
                     <div class="field">
                         <mark>設定狗狗資訊</mark>
@@ -92,7 +119,7 @@
                     </div>
                 </form>
             </div>
-            <div class="eight wide column">
+            <div class="field">
                 <form class="ts form horizontal">
                     <div class="field">
                         <mark>推薦餵食量</mark>
@@ -116,20 +143,18 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            <div class="ts very narrow container">
-                <button class="ts positive button" type="button" id="dog_cal">計算餵食量</button>
-                <button class="ts info button" onclick="reco_dog_feed()">推薦飼料</button>
-            </div>
+        <div class="center aligned field">
+            <button class="ts positive button" type="button" id="dog_cal">計算餵食量</button>
+            <button class="ts info button" onclick="reco_dog_feed()">推薦飼料</button>
         </div>
     </div>
 </div>
 
 <div data-tab="貓貓" class="ts bottom attached tab segment">
-    <div class="ts relaxed grid">
-        <div class="row">
-            <div class="eight wide column">
-                <form class="ts form horizontal" action="/feed/" method="post" name="petclass" value="cat">
+    <div class="ts form">
+        <div class="fields">
+            <div class="field">
+                <form class="ts form horizontal">
                     <div class="field">
                         <mark>設定貓貓資訊</mark>
                     </div>
@@ -179,7 +204,7 @@
                     </div>
                 </form>
             </div>
-            <div class="eight wide column">
+            <div class="field">
                 <form class="ts form horizontal">
                     <div class="field">
                         <mark>推薦餵食量</mark>
@@ -203,16 +228,14 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            <div class="ts very narrow container">
-                <button class="ts positive button" id="cat_cal" type="button">計算餵食量</button>
-                <button class="ts info button" onclick="location.href='/feed/feed_recommendation'">推薦飼料</button>
-            </div>
+        <div class="center aligned field">
+            <button class="ts positive button" id="cat_cal" type="button">計算餵食量</button>
+            <button class="ts info button" onclick="location.href='/feed/feed_recommendation'">推薦飼料</button>
         </div>
     </div>
 </div>
 
-<button class="ts button" onclick="location.href='/feed/feed_list'">查詢所有飼料</button>
-<button class="ts button" onclick="location.href='/mypet/feeding_record'">查詢餵食紀錄</button>
+<!-- <button class="ts button" onclick="location.href='/feed/feed_list'">查詢所有飼料</button>
+<button class="ts button" onclick="location.href='/mypet/feeding_record'">查詢餵食紀錄</button> -->
 
 {% endblock content %}
