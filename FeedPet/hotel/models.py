@@ -12,7 +12,10 @@ class Hotel(models.Model):
     postalcode = models.CharField(max_length=30)
     district = models.CharField(max_length=30)
     address = models.CharField(max_length=40)
+    lng = models.CharField(max_length=40,default="")
+    lat = models.CharField(max_length=40,default="")
     master_hotel = models.ManyToManyField(Master, through='Favor_hotel', related_name='master_hotel')
+   
 
     def __str__(self):
      

@@ -5,6 +5,7 @@ from .models import Hotel
 from django.http import HttpResponse
 import csv
 import collections
+import geocoder
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def hoteldeta(request):
@@ -12,24 +13,32 @@ def hoteldeta(request):
         rows = list(csv.reader(csvfile))
         for row in islice(rows, 1, None):
             row = Hotel(hname=row[0], rank=row[1], full_name=row[2], incharge=row[3],
-                        phone=row[4], postalcode=row[5], district=row[6], address=row[7])
+                        phone=row[4], postalcode=row[5], district=row[6], address=row[7],lng=row[8],lat=row[9])
             row.save()
     return render(request, 'hotel/hotel.html', locals())
 
 def hotel(request):
     unit = Hotel.objects.all().values('district').distinct()
     unit1 = Hotel.objects.all().values('rank').distinct()
-    print(unit)
-
+    unit2=Hotel.objects.all().values('address').distinct()
+    # hotel = Hotel.objects.filter(address=address)
+    if request.method == 'POST':
+        district=request.POST.get('region')
+        address=request.POST.get('address')
+        unit3 = Hotel.objects.filter(district=region).filter(address=address)
+        print(unit3)
+        print("@@@@@@@")
+        for unitaddress in unit3:
+            print(unitaddress.address)               
     if request.method == 'POST':
         region = request.POST.get('region')
         star = request.POST.get('star')
-        # print(region)
         results = Hotel.objects.filter(district=region).filter(rank=star)
-        # print(results[0].district)
-        # print(results[0].rank)
         for result in results:
-            print(result.district,result.address)
+            print(result.district,result.rank)
+    # g = geocoder.google("1403 Washington Ave, New Orleans, LA 70130")
+    # g = geocoder.arcgis(u"臺北市大安區和平東路2段20之1號")
+    # print(g.latlng)
     return render(request, 'hotel/hotel.html', locals())
 
 def hoteldetail(request,postalcode):
@@ -42,18 +51,4 @@ def hoteldetail(request,postalcode):
     return render(request, 'hotel/hotel_detail.html', locals())
 
 def hotel_favorite(request):
-    if request.method != 'POST':
-        form = HotelForm()
-    else:
-        form = HotelForm(data=request.POST, files=request.FILES)
-
-        if form.is_valid():
-            new_hotel = form.save(commit=False)
-            new_hotel.master = request.user
-            new_pet.save()
-
-            messages.add_message(request, messages.SUCCESS, '成功登記')
-            return HttpResponseRedirect(reverse('hotel:mypet'))
-        else:
-            messages.add_message(request, messages.ERROR, form.errors)
     return render(request, 'hotel/hotel_favorite.html', locals())
