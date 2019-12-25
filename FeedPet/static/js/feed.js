@@ -15,35 +15,31 @@ ts('#first.tabbed.menu .item').tab({
 
 //使用者透過下拉式選單選擇狗狗
 $("#choseDog").change(function () {
-    $("#choseDog option:selected").each(function () {
-        var value = $("#choseDog").val();
-        getDogInfo(value)
+    var value = $("#choseDog").val();
+    getDogInfo(value)
 
-        $("#setting").removeClass("active")
-        $("#calculate").addClass("active")
-        $("#favorite").removeClass("active")
+    $("#setting").removeClass("active")
+    $("#calculate").addClass("active")
+    $("#favorite").removeClass("active")
 
-        //點心條
-        ts('.snackbar').snackbar({
-            content: "以填入 [ " + $("#choseDog option:selected").text() + " ] 的資料"
-        });
+    //點心條
+    ts('.snackbar').snackbar({
+        content: "以填入 [ " + $("#choseDog option:selected").text() + " ] 的資料"
     });
 });
 
 //使用者透過下拉式選單選擇貓貓
 $("#choseCat").change(function () {
-    $("#choseCat option:selected").each(function () {
-        var value = $("#choseCat").val();
-        getCatInfo(value)
+    var value = $("#choseCat").val();
+    getCatInfo(value)
 
-        $("#setting").removeClass("active")
-        $("#calculate").addClass("active")
-        $("#favorite").removeClass("active")
+    $("#setting").removeClass("active")
+    $("#calculate").addClass("active")
+    $("#favorite").removeClass("active")
 
-        //點心條
-        ts('.snackbar').snackbar({
-            content: "以填入 [ " + $("#choseCat option:selected").text() + " ] 的資料"
-        });
+    //點心條
+    ts('.snackbar').snackbar({
+        content: "以填入 [ " + $("#choseCat option:selected").text() + " ] 的資料"
     });
 });
 
