@@ -8,8 +8,8 @@
 {% block content %}
 
 <table class="ts celled table">
-    
-  <thead>
+
+    <thead>
         <tr>
             <th colspan="3">
                 hh
@@ -19,41 +19,41 @@
     <tbody>
 
 
-            <form action="/hoteldetail/" method="get">
-                <label for="rank">您的名字</label>
-            
-        <tr>  
-            <td>編號</td>
-            <!-- {% for Hotel in p %} -->
-            <td><a href='{%url "hotel-url" hotel.rank%}'>{{hotel.hname}}</td>
-            <!-- {% endfor %} -->
-        </tr>
-        
-        <tr>
-            <td>評鑑：</td>
-            <td>{{hotel.rank}}</td>
-        </tr>
-        <tr>
-            <td>負責人</td>
-            <td>{{hotel.incharge}}</td>
-        </tr>
-        <tr>
-            <td>連絡電話</td>
-            <td>{{hotel.phone}}</td>
-        </tr>
-         <tr>
-            <td>地址</td>
-            <td>{{hotel.address}}</td>
-        </tr>
+        <form action="/hoteldetail/" method="get">
+            <label for="rank">您的名字</label>
+
+            <tr>
+                <td>編號</td>
+                {% for Hotel in hotel %}
+                <td><a href='{%url "hotel-url" hotel.rank%}'>{{hotel.hname}}</td>
+                {% endfor %}
+            </tr>
+
+            <tr>
+                <td>評鑑：</td>
+                <td>{{hotel.rank}}</td>
+            </tr>
+            <tr>
+                <td>負責人</td>
+                <td>{{hotel.incharge}}</td>
+            </tr>
+            <tr>
+                <td>連絡電話</td>
+                <td>{{hotel.phone}}</td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td>{{hotel.address}}</td>
+            </tr>
     </tbody>
-  <tfoot>
+    <tfoot>
         <tr>
             <th colspan="2">
-            
-             <div class="ts right floated small primary labeled icon button">
-                    <i class="heart icon"></i> 
+
+                <div class="ts right floated small primary labeled icon button">
+                    <i class="heart icon"></i>
                     <a href="{% url 'hotel:hotel_favorite' %}">加到我的最愛</a>
-                    
+
                 </div>
             </th>
         </tr>

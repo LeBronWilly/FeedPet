@@ -4,7 +4,7 @@ from .models import Hotel,Favor_hotel
 # from django_google_maps import fields as map_fields
 # Register your models here.
 class HotelAdmin(admin.ModelAdmin):
-    list_display = ('hname','rank','full_name','incharge','phone','postalcode','district','address')
+    list_display = ('hname','rank','full_name','incharge','phone','postalcode','district','address', 'lng', 'lat')
 class FavorHotelAdmin(admin.ModelAdmin):
     list_display = ('hotel','master')
    

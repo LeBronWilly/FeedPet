@@ -36,6 +36,10 @@
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script> -->
 
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+
     <link rel="shortcut icon" href="#" />
 
     <style type="text/css">
@@ -230,6 +234,9 @@
         var user = "{{user.id}}"
     </script>
     <script type="text/javascript" src="{% static 'js/feed.js' %}"></script>
+    <script>
+        var geo_add = '{{geo_add|safe}}'
+    </script>
     <script type="text/javascript" src="{% static 'js/hotel.js' %}"></script>
 </body>
 
