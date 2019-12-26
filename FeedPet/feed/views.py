@@ -56,12 +56,12 @@ def getPet(request, petId):
 # date：2019/12/6
 # description：列出飼料open data以表格呈現簡單資訊
 def feed_list(request):
-    username = request.user.username
     try:
-        master = Master.objects.get(username=username)
         # favor_feeds = Favor_feed.objects.filter(master=master)
         # print(favor_feeds.feed)
-        # feeds = Feed.objects.all()
+        feeds = Feed.objects.all()
+        if not feeds:
+            raise ValueError('請確認是否匯入飼料')
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'feed/feed_list.html', locals())
@@ -228,11 +228,14 @@ def del_feed_favor(request, master_id, feed_id):
 # description：隨便推薦十個飼料
 def feed_recommendation(request):
     feed_list = []
-    feeds = Feed.objects.all()
-    feeds_count = Feed.objects.count() - 1
-    rendom_i = random.sample(range(0, feeds_count), 10)
-    for i in rendom_i:
-        feed_list.append(feeds[i])
+    try:
+        feeds = Feed.objects.all()
+        feeds_count = Feed.objects.count() - 1
+        rendom_i = random.sample(range(0, feeds_count), 10)
+        for i in rendom_i:
+            feed_list.append(feeds[i])
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, '請確認是否匯入飼料')
     return render(request, 'feed/feed_recommendation.html', locals())
 
 
