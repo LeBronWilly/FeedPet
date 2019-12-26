@@ -2,7 +2,7 @@
 
 // 當網頁載入完畢關閉讀取指示器條
 $(document).ready(function () {
-    $('#loading').hide()
+    // $('#loading').hide()
 });
 
 // index user tag
