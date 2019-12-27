@@ -9,6 +9,8 @@ pip install Pillow
 pip install requests
 pip install django-model-utils
 pip install djangorestframework
+pip install geocoder
+pip install geojson
 ```
 
 執行
