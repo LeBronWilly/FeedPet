@@ -20,4 +20,7 @@ urlpatterns = [
 
     # map
     path('map/<str:district>/', views.map, name='map'),
+
+    # shoe_detail
+    # path('show_detail/<str:district>/', views.show_detail, name='show_detail'),
 ]
