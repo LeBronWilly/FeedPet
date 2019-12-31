@@ -58,17 +58,7 @@ function readURL(input) {
 }
 
 // 下拉式選單搜尋bootstrap-select
-$(document).ready(function () {
-    $(".selectpicker").selectpicker();
-});
-
-// $('.selectpicker').on('click', function () {
-//     var val = $('.selectpicker').val();
-//     console.log(val)
+// $(document).ready(function () {
+//     $(".selectpicker").selectpicker();
 // });
 
-$(".selectpicker").on('changed.bs.select', function (e) {
-    var selected = $('#".selectpicker" option:selected');
-    console.log(selected)
-    // write value to some field, etc
-});
