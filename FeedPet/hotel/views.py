@@ -7,10 +7,13 @@ import csv
 import collections
 import geocoder
 from geojson import Point, Feature, FeatureCollection
+from pathlib import Path
 
 
 def hoteldeta(request):
-    with open('/Users/liumeihui/Documents/GitHub/FeedPet/FeedPet/hotel/hotel.csv', encoding="utf-8", newline="") as csvfile:
+    base_path = Path(__file__).parent
+    file_path = (base_path / "hotel.csv").resolve()
+    with open(file_path, encoding="utf-8", newline="") as csvfile:
         rows = list(csv.reader(csvfile))
         for row in islice(rows, 1, None):
             row = Hotel(hname=row[0], rank=row[1], full_name=row[2], incharge=row[3],
@@ -31,35 +34,24 @@ def hotel(request):
 
 
 def map(request, district):
-    print('district')
-    print(district)
     add_list = []
     if request.method == 'GET' and request.is_ajax():
         try:
             results = Hotel.objects.filter(district=district)
-            print("results")
-            print(results)
+            # print(results)
             for result in results:
-                print("111111111")
-                print((result.id))
-                print("2222222222")
-                print(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                              id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
                 add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
+                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank, "id": int(result.id)}))
             geo_add = FeatureCollection(add_list)
-            print("33333333")
-            print(geo_add)
+            # print(geo_add)
         except Exception as e:
             print(e)
     return JsonResponse(geo_add)
 
 
-def hoteldetail(request, postalcode):
-    hotel = Hotel.objects.get(postalcode=postalcode)
-    context = {
-        'hotel_list': hotel.postalcode
-    }
+def hoteldetail(request, hotel_id):
+    hotel = Hotel.objects.get(id=hotel_id)
+    # detail = Hotel.objects.all().values()
     return render(request, 'hotel/hotel_detail.html', locals())
 
 
