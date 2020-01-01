@@ -19,20 +19,6 @@ def hoteldeta(request):
     return render(request, 'hotel/hotel.html', locals())
 
 
-# def show_detail(request, full_name,rank):
-#      add_detail = []
-#     if request.method == 'GET' and request.is_ajax():
-#         try:
-#             results = Hotel.objects.filter(full_name=full_name,rank=rank)
-#             for result in results:
-#                 add_detail.append(Feature(geometry=Point(
-#                     (float(result.lng), float(result.lat))),properties={"country": "Spain"}))
-#             geo_detail = FeatureCollection(add_detail)
-#         except Exception as e:
-#             print(e)
-#     return JsonResponse(geo_add)
-
-
 def hotel(request):
     district = Hotel.objects.all().values('district').distinct()
     coordinate = Hotel.objects.all().values('lat', 'lng')
@@ -58,9 +44,9 @@ def map(request, district):
                 print((result.id))
                 print("2222222222")
                 print(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                              id=int(result.id), properties={"address": result.address, "rank": result.rank}))
+                              id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
                 add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                                        id=int(result.id), properties={"address": result.address, "rank": result.rank}))
+                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
             geo_add = FeatureCollection(add_list)
             print("33333333")
             print(geo_add)

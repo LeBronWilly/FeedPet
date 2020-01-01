@@ -69,23 +69,40 @@ function changeMap(district) {
             },
             filter: ["==", "$type", "Point"]
           });
-          map.on('mousemove', function (e) {
-            var features = map.queryRenderedFeatures(e.point, { layers: ['park-volcanoes'] });
-            map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-          });
-          map.on('click', function (e) {
-            var features = map.queryRenderedFeatures(e.point, { layers: ['park-volcanoes'] });
+          var quakeID = null;
 
-            if (!features.length) {
-              return;
+          map.on('mouseenter', 'park-volcanoes', (e) => {
+            var hotel_name = e.features[0].properties.full_name;
+            var rank = e.features[0].properties.rank;
+            console.log('hotel_name')
+            console.log(hotel_name)
+            console.log('rank')
+            console.log(rank)
+
+            // Check whether features exist
+            if (e.features.length > 0) {
+              // Display the magnitude, location, and time in the sidebar
+              hotel_nameDisplay.textContent = hotel_name;
+              rankDisplay.textContent = rank;
+
+              // If quakeID for the hovered feature is not null,
+              // use removeFeatureState to reset to the default behavior
+              if (quakeID) {
+                map.removeFeatureState({
+                  source: "national-park",
+                  id: quakeID
+                });
+              }
+
+              quakeID = e.features[0].id;
+
+              map.setFeatureState({
+                source: 'national-park',
+                id: quakeID,
+              }, {
+                hover: true
+              });
             }
-
-            var feature = features[0];
-
-            var popup = new mapboxgl.Popup()
-              .setLngLat(feature.geometry.coordinates)
-              .setHTML("<button>加入我的最愛</button>")
-              .addTo(map);
           });
         });
       }
