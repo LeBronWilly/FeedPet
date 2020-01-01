@@ -19,7 +19,6 @@ def hoteldeta(request):
     return render(request, 'hotel/hotel.html', locals())
 
 
-
 def hotel(request):
     district = Hotel.objects.all().values('district').distinct()
     coordinate = Hotel.objects.all().values('lat', 'lng')
@@ -42,11 +41,12 @@ def map(request, district):
             print(results)
             for result in results:
                 print("111111111")
-                print(type(result.lat))
+                print((result.id))
                 print("2222222222")
-                print(Feature(geometry=Point((float(result.lng), float(result.lat)))))
-                add_list.append(Feature(geometry=Point(
-                    (float(result.lng), float(result.lat)))))
+                print(Feature(geometry=Point((float(result.lng), float(result.lat))),
+                              id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
+                add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
+                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
             geo_add = FeatureCollection(add_list)
             print("33333333")
             print(geo_add)
