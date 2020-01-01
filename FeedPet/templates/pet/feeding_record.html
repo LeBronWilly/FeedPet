@@ -20,8 +20,9 @@
         <table class="ts table">
             <thead>
                 <tr>
-                    <th class="two wide">編號</th>
-                    <th class="five wide">飼料名稱</th>
+                    <th class="one wide">編號</th>
+                    <th class="two wide">寵物</th>
+                    <th class="four wide">飼料名稱</th>
                     <th class="three wide">餵食時間</th>
                     <th class="two wide">餵食量(g)</th>
                     <th class="two wide">水量</th>
@@ -33,8 +34,14 @@
                     <tr>
                         <td>-</td>
                         <td>
-                            <select required class="selectpicker" name="feed_id" data-live-search="true" size=10>
-                                <!-- <option value="">選擇飼料</option> -->
+                            <div class="ts fluid input">
+                                <input type="text" name="pet_id" required="required"
+                                    value="{{ pet.id }}" disabled/>
+                            </div>
+                        </td>
+                        <td>
+                            <select required class="ts fluid basic dropdown" name="feed_id">
+                                <option value="">選擇飼料</option>
                                 {% for feed in feeds %}
                                 <option value="{{ feed.id }}">{{ feed.fname }}</option>
                                 {% endfor %}
