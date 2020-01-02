@@ -12,6 +12,9 @@ $("#chose_district").change(function () {
 
 var hotel_nameDisplay = document.getElementById("hotel_name");
 var rankDisplay = document.getElementById("rank");
+var addressDisplay = document.getElementById("address");
+var phoneDisplay = document.getElementById("phone");
+var inchargeDisplay = document.getElementById("incharge");
 
 mapboxgl.accessToken =
     "pk.eyJ1Ijoic3Vubnl1bnVuIiwiYSI6ImNrNGxjd2FjMzBqYTYzbG41em1wZHhtYWwifQ.pRC4vs_4Oc-sATwbFuxbkg";
