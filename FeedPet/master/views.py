@@ -284,10 +284,16 @@ def feeding_record(request):
         feed_amount = request.POST.get('feed_amount')
         feed_water = request.POST.get('feed_water')
 
-        print(feed_id)
-        print(feed_time)
-        print(feed_amount)
-        print(feed_water)
+        feeds.pet = feed_id
+        feeds.time = feed_time
+        feeds.amount = feed_amount
+        feeds.water = feed_water
+        feeds.save()
+
+        # print(feed_id)
+        # print(feed_time)
+        # print(feed_amount)
+        # print(feed_water)
 
         # try:
         #     pet.petName = petName
