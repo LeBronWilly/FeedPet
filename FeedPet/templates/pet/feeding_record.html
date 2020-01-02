@@ -41,7 +41,8 @@
                             </div>
                         </td>
                         <td>
-                            <select required class="ts fluid basic dropdown" name = "feed_id">
+                            <select required class="ts fluid basic dropdown" name = "feed_id"  >
+                            <option value="" disabled selected>選擇一項食物</option>
                                 <!-- <option value="">選擇飼料</option> -->
                                 {% for feed in feeds %}
                                 <option value={{ feed.id }}>{{ feed.fname }}</option>
