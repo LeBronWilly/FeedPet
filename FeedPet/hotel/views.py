@@ -44,9 +44,9 @@ def map(request, district):
                 print('result.id')
                 print(result.id)
                 add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank, "id": int(result.id)}))
+                                        id=int(result.id), properties={"full_name": result.full_name, "address": result.address, "phone": result.phone, "incharge": result.incharge, "rank": result.rank, "id": int(result.id)}))
             geo_add = FeatureCollection(add_list)
-            # print(geo_add)
+            print(geo_add)
         except Exception as e:
             print(e)
     return JsonResponse(geo_add)

@@ -29,6 +29,9 @@ $("#chose_district").change(function () {
 
 var hotel_nameDisplay = document.getElementById("hotel_name");
 var rankDisplay = document.getElementById("rank");
+var addressDisplay = document.getElementById("address");
+var phoneDisplay = document.getElementById("phone");
+var inchargeDisplay = document.getElementById("incharge");
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic3Vubnl1bnVuIiwiYSI6ImNrNGxjd2FjMzBqYTYzbG41em1wZHhtYWwifQ.pRC4vs_4Oc-sATwbFuxbkg";
@@ -63,8 +66,6 @@ function changeMap(district) {
         }
 
         map.on("load", function () {
-          // console.log("onload");
-          // console.log(typeof geo_add);
 
           map.addSource("national-park", {
             type: "geojson",
@@ -94,20 +95,19 @@ function changeMap(district) {
           map.on('mouseenter', 'park-volcanoes', (e) => {
             var hotel_name = e.features[0].properties.full_name;
             var rank = e.features[0].properties.rank;
+            var address = e.features[0].properties.address;
+            var phone = e.features[0].properties.phone;
+            var incharge = e.features[0].properties.incharge;
             var hotel_id = e.features[0].id;
-            console.log('hotel_name')
-            console.log(hotel_name)
-            console.log('rank')
-            console.log(rank)
-            console.log('hotel_id')
-            console.log(hotel_id)
-
 
             // Check whether features exist
             if (e.features.length > 0) {
               // Display the magnitude, location, and time in the sidebar
               hotel_nameDisplay.textContent = hotel_name;
               rankDisplay.textContent = rank;
+              addressDisplay.textContent = address;
+              phoneDisplay.textContent = phone;
+              inchargeDisplay.textContent = incharge;
 
               // If quakeID for the hovered feature is not null,
               // use removeFeatureState to reset to the default behavior
