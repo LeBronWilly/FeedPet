@@ -7,6 +7,26 @@ $("#chose_district").change(function () {
   changeMap(value);
 });
 
+// $("#show_detail").change(function () {
+//   var value = $("#show_detail").val();
+//   changedetail(value);
+// });
+
+
+// function changedetail(district) {
+//   $.ajax({
+//     url: "/hotel/hotel_detail/" + hotelid,
+//     type: "GET",
+//     dataType: "json",
+//     success: function (data) {
+//       if (data) {
+//         var detail = data
+//       }
+//     },
+//     error: function (err) { }
+//   });
+// }
+
 var hotel_nameDisplay = document.getElementById("hotel_name");
 var rankDisplay = document.getElementById("rank");
 
@@ -26,8 +46,8 @@ function changeMap(district) {
     dataType: "json",
     success: function (data) {
       if (data) {
-        console.log("changeMap");
-        console.log(data);
+        // console.log("changeMap");
+        // console.log(data);
         var geo_add = data;
 
         var map = new mapboxgl.Map({
@@ -43,8 +63,8 @@ function changeMap(district) {
         }
 
         map.on("load", function () {
-          console.log("onload");
-          console.log(typeof geo_add);
+          // console.log("onload");
+          // console.log(typeof geo_add);
 
           map.addSource("national-park", {
             type: "geojson",
@@ -74,10 +94,14 @@ function changeMap(district) {
           map.on('mouseenter', 'park-volcanoes', (e) => {
             var hotel_name = e.features[0].properties.full_name;
             var rank = e.features[0].properties.rank;
+            var hotel_id = e.features[0].id;
             console.log('hotel_name')
             console.log(hotel_name)
             console.log('rank')
             console.log(rank)
+            console.log('hotel_id')
+            console.log(hotel_id)
+
 
             // Check whether features exist
             if (e.features.length > 0) {
@@ -93,6 +117,7 @@ function changeMap(district) {
                   id: quakeID
                 });
               }
+              $('#show_detail').attr("onclick", "location.href='/hotel/hotel_detail/" + hotel_id + "'")
 
               quakeID = e.features[0].id;
 

@@ -9,7 +9,7 @@ urlpatterns = [
     path('', views.hotel, name='hotel'),
 
     # Hotel detail page
-    path('hotel_detail/<int:postalcode>',
+    path('hotel_detail/<int:hotel_id>/',
          views.hoteldetail, name='hotel_detail'),
 
     # Favorite hotel page

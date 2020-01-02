@@ -8,6 +8,7 @@ import csv
 import collections
 import geocoder
 from geojson import Point, Feature, FeatureCollection
+from pathlib import Path
 
 
 def hoteldeta(request):
@@ -23,7 +24,7 @@ def hoteldeta(request):
 
 
 def hotel(request):
-    district = Hotel.objects.all().values('district').distinct()
+    hotels = Hotel.objects.all().values('district').distinct()
     coordinate = Hotel.objects.all().values('lat', 'lng')
     if request.method == 'POST':
         chose_district = request.POST.get('chose_district')
@@ -34,35 +35,26 @@ def hotel(request):
 
 
 def map(request, district):
-    print('district')
-    print(district)
     add_list = []
     if request.method == 'GET' and request.is_ajax():
         try:
             results = Hotel.objects.filter(district=district)
-            print("results")
+            print('results')
             print(results)
             for result in results:
-                print("111111111")
-                print((result.id))
-                print("2222222222")
-                print(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                              id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
+                print('result.id')
+                print(result.id)
                 add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
-                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank}))
+                                        id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank, "id": int(result.id)}))
             geo_add = FeatureCollection(add_list)
-            print("33333333")
-            print(geo_add)
+            # print(geo_add)
         except Exception as e:
             print(e)
     return JsonResponse(geo_add)
 
 
-def hoteldetail(request, postalcode):
-    hotel = Hotel.objects.get(postalcode=postalcode)
-    context = {
-        'hotel_list': hotel.postalcode
-    }
+def hoteldetail(request, hotel_id):
+    hotel = Hotel.objects.get(id=hotel_id)
     return render(request, 'hotel/hotel_detail.html', locals())
 
 
