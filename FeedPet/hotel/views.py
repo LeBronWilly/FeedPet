@@ -3,6 +3,7 @@ from itertools import islice
 from .models import Hotel
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
+from pathlib import Path
 import csv
 import collections
 import geocoder
@@ -10,7 +11,9 @@ from geojson import Point, Feature, FeatureCollection
 
 
 def hoteldeta(request):
-    with open('/Users/liumeihui/Documents/GitHub/FeedPet/FeedPet/hotel/hotel.csv', encoding="utf-8", newline="") as csvfile:
+    base_path = Path(__file__).parent
+    file_path = (base_path / "hotel.csv").resolve()
+    with open(file_path, encoding="utf-8", newline="") as csvfile:
         rows = list(csv.reader(csvfile))
         for row in islice(rows, 1, None):
             row = Hotel(hname=row[0], rank=row[1], full_name=row[2], incharge=row[3],

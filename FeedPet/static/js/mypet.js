@@ -56,24 +56,21 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-function del_record(record_id,pet_id){
-    // var recorddata={
-    //     "recordid":id
-    // };
+function del_record(record_id) {
     $.ajax({
-            type:'GET',
-            url:'/del_record/'+record_id,
-            // data:recorddata,
-            dataType : 'json',
-            async: false, //啟用同步請求
+        type: 'GET',
+        url: '/del_record/' + record_id,
+        // data:recorddata,
+        dataType: 'json',
+        async: false, //啟用同步請求
 
-            success:function(data){
-                alert(data.success),
-                location.replace(location.href)
-
-
-
-    }
+        success: function (data) {
+            //點心條
+            ts('.snackbar').snackbar({
+                content: '成功刪除'
+            });
+            location.replace(location.href)
+        }
     })
 }
 
