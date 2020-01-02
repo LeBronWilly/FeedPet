@@ -23,7 +23,7 @@ def hoteldeta(request):
 
 
 def hotel(request):
-    district = Hotel.objects.all().values('district').distinct()
+    hotels = Hotel.objects.all().values('district').distinct()
     coordinate = Hotel.objects.all().values('lat', 'lng')
     if request.method == 'POST':
         chose_district = request.POST.get('chose_district')
@@ -38,8 +38,11 @@ def map(request, district):
     if request.method == 'GET' and request.is_ajax():
         try:
             results = Hotel.objects.filter(district=district)
-            # print(results)
+            print('results')
+            print(results)
             for result in results:
+                print('result.id')
+                print(result.id)
                 add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
                                         id=int(result.id), properties={"full_name": result.full_name, "rank": result.rank, "id": int(result.id)}))
             geo_add = FeatureCollection(add_list)
@@ -51,7 +54,6 @@ def map(request, district):
 
 def hoteldetail(request, hotel_id):
     hotel = Hotel.objects.get(id=hotel_id)
-    # detail = Hotel.objects.all().values()
     return render(request, 'hotel/hotel_detail.html', locals())
 
 

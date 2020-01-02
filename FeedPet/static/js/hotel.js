@@ -7,6 +7,26 @@ $("#chose_district").change(function () {
   changeMap(value);
 });
 
+// $("#show_detail").change(function () {
+//   var value = $("#show_detail").val();
+//   changedetail(value);
+// });
+
+
+// function changedetail(district) {
+//   $.ajax({
+//     url: "/hotel/hotel_detail/" + hotelid,
+//     type: "GET",
+//     dataType: "json",
+//     success: function (data) {
+//       if (data) {
+//         var detail = data
+//       }
+//     },
+//     error: function (err) { }
+//   });
+// }
+
 var hotel_nameDisplay = document.getElementById("hotel_name");
 var rankDisplay = document.getElementById("rank");
 
@@ -75,12 +95,13 @@ function changeMap(district) {
             var hotel_name = e.features[0].properties.full_name;
             var rank = e.features[0].properties.rank;
             var hotel_id = e.features[0].id;
+            console.log('hotel_name')
+            console.log(hotel_name)
+            console.log('rank')
+            console.log(rank)
             console.log('hotel_id')
             console.log(hotel_id)
-            // console.log('hotel_name')
-            // console.log(hotel_name)
-            // console.log('rank')
-            // console.log(rank)
+
 
             // Check whether features exist
             if (e.features.length > 0) {
