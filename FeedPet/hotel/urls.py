@@ -8,19 +8,22 @@ urlpatterns = [
     # Hotel page
     path('', views.hotel, name='hotel'),
 
+    # import hotel data
+    path('hoteldata', views.hoteldeta, name='hoteldata'),
+
     # Hotel detail page
     path('hotel_detail/<int:hotel_id>/',
          views.hoteldetail, name='hotel_detail'),
 
-    # Favorite hotel page
-    path('hotel_favorite', views.hotel_favorite, name='hotel_favorite'),
-
-    # hoteldata
-    path('hoteldata', views.hoteldeta, name='hoteldata'),
-
-    # map
+    # [api] map get hotel district
     path('map/<str:district>/', views.map, name='map'),
 
-    # shoe_detail
-    # path('show_detail/<str:district>/', views.show_detail, name='show_detail'),
+    # [api] add favorite hotel
+    path('add_hotel_favor/<int:master_id>/<int:hotel_id>/', views.add_hotel_favor, name='add_hotel_favor'),
+
+    # [api] del favorite hotel
+    path('del_hotel_favor/<int:master_id>/<int:hotel_id>/', views.del_hotel_favor, name='del_hotel_favor'),
+
+    # my favorite hotels
+    path('my_favor_hotel/', views.my_favor_hotel,name='my_favor_hotel'),
 ]

@@ -6,7 +6,7 @@
 {% endblock header %}
 
 {% block content %}
-<div class="ts grid">
+<!-- <div class="ts grid">
 
     <div class="three wide column">
         <form class="ts form" method="post">
@@ -25,12 +25,50 @@
                 <br>
                 <div><strong style="font-size:15px;">評鑑:</strong> <span id='rank'></span></div>
                 <br>
-                <botton id="show_detail" style="color: red;font-size:15px;">顯示細節
-                </botton>
+                <botton id="show_detail" style="color: red;font-size:15px;">顯示細節</botton>
             </div>
         </form>
     </div>
 
-    <div id='map' style='width: 700px; height: 500px;'></div>
+</div> -->
+
+<div class="ts relaxed grid">
+    <div class="four wide column">
+        <table class="ts very basic table">
+            <tbody>
+                <tr>
+                    <td class="five wide">選擇地區</td>
+                    <td class="ten wide">
+                        <select class="ts basic dropdown" id="chose_district" name="chose_district">
+                            <option value="" disabled selected>選擇地區</option>
+                            {% for hotel in hotels %}
+                            <option>{{hotel.district}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>旅館名稱</td>
+                    <td><span id='hotel_name'></span></td>
+                </tr>
+                <tr>
+                    <td>評鑑</td>
+                    <td><span id='rank'></span></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">
+                        <button class="ts positive button" id="show_detail">
+                            顯示細節
+                        </button>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="twelve wide column">
+        <div id='map' style='width: 700px; height: 500px;'></div>
+    </div>
 </div>
 {% endblock content %}

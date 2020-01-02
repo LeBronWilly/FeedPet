@@ -140,6 +140,7 @@ def mypet(request):
 # function：add_pet
 # author：Zachary Zhuo
 # date：2019/12/1
+@login_required
 def add_pet(request):
     if request.method != 'POST':
         form = PetForm()
@@ -268,6 +269,7 @@ def calculate_age(born):
 # author：Zachary Zhuo
 # date：2019/12/
 # description：
+@login_required
 def feeding_record(request,pet_id):
 
     username = request.user.username
@@ -294,8 +296,8 @@ def feeding_record(request,pet_id):
     return render(request, 'pet/feeding_record.html', locals())
 
 
-
 #刪記錄
+@login_required
 def del_record(request,record_id):
     # delete = Record.objects.get(id=record_id)
     try:

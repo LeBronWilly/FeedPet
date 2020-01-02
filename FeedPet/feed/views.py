@@ -36,6 +36,7 @@ def feed(request):
 # author：Zachary Zhuo
 # date：2019/12/4
 # description：在後端建立ＡＰＩ，回傳JSON format的資料給前端
+@login_required
 def getPet(request, petId):
     if request.method == 'GET' and request.is_ajax():
         try:
@@ -243,6 +244,7 @@ def feed_recommendation(request):
 # author：Zachary Zhuo
 # date：2019/12/22
 # description：列出我的最愛飼料
+@login_required
 def my_favor_feed(request):
     username = request.user.username
     try:

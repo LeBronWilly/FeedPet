@@ -1,6 +1,6 @@
 // js/feed.js
 
-// feed list table sort
+// favorite feed list table sort
 ts('#my_fav_feed_table').tablesort();
 
 // feed tab
@@ -428,7 +428,7 @@ function del_feed_favor_detail(master_id, feed_id) {
 }
 
 // [my_favorite_feed]刪除feed favorite
-function del_my_favor(master_id, feed_id) {
+function del_my_favor_feed(master_id, feed_id) {
     var result = del_feed_favor(master_id, feed_id)
     if (result) {
         if (result.status == true) {
