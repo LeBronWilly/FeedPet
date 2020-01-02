@@ -1,6 +1,6 @@
 # master/views.py
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -8,7 +8,7 @@ from .forms import MasterCreationForm, MasterChangeForm, PetForm
 from django.contrib.auth.decorators import login_required
 
 from .models import Master, Pet
-from feed.models import Feed
+from feed.models import Feed ,Record
 
 import datetime
 import time
@@ -268,48 +268,48 @@ def calculate_age(born):
 # author：Zachary Zhuo
 # date：2019/12/
 # description：
-def feeding_record(request):
+def feeding_record(request,pet_id):
+
     username = request.user.username
+    records = Record.objects.filter(pet_id = pet_id)
+    feeds = Feed.objects.all()
+
     try:
         master = Master.objects.get(username=username)
-        pets = Pet.objects.filter(master=master)
+        pets = Pet.objects.get(id=pet_id)
         feeds = Feed.objects.all()
         today = datetime.date.today()
+
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
 
     if request.method == 'POST':
+
+
+
         feed_id = request.POST.get('feed_id')
-        feed_time = request.POST.get('feed_time')
-        feed_amount = request.POST.get('feed_amount')
-        feed_water = request.POST.get('feed_water')
 
-        feeds.pet = feed_id
-        feeds.time = feed_time
-        feeds.amount = feed_amount
-        feeds.water = feed_water
-        feeds.save()
+        feedid = Feed.objects.get(id=feed_id)
 
-        # print(feed_id)
-        # print(feed_time)
-        # print(feed_amount)
-        # print(feed_water)
+        time = request.POST.get('feed_time')
+        amount = request.POST.get('feed_amount')
+        water = request.POST.get('feed_water')
 
-        # try:
-        #     pet.petName = petName
-        #     pet.weight = weight
-        #     pet.ligation = ligation
-        #     pet.petGender = petGender
-        #     pet.birthday = birthday
-        #     pet.petType = petType
-        #     if image is not None:
-        #         pet.image = image
-        #     pet.save()
-        # except Exception as e:
-        #     print(e)
-        #     messages.add_message(request, messages.ERROR, '請確認輸入內容')
-        #     return HttpResponseRedirect(reverse('master:mypet/update_pet_detail', args=[pet_id]))
 
-        # messages.add_message(request, messages.SUCCESS, '成功修改')
-        # return HttpResponseRedirect(reverse('master:mypet/pet_detail', args=[pet_id]))
+        record = Record.objects.create(pet=pets, feed=feedid, time=time, amount=amount, water=water)
+
     return render(request, 'pet/feeding_record.html', locals())
+
+
+
+#刪記錄
+def del_record(request,record_id,pet_id):
+    # delete = Record.objects.get(id=record_id)
+    try:
+        record = Record.objects.get(id=record_id)
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+    if record:
+        record.delete()
+
+        return JsonResponse({"success": '成功刪除'})

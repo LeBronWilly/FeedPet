@@ -7,21 +7,22 @@
 
 {% block content %}
 
-<div id="first" class="ts top attached tabbed menu">
-    {% for pet in pets %}
-    <a class="{% if forloop.first %}active {% endif %}item" data-tab="{{ pet.petName }}">{{ pet.petName }}</a>
-    {% endfor %}
-</div>
+{#<div id="first" class="ts top attached tabbed menu">#}
+{#    {% for pet in pets %}#}
+{#    <a class="{% if forloop.first %}active{% endif %} item"data-tab="{{ pet.petName }}">{{ pet.petName }}</ >#}
+{#    {% endfor %}#}
+{#</div>#}
 
-{% for pet in pets %}
-<div data-tab="{{ pet.petName }}" class="{% if forloop.first %}active {% endif %}ts bottom attached tab segment">
-    <p>{{ pet.petName }}</p>
+{#{% for pet in pets %}#}
+{#<div data-tab="{{ pet.petName }}" class="{% if forloop.first %}active {% endif %}ts bottom attached tab segment">#}
+    <p>{{ pets.petName }}</p>
     <div class="ts relaxed grid">
+
         <table class="ts table">
             <thead>
                 <tr>
                     <th class="one wide">編號</th>
-                    <th class="two wide">寵物</th>
+                    <th class="two wide">寵物編號</th>
                     <th class="four wide">飼料名稱</th>
                     <th class="three wide">餵食時間</th>
                     <th class="two wide">餵食量(g)</th>
@@ -30,20 +31,20 @@
                 </tr>
             </thead>
             <tbody>
-                <form method="post" action="{% url 'master:mypet/feeding_record' %}">
+
+                <form method="post" action="/mypet/feeding_record/{{ pets.id }}">
                     <tr>
                         <td>-</td>
                         <td>
                             <div class="ts fluid input">
-                                <input type="text" name="pet_id" required="required"
-                                    value="{{ pet.id }}" disabled/>
+                                <input required type="hidden" name="pet_id" value="{{ pet_id }}" />
                             </div>
                         </td>
                         <td>
-                            <select required class="ts fluid basic dropdown" name="feed_id">
-                                <option value="">選擇飼料</option>
+                            <select required class="ts fluid basic dropdown" name = "feed_id">
+                                <!-- <option value="">選擇飼料</option> -->
                                 {% for feed in feeds %}
-                                <option value="{{ feed.id }}">{{ feed.fname }}</option>
+                                <option value={{ feed.id }}>{{ feed.fname }}</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -67,16 +68,43 @@
                             <!-- <button class="ts icon button negative">
                             <i class="delete icon"></i>
                         </button> -->
-                            <button class="ts icon button positive">
+{#                            <form action = 'actionUrl' method ='GET'>#}
+                            <button class="ts icon button positive" >
+
                                 <i class="add icon"></i>
+                                <input type="submit" value = "" >
+{#                                <input type="hidden" name="next" value="{% url 'master:mypet/feeding_record' pet_id %}" />#}
+{#                                <a onclick="location.href='/mypet/feeding_record/1'"></a>#}
                             </button>
+{#                            </form>#}
                         </td>
                     </tr>
                 </form>
+            {% for feed_record in records %}
+                <tr>
+                <td>{{ feed_record.id }}</td>
+                <td>{{ pets.id }}</td>
+                <td>{{feed_record.feed.fname}}</td>
+                <td>{{ feed_record.time }}</td>
+                <td>{{ feed_record.amount}}</td>
+                <td>{{ feed_record.water }}</td>
+                <td>
+
+                        <button class="ts icon button negative" onclick = "del_record('{{ feed_record.id }}/{{ pets.id }}')"    >
+                            <i class="minus icon"></i>
+{#                            <input type="submit" value = "" >#}
+                        </button>
+
+
+
+                </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
-</div>
-{% endfor %}
+{#</div>#}
+
+{#{% endfor %}#}
 
 {% endblock content %}
