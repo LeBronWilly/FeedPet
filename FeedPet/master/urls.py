@@ -41,6 +41,10 @@ urlpatterns = [
     # Delete pet
     path('mypet/del_pet/<int:pet_id>/', views.del_pet, name='mypet/del_pet'),
 
+
     # feed record
-    path('mypet/feeding_record/', views.feeding_record, name='mypet/feeding_record'),
+    path('mypet/feeding_record/<int:pet_id>', views.feeding_record, name='mypet/feeding_record'),
+
+    #remove record
+    path('del_record/<int:record_id>/<int:pet_id>', views.del_record, name='del_record'),
 ]
