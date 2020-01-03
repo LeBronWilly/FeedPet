@@ -23,7 +23,7 @@
         {% for favor_feed in favor_feeds %}
         <tr>
             <td>
-                <button class="ts circular icon secondary button" id="my_fav_btn_{{feed.id}}" onclick="del_my_favor('{{user.id}}', '{{favor_feed.feed.id}}')">
+                <button class="ts circular icon secondary button" onclick="del_my_favor_feed('{{user.id}}', '{{favor_feed.feed.id}}')">
                     <i class="delete icon"></i>
                 </button>
             </td>

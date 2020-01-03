@@ -7,41 +7,58 @@
 
 {% block content %}
 
-<table class="ts celled table">
-    <thead>
-        <tr>
-            <th colspan="3">
-                旅館資料
-            </th>
-        </tr>
-    </thead>
+<table class="ts very basic table">
     <tbody>
-        <form action="/hoteldetail/" method="get">
-            <tr>
-                <td>負責人</td>
-                <td>{{hotel.incharge}}</td>
-            </tr>
-            <tr>
-                <td>連絡電話</td>
-                <td>{{hotel.phone}}</td>
-            </tr>
-            <tr>
-                <td>地址</td>
-                <td>{{hotel.address}}</td>
-            </tr>
+        <tr>
+            <td class="three wide">名稱</td>
+            <td class="thirty wide">{{ hotel.full_name }}</td>
+        </tr>
+        <tr>
+            <td>字號</td>
+            <td>{{ hotel.hname }}</td>
+        </tr>
+        <tr>
+            <td>評鑑</td>
+            <td>{{ hotel.rank }}</td>
+        </tr>
+        <tr>
+            <td>地區</td>
+            <td>{{ hotel.district }}</td>
+        </tr>
+        <tr>
+            <td>地址</td>
+            <td>{{ hotel.address }}</td>
+        </tr>
+        <tr>
+            <td>郵遞區號</td>
+            <td>{{ hotel.postalcode }}</td>
+        </tr>
+        <tr>
+            <td>負責人</td>
+            <td>{{ hotel.incharge }}</td>
+        </tr>
+        <tr>
+            <td>連絡電話</td>
+            <td>{{ hotel.phone }}</td>
+        </tr>
     </tbody>
-    </form>
     <tfoot>
         <tr>
             <th colspan="2">
-                <div class="ts right floated small primary labeled icon button">
+                {% if not favor_hotel %}
+                <button class="ts right floated positive labeled icon button" id="detail_fav_btn_{{hotel.id}}" onclick="add_hotel_favor_detail('{{user.id}}', '{{hotel.id}}')">
+                    加入最愛
                     <i class="heart icon"></i>
-                    <a href="{% url 'hotel:hotel_favorite' %}">加到我的最愛</a>
-                </div>
+                </button>
+                {% else %}
+                <button class="ts right floated negative labeled icon button" id="detail_fav_btn_{{hotel.id}}" onclick="del_hotel_favor_detail('{{user.id}}', '{{hotel.id}}')">
+                    移除最愛
+                    <i class="heart icon"></i>
+                </button>
+                {% endif %}
             </th>
         </tr>
     </tfoot>
-    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 </table>
 
 {% endblock content %}

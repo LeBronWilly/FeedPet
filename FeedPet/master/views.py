@@ -140,6 +140,7 @@ def mypet(request):
 # function：add_pet
 # author：Zachary Zhuo
 # date：2019/12/1
+@login_required
 def add_pet(request):
     if request.method != 'POST':
         form = PetForm()
@@ -268,6 +269,7 @@ def calculate_age(born):
 # author：Zachary Zhuo
 # date：2019/12/
 # description：
+@login_required
 def feeding_record(request,pet_id):
 
     username = request.user.username
@@ -284,26 +286,19 @@ def feeding_record(request,pet_id):
         messages.add_message(request, messages.WARNING, e)
 
     if request.method == 'POST':
-
-
-
         feed_id = request.POST.get('feed_id')
-
         feedid = Feed.objects.get(id=feed_id)
-
         time = request.POST.get('feed_time')
         amount = request.POST.get('feed_amount')
         water = request.POST.get('feed_water')
-
-
         record = Record.objects.create(pet=pets, feed=feedid, time=time, amount=amount, water=water)
 
     return render(request, 'pet/feeding_record.html', locals())
 
 
-
 #刪記錄
-def del_record(request,record_id,pet_id):
+@login_required
+def del_record(request,record_id):
     # delete = Record.objects.get(id=record_id)
     try:
         record = Record.objects.get(id=record_id)
@@ -311,5 +306,4 @@ def del_record(request,record_id,pet_id):
         messages.add_message(request, messages.WARNING, e)
     if record:
         record.delete()
-
         return JsonResponse({"success": '成功刪除'})

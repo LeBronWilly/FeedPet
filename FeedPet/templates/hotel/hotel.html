@@ -6,63 +6,44 @@
 {% endblock header %}
 
 {% block content %}
-<div class="ts grid">
 
-    <div class="three wide column">
-        <form class="ts form" method="post">
-            <div class="field">
-
-                <label>選擇地區</label>
-                <select id="chose_district" name="chose_district">
-                    <option value="" disabled selected>選擇地區</option>
-                    {% for hotel in hotels %}
-                    <option>{{hotel.district}}</option>
-                    {% endfor %}
-                </select>
-                <div><strong style="font-size:15px;">旅館名稱:</strong> <span id='hotel_name'></span></div>
-                <div><strong style="font-size:15px;">評鑑:</strong> <span id='hotel_name'></span></div>
-                <button id='show_detail'><a href="{% url 'hotel:hoteldetail' %}"></a>顯示細節</button>
-            </div>
-        </form>
+<div class="ts relaxed grid">
+    <div class="four wide column">
+        <table class="ts very basic table">
+            <tbody>
+                <tr>
+                    <td class="five wide">選擇地區</td>
+                    <td class="ten wide">
+                        <select class="ts basic dropdown" id="chose_district" name="chose_district">
+                            <option value="" disabled selected>選擇地區</option>
+                            {% for hotel in hotels %}
+                            <option>{{hotel.district}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>旅館名稱</td>
+                    <td><span id='hotel_name'></span></td>
+                </tr>
+                <tr>
+                    <td>評鑑</td>
+                    <td><span id='rank'></span></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">
+                        <button class="ts positive button" id="show_detail">
+                            顯示細節
+                        </button>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
-
-    <div id='map' style='width: 700px; height: 500px;'></div>
-    <table class="ts celled table" style=width:200px;top:-12px;left:890px;position:absolute;>
-        <thead>
-            <tr>
-                <th colspan="3">
-                    旅館資料
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong style="font-size:15px;">旅館名稱:</strong> <span id='hotel_name'></span></td>
-            </tr>
-            <tr>
-                <td align="center"><strong style="font-size:15px;">評鑑:</strong> <span id='rank'></span></td>
-            </tr>
-            <tr>
-                <td align="center"><strong style="font-size:15px;">負責人:</strong> <span id='incharge'></span></td>
-            </tr>
-            <tr>
-                <td align="center"><strong style="font-size:15px;">電話:</strong> <span id='phone'></span></td>
-            </tr>
-            <tr>
-                <td align="center"><strong style="font-size:15px;">地址:</strong> <span id='address'></span></td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="2">
-                    <div class="ts right floated small primary labeled icon button">
-                        <i class="heart icon"></i>
-                        <a href="{% url 'hotel:hotel_favorite' %}" align="center">加到我的最愛</a>
-                    </div>
-                </th>
-            </tr>
-        </tfoot>
-        <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-    </table>
+    <div class="twelve wide column">
+        <div id='map' style='width: 700px; height: 500px;'></div>
+    </div>
 </div>
 {% endblock content %}

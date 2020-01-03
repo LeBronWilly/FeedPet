@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+<h2>最愛旅館</h2>
+{% endblock header %}
+
+{% block content %}
+
+<table class="ts very basic sortable table" id="my_fav_hotel_table">
+    <thead>
+        <tr>
+            <th class="one wide">刪除</th>
+            <th class="one wide">編號</th>
+            <th class="four wide">名稱</th>
+            <th class="two wide">評鑑</th>
+            <th class="three wide">地區</th>
+            <th class="four wide">地址</th>
+            <th class="one wide">詳細</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for favor_hotel in favor_hotels %}
+        <tr>
+            <td>
+                <button class="ts circular icon secondary button" onclick="del_my_favor_hotel('{{user.id}}', '{{favor_hotel.hotel.id}}')">
+                    <i class="delete icon"></i>
+                </button>
+            </td>
+            <td> {{ favor_hotel.hotel.id }}</td>
+            <td>{{ favor_hotel.hotel.full_name }}</td>
+            <td>{{ favor_hotel.hotel.rank }}</td>
+            <td>{{ favor_hotel.hotel.district }}</td>
+            <td>{{ favor_hotel.hotel.address }}</td>
+            <td><a href="{% url 'hotel:hotel_detail' favor_hotel.hotel.id %}">more</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

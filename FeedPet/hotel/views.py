@@ -1,8 +1,14 @@
 from django.shortcuts import render
-from itertools import islice
-from .models import Hotel
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+from .models import Hotel, Favor_hotel
+from master.models import Master
+
+from itertools import islice
+import datetime
+from pathlib import Path
 import csv
 import collections
 import geocoder
@@ -53,9 +59,83 @@ def map(request, district):
 
 
 def hoteldetail(request, hotel_id):
-    hotel = Hotel.objects.get(id=hotel_id)
+    username = request.user.username
+    try:
+        master = Master.objects.get(username=username)
+        hotel = Hotel.objects.get(id=hotel_id)
+        favor_hotel = Favor_hotel.objects.filter(master=master, hotel=hotel)
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
     return render(request, 'hotel/hotel_detail.html', locals())
 
 
-def hotel_favorite(request):
-    return render(request, 'hotel/hotel_favorite.html', locals())
+# function：add_hotel_favor
+# author：Zachary Zhuo
+# date：2020/1/3
+# description：加入我的最愛旅館
+@login_required
+def add_hotel_favor(request, master_id, hotel_id):
+    if request.method == 'GET' and request.is_ajax():
+        try:
+            master = Master.objects.get(id=master_id)
+            hotel = Hotel.objects.get(id=hotel_id)
+            if master and hotel is not None:
+                if not Favor_hotel.objects.filter(master=master, hotel=hotel):
+                    favor_hotel = Favor_hotel.objects.create(
+                        master=master, hotel=hotel, created_on=datetime.date.today())
+                    favor_hotel.save()
+                    favor_hotel_json = {
+                        'status': True,
+                        'masterId': master_id,
+                        'hotelId': hotel_id,
+                    }
+                    return JsonResponse(favor_hotel_json)
+        except Exception as e:
+            print(e)
+    favor_hotel_json = {
+        'status': False
+    }
+    return JsonResponse(favor_hotel_json)
+
+
+# function：del_hotel_favor
+# author：Zachary Zhuo
+# date：2020/1/3
+# description：刪除我的最愛旅館
+@login_required
+def del_hotel_favor(request, master_id, hotel_id):
+    if request.method == 'GET' and request.is_ajax():
+        try:
+            master = Master.objects.get(id=master_id)
+            hotel = Hotel.objects.get(id=hotel_id)
+            if master and hotel is not None:
+                favor_hotel = Favor_hotel.objects.filter(master=master, hotel=hotel)
+                if favor_hotel:
+                    favor_hotel.delete()
+                    favor_hotel_json = {
+                        'status': True,
+                        'masterId': master_id,
+                        'hotelId': hotel_id,
+                    }
+                    return JsonResponse(favor_hotel_json)
+        except Exception as e:
+            print(e)
+    favor_hotel_json = {
+        'status': False
+    }
+    return JsonResponse(favor_hotel_json)
+
+
+# function：my_favor_feed
+# author：Zachary Zhuo
+# date：2020/1/2
+# description：列出我的最愛旅館
+@login_required
+def my_favor_hotel(request):
+    username = request.user.username
+    try:
+        master = Master.objects.get(username=username)
+        favor_hotels = Favor_hotel.objects.filter(master=master)
+    except Exception as e:
+        messages.add_message(request, messages.WARNING, e)
+    return render(request, 'hotel/my_favor_hotel.html', locals())
