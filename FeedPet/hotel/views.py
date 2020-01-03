@@ -2,10 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from .models import Hotel, Favor_hotel
 from master.models import Master
-
 from itertools import islice
 import datetime
 from pathlib import Path
@@ -45,10 +43,11 @@ def map(request, district):
         try:
             results = Hotel.objects.filter(district=district)
             print('results')
-            print(results)
+            # print(results)
             for result in results:
                 print('result.id')
                 print(result.id)
+                print(result.full_name, result.address)
                 add_list.append(Feature(geometry=Point((float(result.lng), float(result.lat))),
                                         id=int(result.id), properties={"full_name": result.full_name, "address": result.address, "phone": result.phone, "incharge": result.incharge, "rank": result.rank, "id": int(result.id)}))
             geo_add = FeatureCollection(add_list)
@@ -64,6 +63,8 @@ def hoteldetail(request, hotel_id):
         master = Master.objects.get(username=username)
         hotel = Hotel.objects.get(id=hotel_id)
         favor_hotel = Favor_hotel.objects.filter(master=master, hotel=hotel)
+        print("hotel_id")
+        print(hotel)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'hotel/hotel_detail.html', locals())
@@ -109,7 +110,8 @@ def del_hotel_favor(request, master_id, hotel_id):
             master = Master.objects.get(id=master_id)
             hotel = Hotel.objects.get(id=hotel_id)
             if master and hotel is not None:
-                favor_hotel = Favor_hotel.objects.filter(master=master, hotel=hotel)
+                favor_hotel = Favor_hotel.objects.filter(
+                    master=master, hotel=hotel)
                 if favor_hotel:
                     favor_hotel.delete()
                     favor_hotel_json = {
