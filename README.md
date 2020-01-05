@@ -1,7 +1,10 @@
 # FeedPet
 ##環境
+<br>
 Python 3.7.4
+<br>
 Django 2.2.7
+<br>
 
 ##安裝
 ```Python
