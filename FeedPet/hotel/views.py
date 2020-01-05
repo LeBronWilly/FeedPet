@@ -60,11 +60,10 @@ def map(request, district):
 def hoteldetail(request, hotel_id):
     username = request.user.username
     try:
-        master = Master.objects.get(username=username)
         hotel = Hotel.objects.get(id=hotel_id)
-        favor_hotel = Favor_hotel.objects.filter(master=master, hotel=hotel)
-        print("hotel_id")
-        print(hotel)
+        if username:
+            master = Master.objects.get(username=username)
+            favor_hotel = Favor_hotel.objects.filter(master=master, hotel=hotel)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'hotel/hotel_detail.html', locals())

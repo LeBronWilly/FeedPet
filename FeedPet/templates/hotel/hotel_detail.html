@@ -45,6 +45,7 @@
     <tfoot>
         <tr>
             <th colspan="2">
+                {% if user.is_authenticated %}
                 {% if not favor_hotel %}
                 <button class="ts right floated positive labeled icon button" id="detail_fav_btn_{{hotel.id}}" onclick="add_hotel_favor_detail('{{user.id}}', '{{hotel.id}}')">
                     加入最愛
@@ -55,6 +56,7 @@
                     移除最愛
                     <i class="heart icon"></i>
                 </button>
+                {% endif %}
                 {% endif %}
             </th>
         </tr>
