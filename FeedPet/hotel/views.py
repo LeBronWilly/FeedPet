@@ -1,9 +1,13 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect, Http404
+from django.urls import reverse
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from .models import Hotel, Favor_hotel
 from master.models import Master
+
 from itertools import islice
 import datetime
 from pathlib import Path
@@ -14,16 +18,22 @@ from geojson import Point, Feature, FeatureCollection
 from pathlib import Path
 
 
-def hoteldeta(request):
+def import_hotel(request):
     base_path = Path(__file__).parent
     file_path = (base_path / "hotel.csv").resolve()
-    with open(file_path, encoding="utf-8", newline="") as csvfile:
-        rows = list(csv.reader(csvfile))
-        for row in islice(rows, 1, None):
-            row = Hotel(hname=row[0], rank=row[1], full_name=row[2], incharge=row[3],
-                        phone=row[4], postalcode=row[5], district=row[6], address=row[7], lng=row[8], lat=row[9])
-            row.save()
-    return render(request, 'hotel/hotel.html', locals())
+    try:
+        with open(file_path, encoding="utf-8", newline="") as csvfile:
+            rows = list(csv.reader(csvfile))
+            for row in islice(rows, 1, None):
+                is_hotel = Hotel.objects.filter(hname=row[0])
+                if not is_hotel:
+                    row = Hotel(hname=row[0], rank=row[1], full_name=row[2], incharge=row[3],
+                                phone=row[4], postalcode=row[5], district=row[6], address=row[7], lng=row[8], lat=row[9])
+                    row.save()
+            messages.add_message(request, messages.SUCCESS, '成功更新')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, e)
+    return HttpResponseRedirect(reverse('hotel:hotel'))
 
 
 def hotel(request):

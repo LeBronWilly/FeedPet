@@ -9,7 +9,7 @@ urlpatterns = [
     path('', views.hotel, name='hotel'),
 
     # import hotel data
-    path('hoteldata', views.hoteldeta, name='hoteldata'),
+    path('import_hotel/', views.import_hotel, name='import_hotel'),
 
     # Hotel detail page
     path('hotel_detail/<int:hotel_id>/',

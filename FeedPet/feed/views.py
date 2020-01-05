@@ -25,8 +25,9 @@ from feed.serializers import FeedSerializer
 def feed(request):
     username = request.user.username
     try:
-        master = Master.objects.get(username=username)
-        pets = Pet.objects.filter(master=master)
+        if username:
+            master = Master.objects.get(username=username)
+            pets = Pet.objects.filter(master=master)
     except Exception as e:
         messages.add_message(request, messages.WARNING, e)
     return render(request, 'feed/feed.html', locals())
