@@ -36,7 +36,7 @@ python manage.py migrate [appname]
 ```
 
 ##匯入飼料open data
-http://localhost:8000/feed/import_feed
+http://localhost:8000/feed/import_feed (已失效)
 <br>
 ##匯入旅館open data
 http://localhost:8000/hotel/import_hotel
