@@ -1,9 +1,9 @@
 # FeedPet
 ##環境
 <br>
-Python 3.7.4
+Python 3.7.4 (此版本之上可行)
 <br>
-Django 2.2.7
+Django 2.2.7 (限定此版本)
 <br>
 
 ##安裝
@@ -16,15 +16,15 @@ pip install geocoder
 pip install geojson
 ```
 
-##執行
-```Python
-python manage.py runserver
-```
-
 ##有更改model就要執行以下指令
 ```Python
 python manage.py makemigrations
 python manage.py migrate
+```
+
+##執行
+```Python
+python manage.py runserver
 ```
 
 ##偶爾上面的指令沒用時
@@ -35,8 +35,9 @@ python manage.py makemigrations [appname]
 python manage.py migrate [appname]
 ```
 
+
 ##匯入飼料open data
-http://localhost:8000/feed/import_feed (已失效)
+http://localhost:8000/feed/import_feed (目前已失效)
 <br>
 ##匯入旅館open data
 http://localhost:8000/hotel/import_hotel
