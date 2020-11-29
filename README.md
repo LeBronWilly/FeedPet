@@ -37,7 +37,7 @@ python manage.py migrate [appname]
 
 
 ##匯入飼料open data
-http://localhost:8000/feed/import_feed (目前已失效)
+http://localhost:8000/feed/import_feed (已修正完畢，但政府OpenData那裡出了問題，待政府修正)
 <br>
 ##匯入旅館open data
 http://localhost:8000/hotel/import_hotel
