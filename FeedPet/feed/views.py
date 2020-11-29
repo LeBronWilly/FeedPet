@@ -113,7 +113,7 @@ def feed_detail(request, feed_id):
 def import_feed(request):
     try:
         feed_api = requests.get(
-            "http://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3")
+            "https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3")
         feed_json = feed_api.json()
         for feed_obj in feed_json:
             if feed_obj["fname"] == "" or feed_obj["fitem"] == "" or feed_obj["fmat"] == "" or feed_obj["fnut"] == "" or feed_obj["fusage1"] == "" or feed_obj["fusage2"] == "" or feed_obj["fusage3"] == "" or feed_obj["flegalname"] == "":
