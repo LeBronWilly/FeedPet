@@ -23,7 +23,7 @@ python manage.py migrate
 ```
 
 ##執行
-After opening the project, "cd FeedPet" first
+<br>After opening the project, "cd FeedPet" first
 ```Python
 python manage.py runserver
 ```
