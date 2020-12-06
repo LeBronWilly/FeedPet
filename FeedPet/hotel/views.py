@@ -1,3 +1,4 @@
+# hotel/views.py
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
