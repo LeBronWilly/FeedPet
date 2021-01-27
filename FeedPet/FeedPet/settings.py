@@ -57,7 +57,8 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = [
     'feedpet.herokuapp.com/',
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost'
 ]
 
 ROOT_URLCONF = 'FeedPet.urls'
