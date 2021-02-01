@@ -1,15 +1,18 @@
 # FeedPet
-##環境
+##開發環境
 <br>
 Python 3.7.4 (此版本之上可行)
 <br>
 Django 2.2.7 (限定此版本)
+<br>
+SQLite 3.27.2
 <br>
 
 ##安裝
 ```Python
 pip install Pillow
 pip install requests
+pip install django==2.2.7
 pip install django-model-utils
 pip install djangorestframework
 pip install geocoder
@@ -26,7 +29,7 @@ python manage.py migrate
 <br>After opening the project, "cd FeedPet" first
 ```Python
 cd FeedPet
-python manage.py runserver
+python manage.py runserver 8080
 ```
 
 ##偶爾上面的指令沒用時
@@ -39,9 +42,9 @@ python manage.py migrate [appname]
 
 
 ##匯入飼料open data
-http://localhost:8000/feed/import_feed
+http://localhost:8080/feed/import_feed
 (此部分程式碼已修正完畢，但政府OpenData那裡出了問題，待政府修正)
 <br>
 ##匯入旅館open data
-http://localhost:8000/hotel/import_hotel
+http://localhost:8080/hotel/import_hotel
 <br>
