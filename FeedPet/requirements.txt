@@ -37,7 +37,7 @@ odfpy==1.4.1
 openpyxl==3.0.5
 parso==0.7.1
 pickleshare==0.7.5
-Pillow==8.0.1
+Pillow==8.1.1
 prompt-toolkit==3.0.8
 Pygments==2.7.2
 python-dateutil==2.8.1
