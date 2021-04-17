@@ -39,7 +39,7 @@ parso==0.7.1
 pickleshare==0.7.5
 Pillow==8.1.1
 prompt-toolkit==3.0.8
-Pygments==2.7.2
+Pygments==2.7.4
 python-dateutil==2.8.1
 pytz==2020.1
 PyYAML==5.4
