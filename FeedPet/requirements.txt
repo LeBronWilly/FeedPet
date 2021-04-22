@@ -10,7 +10,7 @@ defusedxml==0.6.0
 diff-match-patch==20200713
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==2.2.13
+Django==2.2.20
 django-import-export==2.4.0
 django-model-utils==4.0.0
 django-modelcluster==4.4.1
@@ -37,12 +37,12 @@ odfpy==1.4.1
 openpyxl==3.0.5
 parso==0.7.1
 pickleshare==0.7.5
-Pillow==8.0.1
+Pillow==8.1.1
 prompt-toolkit==3.0.8
-Pygments==2.7.2
+Pygments==2.7.4
 python-dateutil==2.8.1
 pytz==2020.1
-PyYAML==5.3.1
+PyYAML==5.4
 pyzmq==19.0.2
 ratelim==0.1.6
 requests==2.24.0
