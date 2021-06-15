@@ -1,46 +1,37 @@
 <!-- master/profile.html -->
-{% extends "base.html" %}
-
-{% block header %}
+{% extends "base.html" %} {% block header %}
 <h2>個人資料</h2>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 
 <table class="ts very basic table">
-    <tbody>
-        <tr>
-            <td>帳號</td>
-            <td>{{ master.username }}</td>
-        </tr>
-        <tr>
-            <td>姓名</td>
-            <td>{{ master.name }}</td>
-        </tr>
-        <tr>
-            <td>信箱</td>
-            <td>{{ master.email }}</td>
-        </tr>
-        <tr>
-            <td>性別</td>
-            <td>{{ master.gender }}</td>
-        </tr>
-        <tr>
-            <td>毛小孩</td>
-            <td>
-                {% for pet in pets %}
-                    {% if forloop.first %}
-                        {{ pet.petName }}
-                    {% else %}
-                        ,&nbsp;{{ pet.petName }}
-                    {% endif %}
-                {% endfor %}
-            </td>
-        </tr>
-    </tbody>
+  <tbody>
+    <tr>
+      <td>帳號</td>
+      <td>{{ master.username }}</td>
+    </tr>
+    <tr>
+      <td>姓名</td>
+      <td>{{ master.name }}</td>
+    </tr>
+    <tr>
+      <td>信箱</td>
+      <td>{{ master.email }}</td>
+    </tr>
+    <tr>
+      <td>性別</td>
+      <td>{{ master.gender }}</td>
+    </tr>
+    <tr>
+      <td>毛小孩</td>
+      <td>
+        {% for pet in pets %} {% if forloop.first %} {{ pet.petName }} {% else
+        %} ,&nbsp;{{ pet.petName }} {% endif %} {% endfor %}
+      </td>
+    </tr>
+  </tbody>
 </table>
 <button class="ts positive button" onclick="location.href='/update_profile'">
-    修改
+  修改
 </button>
 
 {% endblock content %}

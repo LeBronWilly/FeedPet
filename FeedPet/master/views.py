@@ -8,7 +8,7 @@ from .forms import MasterCreationForm, MasterChangeForm, PetForm
 from django.contrib.auth.decorators import login_required
 
 from .models import Master, Pet
-from feed.models import Feed ,Record
+from feed.models import Feed, Record
 
 import datetime
 import time
@@ -185,9 +185,9 @@ def update_pet_detail(request, pet_id):
     try:
         pet = Pet.objects.get(id=pet_id)
         dogTypes = ["成犬(室內/中低活動量)", "成犬(中高度活動量)", "需增重成犬(輸入目標體重)", "需減肥成犬(輸入目標體重)",
-                      "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"]
+                    "成長期幼犬(斷奶至4個月)", "成長期幼犬(4個月至10個月)", "懷孕母犬(前42天)", "懷孕母犬(最後21天)", "哺乳母犬"]
         catTypes = ["成貓(室內/低活動量)", "成貓(中高活動量)", "需增重成貓(輸入目標體重)",
-                      "需減肥成貓(輸入目標體重)", "成長期幼貓(10個月以內)", "老貓(11歲以上)", "懷孕母貓", "哺乳母貓"]
+                    "需減肥成貓(輸入目標體重)", "成長期幼貓(10個月以內)", "老貓(11歲以上)", "懷孕母貓", "哺乳母貓"]
 
     except Exception as e:
         pet = None
@@ -270,10 +270,10 @@ def calculate_age(born):
 # date：2019/12/
 # description：
 @login_required
-def feeding_record(request,pet_id):
+def feeding_record(request, pet_id):
 
     username = request.user.username
-    records = Record.objects.filter(pet_id = pet_id)
+    records = Record.objects.filter(pet_id=pet_id)
     feeds = Feed.objects.all()
 
     try:
@@ -291,14 +291,15 @@ def feeding_record(request,pet_id):
         time = request.POST.get('feed_time')
         amount = request.POST.get('feed_amount')
         water = request.POST.get('feed_water')
-        record = Record.objects.create(pet=pets, feed=feedid, time=time, amount=amount, water=water)
+        record = Record.objects.create(
+            pet=pets, feed=feedid, time=time, amount=amount, water=water)
 
     return render(request, 'pet/feeding_record.html', locals())
 
 
-#刪記錄
+# 刪記錄
 @login_required
-def del_record(request,record_id):
+def del_record(request, record_id):
     # delete = Record.objects.get(id=record_id)
     try:
         record = Record.objects.get(id=record_id)

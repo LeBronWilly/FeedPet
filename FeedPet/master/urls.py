@@ -30,20 +30,23 @@ urlpatterns = [
     path('mypet/', views.mypet, name='mypet'),
 
     # My pet detail page
-    path('mypet/pet_detail/<int:pet_id>/', views.pet_detail, name='mypet/pet_detail'),
+    path('mypet/pet_detail/<int:pet_id>/',
+         views.pet_detail, name='mypet/pet_detail'),
 
     # Add pet page
     path('mypet/add_pet/', views.add_pet, name='mypet/add_pet'),
 
     # Update pet detail page
-    path('mypet/update_pet_detail/<int:pet_id>/', views.update_pet_detail, name='mypet/update_pet_detail'),
+    path('mypet/update_pet_detail/<int:pet_id>/',
+         views.update_pet_detail, name='mypet/update_pet_detail'),
 
     # Delete pet
     path('mypet/del_pet/<int:pet_id>/', views.del_pet, name='mypet/del_pet'),
 
     # feed record
-    path('mypet/feeding_record/<int:pet_id>/', views.feeding_record, name='mypet/feeding_record'),
+    path('mypet/feeding_record/<int:pet_id>/',
+         views.feeding_record, name='mypet/feeding_record'),
 
-    #remove record
+    # remove record
     path('del_record/<int:record_id>/', views.del_record, name='del_record'),
 ]

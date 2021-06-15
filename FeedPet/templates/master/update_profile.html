@@ -1,40 +1,47 @@
 <!-- master/update_profile.html -->
-{% extends "base.html" %}
-
-{% block header %}
+{% extends "base.html" %} {% block header %}
 <h2>修改個人資料</h2>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 
 <form class="ts form" method="post" action="{% url 'master:update_profile' %}">
-    {% csrf_token %}
-    <div class="seven wide field">
-        <label>姓名</label>
-        <input type="text" id="name" name="name" value="{{ form.name.value }}">
+  {% csrf_token %}
+  <div class="seven wide field">
+    <label>姓名</label>
+    <input type="text" id="name" name="name" value="{{ form.name.value }}" />
+  </div>
+  <div class="seven wide field">
+    <label>信箱</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      value="{{ form.email.value }}"
+    />
+  </div>
+  <div class="field">
+    <label>性別</label>
+    <div class="ts checkboxes">
+      <div class="ts radio checkbox">
+        <input id="firstMale" type="radio" name="gender" {% if form.gender.value
+        == "Male" %}checked="checked" {% endif %} value="Male">
+        <label for="firstMale">男性</label>
+      </div>
+      <div class="ts radio checkbox">
+        <input id="firstFemale" type="radio" name="gender" {% if
+        form.gender.value == "Female" %}checked="checked" {% endif %}
+        value="Female">
+        <label for="firstFemale">女性</label>
+      </div>
     </div>
-    <div class="seven wide field">
-        <label>信箱</label>
-        <input type="email" id="email" name="email" value="{{ form.email.value }}">
-    </div>
-    <div class="field">
-        <label>性別</label>
-        <div class="ts checkboxes">
-            <div class="ts radio checkbox">
-                <input id="firstMale" type="radio" name="gender" {% if form.gender.value == "Male" %}checked="checked"
-                    {% endif %} value="Male">
-                <label for="firstMale">男性</label>
-            </div>
-            <div class="ts radio checkbox">
-                <input id="firstFemale" type="radio" name="gender"
-                    {% if form.gender.value == "Female" %}checked="checked" {% endif %} value="Female">
-                <label for="firstFemale">女性</label>
-            </div>
-        </div>
-    </div>
-    <button class="ts positive button" type="submit">確認</button>
-    <input class="ts button" type="button" onclick="location.href='/profile'" value="取消">
-    <input type="hidden" name="next" value="{% url 'master:profile' %}" />
+  </div>
+  <button class="ts positive button" type="submit">確認</button>
+  <input
+    class="ts button"
+    type="button"
+    onclick="location.href='/profile'"
+    value="取消"
+  />
+  <input type="hidden" name="next" value="{% url 'master:profile' %}" />
 </form>
 
 {% endblock content %}
