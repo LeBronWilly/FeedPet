@@ -16,7 +16,7 @@ django-model-utils==4.0.0
 django-modelcluster==4.4.1
 django-taggit==0.23.0
 django-treebeard==4.3.1
-djangorestframework==3.12.1
+djangorestframework==3.15.2
 draftjs-exporter==2.1.7
 et-xmlfile==1.0.1
 future==0.18.3
